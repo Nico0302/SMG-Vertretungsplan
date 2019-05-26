@@ -1,7 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createLogger } from 'redux-logger';
 import thunk from 'redux-thunk';
-import rootReducer from '@reducers';
+import rootReducer from './reducers';
 
 const loggerMiddleware = createLogger({
     predicate: (getState, action) => action.type !== 'Navigation/COMPLETE_TRANSITION',
@@ -9,7 +9,7 @@ const loggerMiddleware = createLogger({
 });
 
 const middlewares = [
-    thunk.withExtraArgument(getFirebase),
+    thunk
 ];
 
 if (__DEV__) {
@@ -18,7 +18,7 @@ if (__DEV__) {
 
 const store = createStore(
     rootReducer,
-    initialState,
+    {},
     applyMiddleware(...middlewares)
 );
 
