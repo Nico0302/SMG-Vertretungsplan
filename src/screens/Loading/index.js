@@ -1,18 +1,32 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import LoadingBanner from '@components/LoadingBanner';
 import { fetchDSB } from '@actions/dsb';
 
-class Loading extends PureComponent {
+class Loading extends Component {
+    constructor(props) {
+        super(props);
+
+        this.checkAuthentication = this.checkAuthentication.bind(this);
+    }
+    
     componentDidMount() {
+        this.checkAuthentication();
+    }
+
+    componentDidUpdate() {
+        this.checkAuthentication();
+    }
+
+    checkAuthentication() {
         const { dsb, auth, timetables, fetchDSB, navigation } = this.props;
 
-        if (!dsb.isLoading) {
+        if (!dsb || !dsb.isLoading) {
             if (auth.isEmpty) {
                 navigation.navigate('Unauthenticated');
-            } else if (dsb.isEmpty) {
+            } else if (!dsb || dsb.isEmpty) {
                 fetchDSB(auth.username, auth.password);
-            } else if (!timetables.isLoading && !timetables.isEmpty) {
+            } else {
                 navigation.navigate('Authenticated');
             }
         }

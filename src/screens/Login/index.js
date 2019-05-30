@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { connect } from 'react-redux';
+import { Button, Text, TextInput } from 'react-native-paper';
 import { fetchDSB } from '@actions/dsb';
-import styles from './styles;'
+import styles from './styles';
 
 class Login extends PureComponent {
     constructor(props) {
@@ -17,7 +18,7 @@ class Login extends PureComponent {
     }
 
     static navigationOptions = {
-        title: 'Anmelden',
+        title: 'Login',
     };
 
     login() {
@@ -27,16 +28,35 @@ class Login extends PureComponent {
         fetchDSB(username, password).then(() =>
             navigation.navigate('Authenticated')
         ).catch(error => {
-            console.error(error);
+            console.log(error);
         });
     }
 
     render() {
         const { auth } = this.props;
+        const { username, password } = this.state;
 
         return (
-            <View >
-                <Text>{auth.error ? auth.error.message : 'loading'}</Text>
+            <View style={styles.container} >
+                {auth.error && (
+                    <Text style={styles.errorText}>{auth.error.message}</Text>
+                )}
+                <TextInput
+                    style={styles.textInput}
+                    mode='outlined'
+                    value={username}
+                    onChangeText={username => this.setState({ username })}
+                    label={'Nutzername'}
+                />
+                <TextInput
+                    style={styles.textInput}
+                    mode='outlined'
+                    value={password}
+                    onChangeText={password => this.setState({ password })}
+                    label={'Passwort'}
+                    secureTextEntry
+                />
+                <Button onPress={this.login}>{'Login'}</Button>
             </View>
         );
     }

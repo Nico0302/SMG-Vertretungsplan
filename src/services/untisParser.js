@@ -1,4 +1,5 @@
 import cheerio from 'react-native-cheerio';
+import moment from 'moment';
 
 class UntisParser {
     constructor(data) {
@@ -48,15 +49,16 @@ const timetableColumns = [
     {
         key: 'date',
         value: value => {
-            const now = new Date();
-            const date = value + now.getFullYear();
-            return date
+            const values = value.split('.');
+            const date = moment()
+                .date(parseInt(values[0]))
+                .month(parseInt(values[1])-1);
+            return date.toISOString();
         }
     },
     {
         key: 'classes',
-        value: value => value.split(', '),
-        mandatory: true
+        value: value => value.split(', ')
     },
     {
         key: 'lesson'
@@ -79,7 +81,8 @@ const timetableColumns = [
         key: 'swap'
     },
     {
-        key: 'detail'
+        key: 'detail',
+        value: value => value === '' ? null : value
     }
 ];
 

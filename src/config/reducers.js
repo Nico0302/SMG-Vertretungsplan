@@ -10,7 +10,8 @@ import {
 } from '@actions/timetables';
 
 function dsb(state = {
-    isLoading: false
+    isLoading: false,
+    isEmpty: true
 }, action) {
     switch (action.type) {
         case REQUEST_DSB:
@@ -19,10 +20,16 @@ function dsb(state = {
                 isLoading: true
             };
         case RECEIVE_DSB:
+            return {
+                ...state,
+                isLoading: false,
+                isEmpty: false
+            };
         case AUTHENTIFICATION_FAILURE:
             return {
                 ...state,
-                isLoading: false
+                isLoading: false,
+                isEmpty: true
             };
         default:
             return state;
@@ -37,7 +44,8 @@ function auth(state = {
             return {
                 ...state,
                 username: action.username,
-                password: action.password
+                password: action.password,
+                isEmpty: false
             };
         case AUTHENTIFICATION_FAILURE:
             return {
@@ -63,12 +71,23 @@ function timetables(state = {
                 isLoading: true,
                 url: action.url
             };
-        case RECEIVE_TIMETABLES:
+        case REQUEST_DSB:
             return {
                 ...state,
-                isLoading: false,
-                isEmpty: action.timetables.length > 0,
-                data: action.timetables
+                isLoading: true
+            };
+        case RECEIVE_TIMETABLES:
+            if (action.timetables) {
+                return {
+                    ...state,
+                    isLoading: false,
+                    isEmpty: action.timetables.length < 1,
+                    data: action.timetables
+                };
+            }
+            return {
+                ...state,
+                isLoading: false
             };
         default:
             return state;

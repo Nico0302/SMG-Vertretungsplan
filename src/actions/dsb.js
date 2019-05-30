@@ -12,7 +12,8 @@ const requestDSB = () => ({
 const receiveDSB = (username, password) => ({
     type: RECEIVE_DSB,
     username,
-    password
+    password,
+    lastFetched: Date.now()
 });
 
 const authentificationFailure = (error) => ({
@@ -26,7 +27,6 @@ export function fetchDSB(username, password) {
             dispatch(requestDSB());
             const data = await getData(username, password);
             dispatch(receiveDSB(username, password, data));
-            console.log(data);
             dispatch(fetchTimetables(data.timetables[0].timetableurl));
 
             return true;

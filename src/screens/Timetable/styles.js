@@ -5,8 +5,6 @@ import theme from '@config/theme';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
-        paddingTop: 24,
         backgroundColor: theme.colors.background
     },
     textInput: {

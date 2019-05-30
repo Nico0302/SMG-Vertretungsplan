@@ -1,11 +1,52 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
-import { connect } from 'react-redux'
+import { View, SectionList, RefreshControl } from 'react-native';
+import { connect } from 'react-redux';
+import moment from 'moment';
+import { List } from 'react-native-paper';
+import { fetchDSB } from '@actions/dsb';
+import Entry from './Entry';
+import styles from './styles';
 
 class Timetable extends PureComponent {
+    constructor(props) {
+        super(props);
+
+        this.onRefresh = this.onRefresh.bind(this);
+    }
+
+    static navigationOptions = {
+        title: 'Vertretungsplan'
+    };
+
+    onRefresh() {
+        const { auth, fetchDSB } = this.props;
+
+        fetchDSB(auth.username, auth.password);
+    }
+
     render() {
+        const { timetables, dsb } = this.props;
+        const sections = timetables.data.map(timetable => ({
+            title: moment(timetable[0].date).format('dddd, DD.MM.YYYY'),
+            data: timetable
+        }));
+
         return (
-            <View>
+            <View style={styles.container}>
+                <SectionList
+                    renderItem={({ item }) => (<Entry {...item}/>)}
+                    renderSectionHeader={({section: { title }}) => (
+                        <List.Subheader>{title}</List.Subheader>
+                    )}
+                    sections={sections}
+                    refreshControl={
+                        <RefreshControl
+                          refreshing={timetables.isLoading || dsb.isLoading}
+                          onRefresh={this.onRefresh}
+                        />
+                    }
+                    keyExtractor={(item, index) => item.lesson + index}
+                />
             </View>
         );
     }
@@ -13,9 +54,15 @@ class Timetable extends PureComponent {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    timetables: state.timetables
+    timetables: state.timetables,
+    dsb: state.dsb
 });
 
+const mapDispatchToProps = {
+    fetchDSB
+};
+
 export default connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Timetable);
