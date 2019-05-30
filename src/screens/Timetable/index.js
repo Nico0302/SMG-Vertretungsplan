@@ -3,6 +3,7 @@ import { View, SectionList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { List } from 'react-native-paper';
+import theme from '@config/theme';
 import { fetchDSB } from '@actions/dsb';
 import Entry from './Entry';
 import styles from './styles';
@@ -25,7 +26,7 @@ class Timetable extends PureComponent {
     }
 
     render() {
-        const { timetables, dsb } = this.props;
+        const { timetables } = this.props;
         const sections = timetables.data.map(timetable => ({
             title: moment(timetable[0].date).format('dddd, DD.MM.YYYY'),
             data: timetable
@@ -41,8 +42,9 @@ class Timetable extends PureComponent {
                     sections={sections}
                     refreshControl={
                         <RefreshControl
-                          refreshing={timetables.isLoading || dsb.isLoading}
+                          refreshing={timetables.isLoading}
                           onRefresh={this.onRefresh}
+                          colors={[ theme.colors.primary ]}
                         />
                     }
                     keyExtractor={(item, index) => item.lesson + index}
@@ -54,8 +56,7 @@ class Timetable extends PureComponent {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    timetables: state.timetables,
-    dsb: state.dsb
+    timetables: state.timetables
 });
 
 const mapDispatchToProps = {

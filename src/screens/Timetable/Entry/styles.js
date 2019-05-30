@@ -3,14 +3,14 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        paddingStart: 8,
-        paddingEnd: 18,
+        paddingStart: 4,
+        paddingEnd: 16,
         paddingVertical: 6,
         borderLeftWidth: 4,
         borderStyle: 'solid'
     },
     lesson: {
-        minWidth: 60,
+        minWidth: 57,
         alignItems: 'center',
         justifyContent: 'center',
         marginEnd: 6
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
         textAlign: 'right'
     },
     subject: {
-        minWidth: 30
+        minWidth: 32
     },
     description: {
         fontSize: 14
