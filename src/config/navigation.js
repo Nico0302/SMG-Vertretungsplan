@@ -34,12 +34,11 @@ const mainStack = createStackNavigator(
 
 const rootStack = createSwitchNavigator(
     {
-        Loading,
+        Authenticated: mainStack,
         Unauthenticated: authStack,
-        Authenticated: mainStack
     },
     {
-        initialRouteName: 'Loading'
+        initialRouteName: 'Authenticated'
     }
 );
 

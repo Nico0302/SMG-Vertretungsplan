@@ -12,25 +12,33 @@ class Timetable extends PureComponent {
     constructor(props) {
         super(props);
 
-        this.onRefresh = this.onRefresh.bind(this);
+        this.fetchDSB = this.fetchDSB.bind(this);
     }
 
     static navigationOptions = {
         title: 'Vertretungsplan'
     };
 
-    onRefresh() {
-        const { auth, fetchDSB } = this.props;
+    componentDidMount() {
+        this.fetchDSB();
+    }
 
-        fetchDSB(auth.username, auth.password);
+    fetchDSB() {
+        const { auth, fetchDSB, navigation } = this.props;
+
+        if (auth.username && auth.password) {
+            fetchDSB(auth.username, auth.password);
+        } else {
+            navigation.navigate('Unauthenticated');
+        }
     }
 
     render() {
         const { timetables } = this.props;
-        const sections = timetables.data.map(timetable => ({
+        const sections = timetables.data ? timetables.data.map(timetable => ({
             title: moment(timetable[0].date).format('dddd, DD.MM.YYYY'),
             data: timetable
-        }));
+        })) : [];
 
         return (
             <View style={styles.container}>
@@ -43,7 +51,7 @@ class Timetable extends PureComponent {
                     refreshControl={
                         <RefreshControl
                           refreshing={timetables.isLoading}
-                          onRefresh={this.onRefresh}
+                          onRefresh={this.fetchDSB}
                           colors={[ theme.colors.primary ]}
                         />
                     }

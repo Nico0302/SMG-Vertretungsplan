@@ -2,7 +2,7 @@ import { combineReducers } from 'redux';
 import {
     REQUEST_DSB,
     RECEIVE_DSB,
-    AUTHENTIFICATION_FAILURE
+    RECEIVE_DSB_FAILED
 } from '@actions/dsb';
 import {
     REQUEST_TIMETABLES,
@@ -25,7 +25,7 @@ function dsb(state = {
                 isLoading: false,
                 isEmpty: false
             };
-        case AUTHENTIFICATION_FAILURE:
+        case RECEIVE_DSB_FAILED:
             return {
                 ...state,
                 isLoading: false,
@@ -47,7 +47,7 @@ function auth(state = {
                 password: action.password,
                 isEmpty: false
             };
-        case AUTHENTIFICATION_FAILURE:
+        case RECEIVE_DSB_FAILED:
             return {
                 ...state,
                 username: null,
