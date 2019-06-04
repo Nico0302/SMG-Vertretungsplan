@@ -1,16 +1,13 @@
-import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
-
-import theme from '@config/theme';
-import Loading from '@screens/Loading';
+import React from 'react';
+import { createAppContainer, createSwitchNavigator, createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import NavigationDrawer from '@components/NavigationDrawer';
 import Login from '@screens/Login';
 import Timetable from '@screens/Timetable';
+import Settings from '@screens/Settings';
 
 const defaultNavigationOptions = {
-    headerStyle: {
-        backgroundColor: theme.colors.primary,
-    },
-    headerTintColor: '#fff'
-}
+    header: null
+};
 
 const authStack = createStackNavigator(
     {
@@ -22,13 +19,15 @@ const authStack = createStackNavigator(
     }
 );
 
-const mainStack = createStackNavigator(
+const mainStack = createDrawerNavigator(
     {
-        Timetable
+        Timetable,
+        Settings
     },
     {
         initialRouteName: 'Timetable',
-        defaultNavigationOptions
+        defaultNavigationOptions,
+        contentComponent: props => (<NavigationDrawer {...props}/>)
     }
 );
 

@@ -1,53 +1,35 @@
 import { combineReducers } from 'redux';
 import {
-    REQUEST_DSB,
-    RECEIVE_DSB,
-    RECEIVE_DSB_FAILED
-} from '@actions/dsb';
+    LOGIN_REQUEST,
+    LOGIN_FAILURE,
+    LOGIN_SUCCESS,
+    LOGOUT
+} from '@actions/auth';
 import {
-    REQUEST_TIMETABLES,
-    RECEIVE_TIMETABLES
+    FETCH_TIMETABLES_REQUEST,
+    FETCH_TIMETABLES_FAILURE,
+    FETCH_TIMETABLES_SUCCESS,
+    SET_TIMETABLE_FILTER,
+    TOGGLE_TIMETABLE_FILTER
 } from '@actions/timetables';
-
-function dsb(state = {
-    isLoading: false,
-    isEmpty: true
-}, action) {
-    switch (action.type) {
-        case REQUEST_DSB:
-            return {
-                ...state,
-                isLoading: true
-            };
-        case RECEIVE_DSB:
-            return {
-                ...state,
-                isLoading: false,
-                isEmpty: false
-            };
-        case RECEIVE_DSB_FAILED:
-            return {
-                ...state,
-                isLoading: false,
-                isEmpty: true
-            };
-        default:
-            return state;
-    }
-}
 
 function auth(state = {
     isEmpty: true
 }, action) {
     switch (action.type) {
-        case RECEIVE_DSB:
+        case LOGIN_REQUEST:
             return {
                 ...state,
                 username: action.username,
                 password: action.password,
+                isEmpty: true
+            };
+        case LOGIN_SUCCESS:
+            return {
+                ...state,
                 isEmpty: false
             };
-        case RECEIVE_DSB_FAILED:
+        case LOGIN_FAILURE:
             return {
                 ...state,
                 username: null,
@@ -55,6 +37,14 @@ function auth(state = {
                 isEmpty: true,
                 error: action.error
             };
+        case LOGOUT: {
+            return {
+                ...state,
+                username: null,
+                password: null,
+                isEmpty: true
+            };
+        }
         default:
             return state;
     }
@@ -62,32 +52,66 @@ function auth(state = {
 
 function timetables(state = {
     isLoading: false,
-    isEmpty: true
+    isEmpty: true,
+    filter: {
+        isActive: false
+    }
 }, action) {
     switch (action.type) {
-        case REQUEST_TIMETABLES:
-            return {
-                ...state,
-                isLoading: true,
-                url: action.url
-            };
-        case REQUEST_DSB:
+        case FETCH_TIMETABLES_REQUEST:
             return {
                 ...state,
                 isLoading: true
             };
-        case RECEIVE_TIMETABLES:
+        case FETCH_TIMETABLES_SUCCESS:
             if (action.timetables) {
                 return {
                     ...state,
                     isLoading: false,
                     isEmpty: action.timetables.length < 1,
-                    data: action.timetables
+                    data: action.timetables,
+                    url: action.url,
+                    requestedAt: action.requestedAt
                 };
             }
             return {
                 ...state,
-                isLoading: false
+                isLoading: false,
+                requestedAt: action.requestedAt
+            };
+        case FETCH_TIMETABLES_FAILURE:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.error
+            };
+        case SET_TIMETABLE_FILTER:
+            return {
+                ...state,
+                filter: {
+                    data: action.filter,
+                    isActive: true
+                }
+            }
+        case TOGGLE_TIMETABLE_FILTER:
+            return {
+                ...state,
+                filter: {
+                    ...state.filter,
+                    isActive: state.filter ? !state.filter.isActive : true
+                }
+            }
+        case LOGOUT:
+            return {
+                ...state,
+                filter: {
+                    data: null,
+                    isActive: false
+                },
+                data: [],
+                url: null,
+                requestedAt: null,
+                isEmpty: true
             };
         default:
             return state;
@@ -95,7 +119,6 @@ function timetables(state = {
 }
 
 const rootReducer = combineReducers({
-    dsb,
     auth,
     timetables
 });

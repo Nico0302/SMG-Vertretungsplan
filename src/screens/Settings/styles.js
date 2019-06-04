@@ -7,12 +7,19 @@ const styles = StyleSheet.create({
         backgroundColor: theme.colors.surface
     },
     appbar: {
-        zIndex: 10,
         elevation: 4
     },
-    emptySection: {
-        alignItems: 'center',
-        padding: 4
+    content: {
+        flex: 1
+    },
+    deactivatedItem: {
+        opacity: 0.6,
+    },
+    activeDescription: {
+        color: theme.colors.primary
+    },
+    leftSpacer: {
+        width: 56
     }
 });
 

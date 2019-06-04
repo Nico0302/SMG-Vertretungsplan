@@ -30,7 +30,7 @@ class Entry extends PureComponent {
     }
 
     render() {
-        const { classes, lesson, room, subject, substitute, type, detail, onPress } = this.props;
+        const { classes, lesson, room, subject, substitute, type, swap, detail, onPress } = this.props;
         const titleColor = color(theme.colors.text)
             .alpha(0.87)
             .rgb()
@@ -68,22 +68,22 @@ class Entry extends PureComponent {
                                 </Text>
                             )}
                         </View>
-                        {((substitute && room) || detail) && (
+                        {((substitute && room) || (detail || swap)) && (
                             <View style={styles.spaceRow} pointerEvents="none">
                                 {substitute && room && (
                                     <Text
                                         numberOfLines={1}
                                         style={[styles.description, { color: descriptionColor }]}
                                     >
-                                        {`${substitute} in Raum ${room}`}
+                                        {`${substitute} in ${room}`}
                                     </Text>
                                 )}
-                                {detail && (
+                                {(detail || swap) && (
                                     <Text
                                         numberOfLines={1}
                                         style={[styles.description, { color: descriptionColor }]}
                                     >
-                                        {detail}
+                                        {swap ? `von ${swap} Stunde` : detail}
                                     </Text>
                                 )}
                             </View>

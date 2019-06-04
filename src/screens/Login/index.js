@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { View } from 'react-native';
+import { View, ScrollView, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { Button, Text, TextInput } from 'react-native-paper';
-import { fetchDSB } from '@actions/dsb';
+import { login } from '@actions/auth';
+import Logo from '@components/Logo';
 import styles from './styles';
 
 class Login extends PureComponent {
@@ -21,15 +22,19 @@ class Login extends PureComponent {
         title: 'Login',
     };
 
+    componentWillReceiveProps(newProps) {
+        const { navigation } = this.props;
+
+        if (!newProps.auth.isEmpty) {
+            navigation.navigate('Authenticated');
+        }
+    }
+
     login() {
-        const { fetchDSB, navigation } = this.props;
+        const { login } = this.props;
         const { username, password } = this.state;
 
-        fetchDSB(username, password).then(() =>
-            navigation.navigate('Authenticated')
-        ).catch(error => {
-            console.log(error);
-        });
+        login(username, password);
     }
 
     render() {
@@ -37,27 +42,47 @@ class Login extends PureComponent {
         const { username, password } = this.state;
 
         return (
-            <View style={styles.container} >
-                {auth.error && (
-                    <Text style={styles.errorText}>{auth.error.message}</Text>
-                )}
-                <TextInput
-                    style={styles.textInput}
-                    mode='outlined'
-                    value={username}
-                    onChangeText={username => this.setState({ username })}
-                    label={'Nutzername'}
-                />
-                <TextInput
-                    style={styles.textInput}
-                    mode='outlined'
-                    value={password}
-                    onChangeText={password => this.setState({ password })}
-                    label={'Passwort'}
-                    secureTextEntry
-                />
-                <Button onPress={this.login}>{'Login'}</Button>
-            </View>
+            <ScrollView
+                style={styles.container}
+                keyboardShouldPersistTaps="always"
+                showsVerticalScrollIndicator={false}
+                bounces={false}
+                ref={scrollView => this.scrollView = scrollView}
+            >
+                <View style={styles.content}>
+                    <StatusBar backgroundColor="#cccccc" />
+                    <View style={styles.logo}>
+                        <Logo size={160} />
+                    </View>
+                    {auth.error && auth.error.message &&  (
+                        <Text style={styles.errorText}>{auth.error.message}</Text>
+                    )}
+                    <TextInput
+                        style={styles.textInput}
+                        textContentType="username"
+                        mode="outlined"
+                        value={username}
+                        onChangeText={username => this.setState({ username })}
+                        onSubmitEditing={() => this.passwordInput.focus()}
+                        returnKeyType="next"
+                        label="Nutzername"
+                    />
+                    <TextInput
+                        ref={passwordInput => this.passwordInput = passwordInput}
+                        style={styles.textInput}
+                        mode="outlined"
+                        value={password}
+                        onChangeText={password => this.setState({ password })}
+                        onSubmitEditing={this.login}
+                        returnKeyType="go"
+                        label="Passwort"
+                        secureTextEntry
+                    />
+                    <View style={styles.actions}>
+                        <Button onPress={this.login}>Login</Button>
+                    </View>
+                </View>
+            </ScrollView>
         );
     }
 }
@@ -67,7 +92,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-    fetchDSB
+    login
 };
 
 export default connect(

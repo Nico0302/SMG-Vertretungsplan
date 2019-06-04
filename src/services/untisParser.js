@@ -78,7 +78,8 @@ const timetableColumns = [
         key: 'type'
     },
     {
-        key: 'swap'
+        key: 'swap',
+        value: value => value === '' ? null : value
     },
     {
         key: 'detail',

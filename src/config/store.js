@@ -10,7 +10,6 @@ const persistConfig = {
     key: 'root',
     storage,
     stateReconciler: hardSet,
-    blacklist: ['dsb'],
     timeout: 0
 };
 
