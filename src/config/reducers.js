@@ -118,9 +118,8 @@ function timetables(state = {
     }
 }
 
-const rootReducer = combineReducers({
-    auth,
+export const reducers = {
     timetables
-});
+};
 
-export default rootReducer
+export const authReducer = auth;
