@@ -1,4 +1,4 @@
-package com.smg_vertretungsplan;
+package io.gres.smg_vertretungsplan;
 
 import android.app.Application;
 

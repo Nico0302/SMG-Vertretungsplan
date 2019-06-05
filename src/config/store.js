@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import createSensitiveStorage from 'redux-persist-sensitive-storage';
+import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import { authReducer, reducers } from './reducers';
 
 const sensitiveStorage = createSensitiveStorage({
@@ -14,15 +15,14 @@ const sensitiveStorage = createSensitiveStorage({
 const rootPersistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: ['auth'],
-    timeout: 0
+    blacklist: ['auth']
 };
 
 const authPersistConfig = {
     key: 'auth',
     blacklist: ['isLoading', 'error'],
     storage: sensitiveStorage,
-    timeout: 0
+    stateReconciler: hardSet
 };
 
 const rootReducer = combineReducers({

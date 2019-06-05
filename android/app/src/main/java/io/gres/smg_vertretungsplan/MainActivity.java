@@ -1,4 +1,4 @@
-package com.smg_vertretungsplan;
+package io.gres.smg_vertretungsplan;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
