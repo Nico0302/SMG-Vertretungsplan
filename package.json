@@ -8,7 +8,6 @@
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.4.2",
-    "dsbapi": "github:Nico0302/DSBAPI#master",
     "moment": "^2.24.0",
     "react": "16.8.3",
     "react-native": "0.59.8",
