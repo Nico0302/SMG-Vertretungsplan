@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Linking } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { Drawer, Divider } from 'react-native-paper';
 import Logo from '@components/Logo';
@@ -11,8 +11,8 @@ class NavigationDrawer extends Component {
     }
 
     render() {
-        const { activeItemKey, items, navigation, onItemPress } = this.props;
-        console.log(items)
+        const { activeItemKey, onItemPress } = this.props;
+
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
@@ -35,6 +35,7 @@ class NavigationDrawer extends Component {
                     <Drawer.Item
                         label='Feedback'
                         icon='feedback'
+                        onPress={() => Linking.openURL('https://github.com/Nico0302/SMG-Vertretungsplan/issues')}
                     />
                 </View>
             </SafeAreaView>

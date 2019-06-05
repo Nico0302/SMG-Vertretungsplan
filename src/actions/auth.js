@@ -1,4 +1,4 @@
-import { fetchTimetables }  from '@actions/timetables';
+import { getToken } from '@services/dsb';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -9,17 +9,16 @@ export function login(username, password) {
     return async dispatch => {
         try {
             dispatch({
-                type: LOGIN_REQUEST,
-                username,
-                password
+                type: LOGIN_REQUEST
             });
             if (!username)
                 throw new Error('Ungültiger Nutzername!');
             if (!password)
                 throw new Error('Ungültiges Passwort!');
-            await dispatch(fetchTimetables());
+            const token = await getToken(username, password);
             dispatch({
-                type: LOGIN_SUCCESS
+                type: LOGIN_SUCCESS,
+                token
             });
         } catch(error) {
             dispatch({

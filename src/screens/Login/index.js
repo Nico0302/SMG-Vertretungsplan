@@ -25,7 +25,7 @@ class Login extends PureComponent {
     componentWillReceiveProps(newProps) {
         const { navigation } = this.props;
 
-        if (!newProps.auth.isEmpty) {
+        if (newProps.auth.token) {
             navigation.navigate('Authenticated');
         }
     }

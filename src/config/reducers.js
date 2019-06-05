@@ -14,35 +14,32 @@ import {
 } from '@actions/timetables';
 
 function auth(state = {
-    isEmpty: true
+    isLoading: false
 }, action) {
     switch (action.type) {
         case LOGIN_REQUEST:
             return {
                 ...state,
-                username: action.username,
-                password: action.password,
-                isEmpty: true
+                isLoading: true,
+                error: null
             };
         case LOGIN_SUCCESS:
             return {
                 ...state,
-                isEmpty: false
+                token: action.token,
+                isLoading: false
             };
         case LOGIN_FAILURE:
             return {
                 ...state,
-                username: null,
-                password: null,
-                isEmpty: true,
+                token: null,
+                isLoading: false,
                 error: action.error
             };
         case LOGOUT: {
             return {
                 ...state,
-                username: null,
-                password: null,
-                isEmpty: true
+                token: null
             };
         }
         default:
@@ -61,7 +58,8 @@ function timetables(state = {
         case FETCH_TIMETABLES_REQUEST:
             return {
                 ...state,
-                isLoading: true
+                isLoading: true,
+                error: null
             };
         case FETCH_TIMETABLES_SUCCESS:
             if (action.timetables) {

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, SectionList, StatusBar, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { Appbar, List, Subheading, Surface } from 'react-native-paper';
+import { Appbar, Snackbar, List, Subheading, Surface } from 'react-native-paper';
 import theme from '@config/theme';
 import { fetchTimetables } from '@actions/timetables';
 import Entry from './Entry';
@@ -25,12 +25,13 @@ class Timetable extends PureComponent {
     }
 
     fetchTimetables() {
-        const { auth, fetchTimetables, navigation } = this.props;
+        const { auth, timetables, fetchTimetables, navigation } = this.props;
 
-        if (auth.isEmpty) {
-            navigation.navigate('Unauthenticated');
+        if (auth.token) {
+            if (!timetables.isLoading)
+                fetchTimetables();
         } else {
-            fetchTimetables();
+            navigation.navigate('Unauthenticated');
         }
     }
 
@@ -48,7 +49,7 @@ class Timetable extends PureComponent {
                         className.toLowerCase().includes(filter.data.toLowerCase()))
                     )
                     : timetable
-                })
+            })
             );
         }
         return [];
@@ -80,7 +81,7 @@ class Timetable extends PureComponent {
                     renderSectionFooter={({ section }) => section.data.length < 1 ? (
                         <View style={styles.emptySection}>
                             <Subheading>
-                                {'keine Inhalte' + (filter.isActive ? ` zur Klasse ${filter.data}` : '')}
+                                {'keine Einträge' + (filter.isActive ? ` für die Klasse ${filter.data}` : '')}
                             </Subheading>
                         </View>
                     ) : null}
@@ -94,6 +95,16 @@ class Timetable extends PureComponent {
                     }
                     keyExtractor={(item, index) => item.lesson + index}
                 />
+                <Snackbar
+                    visible={timetables.error}
+                    onDismiss={() => {}}
+                    action={{
+                        label: 'neu laden',
+                        onPress: () => this.fetchTimetables()
+                    }}
+                >
+                    Fehler beim Aktualisieren
+                </Snackbar>
             </View>
         );
     }

@@ -14,12 +14,15 @@ const sensitiveStorage = createSensitiveStorage({
 const rootPersistConfig = {
     key: 'root',
     storage: AsyncStorage,
-    blacklist: ['auth']
+    blacklist: ['auth'],
+    timeout: 0
 };
 
 const authPersistConfig = {
     key: 'auth',
-    storage: sensitiveStorage
+    blacklist: ['isLoading', 'error'],
+    storage: sensitiveStorage,
+    timeout: 0
 };
 
 const rootReducer = combineReducers({
