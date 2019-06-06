@@ -13,7 +13,6 @@ class Timetable extends PureComponent {
         super(props);
 
         this.fetchTimetables = this.fetchTimetables.bind(this);
-        this.generateSections = this.generateSections.bind(this);
     }
 
     static navigationOptions = {
@@ -25,39 +24,18 @@ class Timetable extends PureComponent {
     }
 
     fetchTimetables() {
-        const { auth, timetables, fetchTimetables, navigation } = this.props;
+        const { auth, isLoading, fetchTimetables, navigation } = this.props;
 
         if (auth.token) {
-            if (!timetables.isLoading)
+            if (!isLoading)
                 fetchTimetables();
         } else {
             navigation.navigate('Unauthenticated');
         }
     }
 
-    generateSections() {
-        const { data, filter = { isActive: false } } = this.props.timetables;
-
-        if (data) {
-            return data.map(timetable => ({
-                // format date as title
-                title: moment(timetable[0].date).format('dddd, DD.MM.YYYY'),
-                // check if filter exists and is active
-                data: filter.isActive && filter.data ?
-                    // apply filter
-                    timetable.filter(entry => entry.classes.find(className =>
-                        className.toLowerCase().includes(filter.data.toLowerCase()))
-                    )
-                    : timetable
-            })
-            );
-        }
-        return [];
-    }
-
     render() {
-        const { timetables, navigation } = this.props;
-        const { filter = { isActive: false } } = timetables;
+        const { sections = [], error, filter, isLoading, navigation } = this.props;
 
         return (
             <View style={styles.container}>
@@ -74,6 +52,7 @@ class Timetable extends PureComponent {
                     </Appbar.Header>
                 </Surface>
                 <SectionList
+                    contentContainerStyle={error ? styles.snackbarListPadding : {}}
                     renderItem={({ item }) => (<Entry {...item} />)}
                     renderSectionHeader={({ section: { title } }) => (
                         <List.Subheader>{title}</List.Subheader>
@@ -85,10 +64,10 @@ class Timetable extends PureComponent {
                             </Subheading>
                         </View>
                     ) : null}
-                    sections={this.generateSections()}
+                    sections={sections}
                     refreshControl={
                         <RefreshControl
-                            refreshing={timetables.isLoading}
+                            refreshing={isLoading}
                             onRefresh={this.fetchTimetables}
                             colors={[theme.colors.primary]}
                         />
@@ -96,7 +75,7 @@ class Timetable extends PureComponent {
                     keyExtractor={(item, index) => item.lesson + index}
                 />
                 <Snackbar
-                    visible={timetables.error}
+                    visible={error}
                     onDismiss={() => {}}
                     action={{
                         label: 'neu laden',
@@ -112,7 +91,10 @@ class Timetable extends PureComponent {
 
 const mapStateToProps = (state) => ({
     auth: state.auth,
-    timetables: state.timetables
+    isLoading: state.timetables.isLoading,
+    error: state.timetables.error,
+    sections: state.timetables.sections,
+    filter: state.timetables.filter
 });
 
 const mapDispatchToProps = {

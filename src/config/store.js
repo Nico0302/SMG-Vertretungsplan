@@ -5,18 +5,18 @@ import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import createSensitiveStorage from 'redux-persist-sensitive-storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
-import { authReducer, reducers } from './reducers';
+import { authReducer, timetablesReducer } from './reducers';
 
 const sensitiveStorage = createSensitiveStorage({
     keychainService: 'myKeychain',
     sharedPreferencesName: 'mySharedPrefs'
 });
 
-const rootPersistConfig = {
-    key: 'root',
-    storage: AsyncStorage,
-    blacklist: ['auth']
-};
+const timetablesPersistConfig = {
+    key: 'timetables',
+    blacklist: [ 'isLoading', 'error', 'data' ],
+    storage: AsyncStorage
+}
 
 const authPersistConfig = {
     key: 'auth',
@@ -26,11 +26,9 @@ const authPersistConfig = {
 };
 
 const rootReducer = combineReducers({
-    ...reducers,
+    timetables: persistReducer(timetablesPersistConfig, timetablesReducer),
     auth: persistReducer(authPersistConfig, authReducer)
 });
-
-const persistedReducer = persistReducer(rootPersistConfig, rootReducer);
 
 const loggerMiddleware = createLogger();
 
@@ -44,7 +42,7 @@ if (__DEV__) {
 
 export default () => {
     const store = createStore(
-        persistedReducer,
+        rootReducer,
         {},
         applyMiddleware(...middlewares)
     );

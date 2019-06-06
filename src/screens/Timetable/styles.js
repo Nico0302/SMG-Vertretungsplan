@@ -13,6 +13,9 @@ const styles = StyleSheet.create({
     emptySection: {
         alignItems: 'center',
         padding: 4
+    },
+    snackbarListPadding: {
+        paddingBottom: 68
     }
 });
 

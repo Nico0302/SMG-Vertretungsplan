@@ -22,7 +22,7 @@ export function fetchTimetables() {
             // only on timetable is used
             const { timetableurl } = data[0];
 
-            if (state.timetables.url === timetableurl) {
+            if (state.timetables.url === timetableurl && state.data) {
                 dispatch({
                     type: FETCH_TIMETABLES_SUCCESS,
                     receivedAt: moment().toISOString()
@@ -48,11 +48,21 @@ export function fetchTimetables() {
     }
 }
 
-export const setTimetableFilter = filter => ({
-    type: SET_TIMETABLE_FILTER,
-    filter
-});
+export function setTimetableFilter(filter) {
+    return dispatch => {
+        dispatch({
+            type: SET_TIMETABLE_FILTER,
+            filter
+        });
+        dispatch(fetchTimetables());
+    };
+}
 
-export const toggleTimetableFilter = () => ({
-    type: TOGGLE_TIMETABLE_FILTER
-});
+export function toggleTimetableFilter() {
+    return dispatch => {
+        dispatch({
+            type: TOGGLE_TIMETABLE_FILTER
+        });
+        dispatch(fetchTimetables());
+    };
+}
