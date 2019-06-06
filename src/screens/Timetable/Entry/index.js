@@ -43,11 +43,11 @@ class Entry extends PureComponent {
 
         return (
             <TouchableRipple
-                style={[ styles.container, { borderColor: indicatorColor } ]}
+                style={styles.container}
                 onPress={onPress}
             >
                 <View style={styles.row}>
-                    <View style={styles.lesson}>
+                    <View style={[styles.lesson, { borderColor: indicatorColor }]}>
                         <Title style={{ color: titleColor }} >{lesson}</Title>
                     </View>
                     <View style={styles.content} pointerEvents="none">

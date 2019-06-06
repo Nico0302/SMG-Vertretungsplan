@@ -6,14 +6,14 @@ const styles = StyleSheet.create({
         paddingStart: 4,
         paddingEnd: 16,
         paddingVertical: 6,
-        borderLeftWidth: 4,
-        borderStyle: 'solid'
     },
     lesson: {
         minWidth: 57,
         alignItems: 'center',
         justifyContent: 'center',
-        marginEnd: 6
+        marginStart: 4,
+        marginEnd: 6,
+        borderRightWidth: 4
     },
     row: {
         flexDirection: 'row'
