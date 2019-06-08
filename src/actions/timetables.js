@@ -22,7 +22,7 @@ export function fetchTimetables() {
             // only on timetable is used
             const { timetableurl } = data[0];
 
-            if (state.timetables.url === timetableurl && state.data) {
+            if (state.timetables.url === timetableurl && state.cache) {
                 dispatch({
                     type: FETCH_TIMETABLES_SUCCESS,
                     receivedAt: moment().toISOString()

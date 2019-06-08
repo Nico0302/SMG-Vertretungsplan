@@ -32,7 +32,8 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        padding: 8
+        padding: 8,
+        paddingBottom: 16
     }
 });
 

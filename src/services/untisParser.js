@@ -9,13 +9,22 @@ class UntisParser {
     }
 
     parse() {
+        this._$('div[class=mon_title]').each((index, date) =>
+            this.prepareTimetable(index, date)
+        );
         this._$('table[class=mon_list]').each((index, timetable) =>
             this.parseTimetable(index, timetable)
         );
     }
 
+    prepareTimetable(timetableIndex, dateElement) {
+        const dateString = this._$(dateElement).text().split(' ')[0];
+        const date = moment(dateString, 'D.M.YYYY').toISOString();
+
+        this.timetables[timetableIndex] = { date, data: [] };
+    }
+
     parseTimetable(timetableIndex, timetable) {
-        this.timetables.push([]);
         this._$(timetable).find('tr').each((index, row) => {
             try {
                 this.parseTimetableRow(timetableIndex, index, row);
@@ -30,31 +39,24 @@ class UntisParser {
         let entry = {};
 
         this._$(row).find('td').each((index, cell) => {
-            const value = this._$(cell).text().trim();
+            const plainValue = this._$(cell).text().trim();
             const columProperties = timetableColumns[index];
 
-            if (columProperties.mandatory && value === '')
-                throw new Error('Missing mandatory value!');
-
-            entry[columProperties.key] = columProperties.value ?
-                columProperties.value(value) : value;
+            if (!columProperties.ignore) {
+                const value = columProperties.value ?
+                        columProperties.value(plainValue) : plainValue;
+                if (value)
+                    entry[columProperties.key] = value;
+            }
         });
-
         if (Object.keys(entry).length > 0)
-            this.timetables[timetableIndex].push(entry);
+            this.timetables[timetableIndex].data.push(entry);
     }
 }
 
 const timetableColumns = [
     {
-        key: 'date',
-        value: value => {
-            const values = value.split('.');
-            const date = moment()
-                .date(parseInt(values[0]))
-                .month(parseInt(values[1])-1);
-            return date.toISOString();
-        }
+        ignore: true
     },
     {
         key: 'classes',

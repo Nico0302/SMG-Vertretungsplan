@@ -60,8 +60,10 @@ class Login extends PureComponent {
                     <TextInput
                         style={styles.textInput}
                         textContentType="username"
+                        keyboardType="number-pad"
                         mode="outlined"
                         value={username}
+                        blurOnSubmit={false}
                         onChangeText={username => this.setState({ username })}
                         onSubmitEditing={() => this.passwordInput.focus()}
                         returnKeyType="next"
@@ -74,12 +76,12 @@ class Login extends PureComponent {
                         value={password}
                         onChangeText={password => this.setState({ password })}
                         onSubmitEditing={this.login}
-                        returnKeyType="go"
+                        returnKeyType="done"
                         label="Passwort"
                         secureTextEntry
                     />
                     <View style={styles.actions}>
-                        <Button onPress={this.login}>Login</Button>
+                        <Button onPress={this.login} mode="contained">Login</Button>
                     </View>
                 </View>
             </ScrollView>

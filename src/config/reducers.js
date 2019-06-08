@@ -47,18 +47,18 @@ function auth(state = {
     }
 }
 
-function generateSections(data, filter) {
-    if (data) {
-        return data.map(timetable => ({
+function generateSections(timetables, filter) {
+    if (timetables) {
+        return timetables.map(timetable => ({
             // format date as title
-            title: moment(timetable[0].date).format('dddd, DD.MM.YYYY'),
+            title: moment(timetable.date).format('dddd, DD.MM.YYYY'),
             // check if filter exists and is active
             data: filter.isActive && filter.data ?
                 // apply filter
-                timetable.filter(entry => entry.classes.find(className =>
+                timetable.data.filter(entry => entry.classes.find(className =>
                     className.toLowerCase().includes(filter.data.toLowerCase()))
                 )
-                : timetable
+                : timetable.data
         }));
     }
     return [];
@@ -70,7 +70,7 @@ function timetables(state = {
     filter: {
         isActive: false
     },
-    data: null,
+    cache: null,
     sections: []
 }, action) {
     switch (action.type) {
@@ -86,17 +86,17 @@ function timetables(state = {
                     ...state,
                     isLoading: false,
                     isEmpty: action.timetables.length < 1,
-                    data: action.timetables,
+                    cache: action.timetables,
                     sections: generateSections(action.timetables, state.filter),
                     url: action.url,
-                    requestedAt: action.requestedAt
+                    receivedAt: action.receivedAt
                 };
             }
             return {
                 ...state,
                 isLoading: false,
-                sections: generateSections(state.data, state.filter),
-                requestedAt: action.requestedAt
+                sections: generateSections(state.cache, state.filter),
+                receivedAt: action.receivedAt
             };
         case FETCH_TIMETABLES_FAILURE:
             return {
@@ -128,10 +128,10 @@ function timetables(state = {
                     data: null,
                     isActive: false
                 },
-                data: null,
+                cache: null,
                 sections: [],
                 url: null,
-                requestedAt: null,
+                receivedAt: null,
                 isEmpty: true
             };
         default:

@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, SectionList, StatusBar, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { Appbar, Snackbar, List, Subheading, Surface } from 'react-native-paper';
 import theme from '@config/theme';
 import { fetchTimetables } from '@actions/timetables';
@@ -52,6 +51,7 @@ class Timetable extends PureComponent {
                     </Appbar.Header>
                 </Surface>
                 <SectionList
+                    initialNumToRender={11}
                     contentContainerStyle={error ? styles.snackbarListPadding : {}}
                     renderItem={({ item }) => (<Entry {...item} />)}
                     renderSectionHeader={({ section: { title } }) => (
@@ -72,7 +72,7 @@ class Timetable extends PureComponent {
                             colors={[theme.colors.primary]}
                         />
                     }
-                    keyExtractor={(item, index) => item.lesson + index}
+                    keyExtractor={(item, index) => item.lesson+index.toString()}
                 />
                 <Snackbar
                     visible={error}
