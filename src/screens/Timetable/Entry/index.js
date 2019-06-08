@@ -2,16 +2,8 @@ import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 import { TouchableRipple, Text, Title, Colors } from 'react-native-paper';
 import color from 'color';
-import theme from '@config/theme';
+import theme, { indicators } from '@config/theme';
 import styles from './styles';
-
-const indicatorColors = {
-    'Entfall': Colors.red600,
-    'Vertretung': Colors.blue500,
-    'Statt-Vertretung': Colors.blue500,
-    'Raum-Vtr.': Colors.teal500,
-    'Verlegung': Colors.orange500
-}
 
 class Entry extends PureComponent {
     simplifyClasses(classes) {
@@ -39,7 +31,7 @@ class Entry extends PureComponent {
             .alpha(0.54)
             .rgb()
             .string();
-        const indicatorColor = indicatorColors[type] ? indicatorColors[type] : Colors.grey500;
+        const indicatorColor = indicators[type] ? indicators[type] : Colors.grey500;
 
         return (
             <TouchableRipple

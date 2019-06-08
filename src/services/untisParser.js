@@ -3,6 +3,7 @@ import moment from 'moment';
 
 class UntisParser {
     constructor(data) {
+        console.log(data);
         this._$ = cheerio.load(data);
         this.timetables = [];
         this.parse();

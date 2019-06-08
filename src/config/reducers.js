@@ -52,6 +52,7 @@ function generateSections(timetables, filter) {
         return timetables.map(timetable => ({
             // format date as title
             title: moment(timetable.date).format('dddd, DD.MM.YYYY'),
+            date: timetable.date,
             // check if filter exists and is active
             data: filter.isActive && filter.data ?
                 // apply filter

@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, SectionList, StatusBar, RefreshControl } from 'react-native';
+import { View, SectionList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { Appbar, Snackbar, List, Subheading, Surface } from 'react-native-paper';
 import theme from '@config/theme';
@@ -12,6 +12,7 @@ class Timetable extends PureComponent {
         super(props);
 
         this.fetchTimetables = this.fetchTimetables.bind(this);
+        this.onEntryDetail = this.onEntryDetail.bind(this);
     }
 
     static navigationOptions = {
@@ -33,12 +34,22 @@ class Timetable extends PureComponent {
         }
     }
 
+    onEntryDetail({ section, item }) {
+        const { navigation } = this.props;
+
+        navigation.push('Entry', {
+            entry: {
+                ...item,
+                date: section.date
+            }
+        });
+    }
+
     render() {
         const { sections = [], error, filter, isLoading, navigation } = this.props;
 
         return (
             <View style={styles.container}>
-                <StatusBar backgroundColor="#650016" barStyle="light-content" />
                 <Surface style={styles.appbar}>
                     <Appbar.Header>
                         <Appbar.Action
@@ -53,7 +64,12 @@ class Timetable extends PureComponent {
                 <SectionList
                     initialNumToRender={11}
                     contentContainerStyle={error ? styles.snackbarListPadding : {}}
-                    renderItem={({ item }) => (<Entry {...item} />)}
+                    renderItem={({ item, section }) => (
+                        <Entry
+                            {...item}
+                            onPress={() => this.onEntryDetail({ item, section })}
+                        />
+                    )}
                     renderSectionHeader={({ section: { title } }) => (
                         <List.Subheader>{title}</List.Subheader>
                     )}

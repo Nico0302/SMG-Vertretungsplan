@@ -23,8 +23,8 @@ class NavigationDrawer extends Component {
                     <Drawer.Item
                         label='Vertretungsplan'
                         icon='list'
-                        active={activeItemKey === 'Timetable'}
-                        onPress={() => onItemPress({ route: { routeName: 'Timetable' }, focused: activeItemKey === 'Timetable' })}
+                        active={activeItemKey === 'TimetableStack'}
+                        onPress={() => onItemPress({ route: { routeName: 'Timetable' }, focused: activeItemKey === 'TimetableStack' })}
                     />
                     <Drawer.Item
                         label='Einstellungen'

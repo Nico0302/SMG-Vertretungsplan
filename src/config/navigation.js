@@ -4,6 +4,7 @@ import NavigationDrawer from '@components/NavigationDrawer';
 import Login from '@screens/Login';
 import Timetable from '@screens/Timetable';
 import Settings from '@screens/Settings';
+import Entry from '@screens/Entry';
 
 const defaultNavigationOptions = {
     header: null
@@ -19,13 +20,25 @@ const authStack = createStackNavigator(
     }
 );
 
-const mainStack = createDrawerNavigator(
+const timetableStack = createStackNavigator(
     {
         Timetable,
-        Settings
+        Entry
     },
     {
         initialRouteName: 'Timetable',
+        defaultNavigationOptions
+    }
+)
+
+const mainStack = createDrawerNavigator(
+    {
+        TimetableStack: timetableStack,
+        Settings,
+        Entry
+    },
+    {
+        initialRouteName: 'TimetableStack',
         defaultNavigationOptions,
         contentComponent: props => (<NavigationDrawer {...props}/>)
     }
