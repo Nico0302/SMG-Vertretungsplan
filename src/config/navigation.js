@@ -2,6 +2,7 @@ import React from 'react';
 import { createAppContainer, createSwitchNavigator, createStackNavigator, createDrawerNavigator } from 'react-navigation';
 import NavigationDrawer from '@components/NavigationDrawer';
 import Login from '@screens/Login';
+import Register from '@screens/Register';
 import Timetable from '@screens/Timetable';
 import Settings from '@screens/Settings';
 import Entry from '@screens/Entry';
@@ -12,7 +13,8 @@ const defaultNavigationOptions = {
 
 const authStack = createStackNavigator(
     {
-        Login
+        Login,
+        Register
     },
     {
         initialRouteName: 'Login',

@@ -18,10 +18,6 @@ class Login extends PureComponent {
         this.login = this.login.bind(this);
     }
 
-    static navigationOptions = {
-        title: 'Login',
-    };
-
     componentWillReceiveProps(newProps) {
         const { navigation } = this.props;
 
@@ -38,7 +34,7 @@ class Login extends PureComponent {
     }
 
     render() {
-        const { auth } = this.props;
+        const { auth, navigation } = this.props;
         const { username, password } = this.state;
 
         return (
@@ -81,6 +77,7 @@ class Login extends PureComponent {
                         secureTextEntry
                     />
                     <View style={styles.actions}>
+                        <Button onPress={() => navigation.navigate('Register')}>Zugang anfordern</Button>
                         <Button onPress={this.login} mode="contained">Login</Button>
                     </View>
                 </View>
