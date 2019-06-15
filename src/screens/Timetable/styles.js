@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
     },
     snackbarListPadding: {
         paddingBottom: 68
+    },
+    info: {
+        marginHorizontal: 16,
+        marginBottom: 8
     }
 });
 

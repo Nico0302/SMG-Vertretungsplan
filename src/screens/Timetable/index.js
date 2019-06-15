@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, SectionList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
-import { Appbar, Snackbar, List, Subheading, Surface } from 'react-native-paper';
+import { Appbar, Paragraph, Snackbar, List, Subheading, Surface } from 'react-native-paper';
 import theme from '@config/theme';
 import { fetchTimetables } from '@actions/timetables';
 import Entry from './Entry';
@@ -70,8 +70,13 @@ class Timetable extends PureComponent {
                             onPress={() => this.onEntryDetail({ item, section })}
                         />
                     )}
-                    renderSectionHeader={({ section: { title } }) => (
-                        <List.Subheader>{title}</List.Subheader>
+                    renderSectionHeader={({ section: { title, info } }) => (
+                        <View>
+                            <List.Subheader>{title}</List.Subheader>
+                            {info && (
+                                <Paragraph style={styles.info}>{info}</Paragraph>
+                            )}
+                        </View>
                     )}
                     renderSectionFooter={({ section }) => section.data.length < 1 ? (
                         <View style={styles.emptySection}>

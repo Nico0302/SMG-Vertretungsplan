@@ -1,5 +1,6 @@
 import UntisParser from '@services/untisParser';
 import { getTimetables } from '@services/dsb';
+import { getHtmlTimetables } from '@services/timetables';
 import moment from 'moment';
 
 export const FETCH_TIMETABLES_REQUEST = 'FETCH_TIMETABLES_REQUEST';
@@ -28,8 +29,7 @@ export function fetchTimetables() {
                     receivedAt: moment().toISOString()
                 });
             } else {
-                const response = await fetch(timetableurl);
-                const htmlTimetable = await response.text();
+                const htmlTimetable = await getHtmlTimetables(timetableurl);
                 const parser = new UntisParser(htmlTimetable);
 
                 dispatch({

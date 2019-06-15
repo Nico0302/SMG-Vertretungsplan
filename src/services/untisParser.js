@@ -3,7 +3,6 @@ import moment from 'moment';
 
 class UntisParser {
     constructor(data) {
-        console.log(data);
         this._$ = cheerio.load(data);
         this.timetables = [];
         this.parse();
@@ -23,6 +22,11 @@ class UntisParser {
         const date = moment(dateString, 'D.M.YYYY').toISOString();
 
         this.timetables[timetableIndex] = { date, data: [] };
+
+        // check for timetable info
+        const infoElement = this._$(dateElement).next();
+        if (infoElement.hasClass('info'))
+            this.timetables[timetableIndex].info = infoElement.text().replace(/^\s+|\s+$/g, '');
     }
 
     parseTimetable(timetableIndex, timetable) {

@@ -15,14 +15,16 @@ const sensitiveStorage = createSensitiveStorage({
 const timetablesPersistConfig = {
     key: 'timetables',
     blacklist: [ 'isLoading', 'error', 'data', 'cache' ],
-    storage: AsyncStorage
+    storage: AsyncStorage,
+    timeout: 0
 }
 
 const authPersistConfig = {
     key: 'auth',
     blacklist: ['isLoading', 'error'],
     storage: sensitiveStorage,
-    stateReconciler: hardSet
+    stateReconciler: hardSet,
+    timeout: 0
 };
 
 const rootReducer = combineReducers({

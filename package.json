@@ -23,7 +23,8 @@
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-persist-sensitive-storage": "^1.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "text-encoding": "^0.7.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

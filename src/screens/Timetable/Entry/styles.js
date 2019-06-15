@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingStart: 4,
         paddingEnd: 16,
-        paddingVertical: 6,
+        paddingVertical: 6
     },
     lesson: {
         minWidth: 57,
