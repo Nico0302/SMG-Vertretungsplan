@@ -52,6 +52,7 @@ class Settings extends Component {
                         left={props => (<List.Icon {...props} icon="filter-list" />)}
                         right={()=> (
                             <Switch
+                                style={styles.switch}
                                 value={isFilterActive}
                                 onValueChange={() => toggleTimetableFilter()}
                             />

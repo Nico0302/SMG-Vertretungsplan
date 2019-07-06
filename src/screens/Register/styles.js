@@ -14,7 +14,7 @@ const styles = StyleSheet.create({
     info: {
         marginTop: 32,
         marginHorizontal: 20,
-        marginBottom: 28
+        marginBottom: 18
     },
     textInput: {
         width: '90%',

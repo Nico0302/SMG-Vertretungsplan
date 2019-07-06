@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
+import { SafeAreaView } from 'react-navigation';
 import { Button, Text, TextInput } from 'react-native-paper';
 import { login } from '@actions/auth';
 import Logo from '@components/Logo';
@@ -45,8 +46,8 @@ class Login extends PureComponent {
                 bounces={false}
                 ref={scrollView => this.scrollView = scrollView}
             >
-                <View style={styles.content}>
-                    <StatusBar backgroundColor="#cccccc" />
+                <SafeAreaView style={styles.content}>
+                    <StatusBar backgroundColor="#cccccc" barStyle="dark-content" />
                     <View style={styles.logo}>
                         <Logo size={160} />
                     </View>
@@ -80,7 +81,7 @@ class Login extends PureComponent {
                         <Button onPress={() => navigation.navigate('Register')}>Zugang anfordern</Button>
                         <Button onPress={this.login} mode="contained">Login</Button>
                     </View>
-                </View>
+                </SafeAreaView>
             </ScrollView>
         );
     }

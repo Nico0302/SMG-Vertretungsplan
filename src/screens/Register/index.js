@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react';
-import { View, ScrollView, Linking } from 'react-native';
+import { View, ScrollView, Linking, Platform } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
 import { Button, Paragraph, TextInput } from 'react-native-paper';
 import styles from './styles';
 
@@ -16,17 +17,22 @@ class Register extends PureComponent {
     }
 
     register() {
-        const { name, className, navigation } = this.state;
+        const { name, className } = this.state;
         const body = 
         `Bitte stellen Sie die Zugangsdaten für den Online-Vertretungsplan bereit.
 Name: ${name}
 Klasse: ${className}
 Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generiert.`;
+        const subject = 'Zugang Anfordern';
 
-        Linking.openURL(`mailto:dsb@smg-ingelheim.de?subject=Zugangsdaten anfordern&body=${body}`);
+        Linking.openURL(Platform.OS === 'ios' ?
+            `mailto:dsb@smg-ingelheim.de?cc=&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` :
+            `mailto:dsb@smg-ingelheim.de?subject=${subject}&body=${body}`
+        );
     }
 
     render() {
+        const { navigation } = this.props;
         const { name, className } = this.state;
 
         return (
@@ -37,7 +43,7 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
                 bounces={false}
                 ref={scrollView => this.scrollView = scrollView}
             >
-                <View style={styles.content}>
+                <SafeAreaView style={styles.content}>
                     <Paragraph style={styles.info}>Du kannst per E-Mail die Zugangsdaten für den SMG Vertretungsplan bei der Schule anfordern.</Paragraph>
                     <TextInput
                         style={styles.textInput}
@@ -60,9 +66,10 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
                         label="Klasse"
                     />
                     <View style={styles.actions}>
+                        <Button onPress={() => navigation.goBack()}>Anmelden</Button>
                         <Button onPress={this.register} mode="contained">Zugang anfordern</Button>
                     </View>
-                </View>
+                </SafeAreaView>
             </ScrollView>
         );
     }

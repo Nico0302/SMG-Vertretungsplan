@@ -20,6 +20,9 @@ const styles = StyleSheet.create({
     },
     leftSpacer: {
         width: 56
+    },
+    switch: {
+        alignSelf: 'center'
     }
 });
 
