@@ -75,7 +75,7 @@ class Entry extends PureComponent {
                                         numberOfLines={1}
                                         style={[styles.description, { color: descriptionColor }]}
                                     >
-                                        {swap ? `von ${swap} Stunde` : detail}
+                                        {swap ? `von ${swap}` : detail}
                                     </Text>
                                 )}
                             </View>

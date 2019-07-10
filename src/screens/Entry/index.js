@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, ScrollView, StatusBar } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import moment from 'moment';
 import { Appbar, Surface, Headline } from 'react-native-paper';
@@ -34,25 +34,27 @@ class Entry extends Component {
                     <Headline>{type}</Headline>
                 </View>
                 <Surface style={styles.surface}>
-                    <Info value={moment(date).format('dddd, DD.MM.YYYY')} label="Datum" icon="event"/>
-                    {classes && classes[0] !== '' && (
-                        <Info value={classes.join(', ')} label={classes.length > 1 ? 'Klassen' : 'Klasse'} icon="group"/>
-                    )}
-                    {subject && (
-                        <Info value={subject} label="Fach" icon="class"/>
-                    )}
-                    {substitute && (
-                        <Info value={substitute} label="Lehrer/in" icon="person"/>
-                    )}
-                    {room && (
-                        <Info value={room} label="Raum" icon="room"/>
-                    )}
-                    {swap && (
-                        <Info value={`von ${swap}. Stunde`} label="Verlegung" icon="reply"/>
-                    )}
-                    {detail && (
-                        <Info value={detail} label="Anmerkung" icon="info"/>
-                    )}
+                    <ScrollView bounces={false}>
+                        <Info value={moment(date).format('dddd, DD.MM.YYYY')} label="Datum" icon="event"/>
+                        {classes && classes[0] !== '' && (
+                            <Info value={classes.join(', ')} label={classes.length > 1 ? 'Klassen' : 'Klasse'} icon="group"/>
+                        )}
+                        {subject && (
+                            <Info value={subject} label="Fach" icon="class"/>
+                        )}
+                        {substitute && (
+                            <Info value={substitute} label="Lehrer/in" icon="person"/>
+                        )}
+                        {room && (
+                            <Info value={room} label="Raum" icon="room"/>
+                        )}
+                        {swap && (
+                            <Info value={`von ${swap}. Stunde`} label="Verlegung" icon="reply"/>
+                        )}
+                        {detail && (
+                            <Info value={detail} label="Anmerkung" icon="info"/>
+                        )}
+                    </ScrollView>
                 </Surface>
             </View>
         );
