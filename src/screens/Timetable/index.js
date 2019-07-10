@@ -93,6 +93,7 @@ class Timetable extends PureComponent {
                             colors={[theme.colors.primary]}
                         />
                     }
+                    stickySectionHeadersEnabled={false}
                     keyExtractor={(item, index) => item.lesson+index.toString()}
                 />
                 <Snackbar
