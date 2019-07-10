@@ -3,6 +3,7 @@ package io.gres.smg_vertretungsplan;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import br.com.classapp.RNSensitiveInfo.RNSensitiveInfoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
             new AsyncStoragePackage(),
             new RNSensitiveInfoPackage(),
             new VectorIconsPackage(),

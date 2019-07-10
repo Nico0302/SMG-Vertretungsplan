@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, SectionList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
+import SplashScreen from 'react-native-splash-screen'
 import { Appbar, Paragraph, Snackbar, List, Subheading, Surface } from 'react-native-paper';
 import theme from '@config/theme';
 import { fetchTimetables } from '@actions/timetables';
@@ -21,6 +22,7 @@ class Timetable extends PureComponent {
 
     componentDidMount() {
         this.fetchTimetables();
+        SplashScreen.hide();
     }
 
     fetchTimetables() {
