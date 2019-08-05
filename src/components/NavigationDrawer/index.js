@@ -29,7 +29,7 @@ class NavigationDrawer extends Component {
                     <Drawer.Item
                         label='Einstellungen'
                         icon='settings'
-                        active={activeItemKey === 'Settings'}
+                        active={activeItemKey === 'SettingsStack'}
                         onPress={() => onItemPress({ route: { routeName:  'Settings' }, focused: activeItemKey === 'Settings' })}
                     />
                     <Drawer.Item

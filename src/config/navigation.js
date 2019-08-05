@@ -5,6 +5,7 @@ import Login from '@screens/Login';
 import Register from '@screens/Register';
 import Timetable from '@screens/Timetable';
 import Settings from '@screens/Settings';
+import Filters from '@screens/Filters';
 import Entry from '@screens/Entry';
 
 const defaultNavigationOptions = {
@@ -31,12 +32,23 @@ const timetableStack = createStackNavigator(
         initialRouteName: 'Timetable',
         defaultNavigationOptions
     }
+);
+
+const settingsStack = createStackNavigator(
+    {
+        Settings,
+        Filters
+    },
+    {
+        initialRouteName: 'Settings',
+        defaultNavigationOptions
+    }
 )
 
 const mainStack = createDrawerNavigator(
     {
         TimetableStack: timetableStack,
-        Settings,
+        SettingsStack: settingsStack,
         Entry
     },
     {

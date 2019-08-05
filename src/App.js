@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StatusBar } from 'react-native';
 import { Provider } from 'react-redux';
-import { PersistGate } from 'redux-persist/integration/react'
+import { PersistGate } from 'redux-persist/integration/react';
 import moment from 'moment';
 import 'moment/locale/de';
 import { Provider as PaperProvider } from 'react-native-paper';

@@ -1,20 +1,44 @@
+import moment from 'moment';
 import {
     LOGOUT
 } from '@actions/auth';
 import {
+    TOGGLE_FILTER,
+    SET_CLASS_FILTER,
+    ADD_SUBJECT_FILTER,
+    REMOVE_SUBJECT_FILTER
+} from '@actions/filters';
+import {
     FETCH_TIMETABLES_REQUEST,
     FETCH_TIMETABLES_FAILURE,
-    FETCH_TIMETABLES_SUCCESS,
-    SET_TIMETABLE_FILTER,
-    TOGGLE_TIMETABLE_FILTER
+    FETCH_TIMETABLES_SUCCESS
 } from '@actions/timetables';
+import filters from '@reducers/filters';
+
+function generateSections(timetables, filters) {
+    if (timetables) {
+        return timetables.map(timetable => ({
+            ...timetable,
+            // format date as title
+            title: moment(timetable.date).format('dddd, DD.MM.YYYY'),
+            // check if filter exists and is active
+            data: filters.isActive && !filters.isEmpty ?
+                // apply filter
+                timetable.data.filter(entry => 
+                    entry.classes.find(className =>
+                        className.toLowerCase() === filters.data.toLowerCase()
+                    ) && (!entry.subject || filters.subjects.includes(entry.subject))
+                )
+                : timetable.data
+        }));
+    }
+    return [];
+}
 
 function timetables(state = {
     isLoading: false,
     isEmpty: true,
-    filter: {
-        isActive: false
-    },
+    filters: filters(),
     cache: null,
     sections: []
 }, action) {
@@ -32,7 +56,7 @@ function timetables(state = {
                     isLoading: false,
                     isEmpty: action.timetables.length < 1,
                     cache: action.timetables,
-                    sections: generateSections(action.timetables, state.filter),
+                    sections: generateSections(action.timetables, state.filters),
                     url: action.url,
                     receivedAt: action.receivedAt
                 };
@@ -40,7 +64,7 @@ function timetables(state = {
             return {
                 ...state,
                 isLoading: false,
-                sections: generateSections(state.cache, state.filter),
+                sections: generateSections(state.cache, state.filters),
                 receivedAt: action.receivedAt
             };
         case FETCH_TIMETABLES_FAILURE:
@@ -49,30 +73,21 @@ function timetables(state = {
                 isLoading: false,
                 error: action.error
             };
-        case SET_TIMETABLE_FILTER:
+        case TOGGLE_FILTER:
+        case SET_CLASS_FILTER:
+        case ADD_SUBJECT_FILTER:
+        case REMOVE_SUBJECT_FILTER:
+            const nextFilterState = filters(state.filters, action);
+
             return {
                 ...state,
-                filter: {
-                    ...state.filter,
-                    data: action.filter,
-                    isActive: true
-                }
-            };
-        case TOGGLE_TIMETABLE_FILTER:
-            return {
-                ...state,
-                filter: {
-                    ...state.filter,
-                    isActive: state.filter ? !state.filter.isActive : true
-                }
+                sections: generateSections(state.cache, nextFilterState),
+                filters: nextFilterState
             };
         case LOGOUT:
             return {
                 ...state,
-                filter: {
-                    data: null,
-                    isActive: false
-                },
+                filters: filters(state.filters, action),
                 cache: null,
                 sections: [],
                 url: null,

@@ -5,7 +5,8 @@ import { persistStore, persistReducer } from 'redux-persist';
 import AsyncStorage from '@react-native-community/async-storage';
 import createSensitiveStorage from 'redux-persist-sensitive-storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
-import { authReducer, timetablesReducer } from './reducers';
+import authReducer from '@reducers/auth';
+import timetablesReducer from '@reducers/timetables';
 
 const sensitiveStorage = createSensitiveStorage({
     keychainService: 'myKeychain',
@@ -14,7 +15,7 @@ const sensitiveStorage = createSensitiveStorage({
 
 const timetablesPersistConfig = {
     key: 'timetables',
-    blacklist: [ 'isLoading', 'error', 'data', 'cache' ],
+    blacklist: ['isLoading', 'error', 'data', 'cache'],
     storage: AsyncStorage,
     timeout: 0
 }

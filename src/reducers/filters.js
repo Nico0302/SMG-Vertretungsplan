@@ -1,80 +1,55 @@
+
 import {
     LOGOUT
 } from '@actions/auth';
 import {
     TOGGLE_FILTER,
-    ADD_CLASS_FILTER,
+    SET_CLASS_FILTER,
     ADD_SUBJECT_FILTER,
-    REMOVE_CLASS_FILTER,
     REMOVE_SUBJECT_FILTER
 } from '@actions/filters';
 
 function filters(state = {
-    data: [],
+    value: '',
+    subjects: [],
     isActive: false,
     isEmpty: true
-}, action) {
+}, action = {}) {
     switch (action.type) {
         case TOGGLE_FILTER:
             return {
                 ...state,
                 isActive: !state.isActive
             };
-        case ADD_CLASS_FILTER:
+        case SET_CLASS_FILTER:
             return {
                 ...state,
-                data: [
-                    ...state.data,
-                    {
-                        class: action.value,
-                        subjects: []
-                    }
-                ]
+                value: action.class,
+                isEmpty: action.class !== ''
             };
         case ADD_SUBJECT_FILTER:
-            const filterIndex = state.data.findIndex(filter => filter.class === action.class);
-
             return {
                 ...state,
-                data: [
-                    ...state.data,
-                    [filterIndex]: {
-                        class: action.value,
-                        subjects: []
-                    }
+                subjects: [
+                    ...state.subjects,
+                    action.subject
                 ]
             };
-        case SET_TIMETABLE_FILTER:
+        case REMOVE_SUBJECT_FILTER:
             return {
                 ...state,
-                filter: {
-                    ...state.filter,
-                    data: action.filter,
-                    isActive: true
-                }
-            };
-        case TOGGLE_TIMETABLE_FILTER:
-            return {
-                ...state,
-                filter: {
-                    ...state.filter,
-                    isActive: state.filter ? !state.filter.isActive : true
-                }
+                subjects: state.subjects.filter(subject => subject !== action.subject)
             };
         case LOGOUT:
             return {
                 ...state,
-                filter: {
-                    data: null,
-                    isActive: false
-                },
-                cache: null,
-                sections: [],
-                url: null,
-                receivedAt: null,
-                isEmpty: true
+                data: [],
+                isEmpty: true,
+                isActive: false
             };
         default:
             return state;
     }
 }
+
+export default filters;

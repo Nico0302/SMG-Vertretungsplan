@@ -1,36 +1,20 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Appbar, Surface, Switch, Divider, List } from 'react-native-paper';
 import { logout } from '@actions/auth';
-import { setTimetableFilter, toggleTimetableFilter } from '@actions/timetables';
-import FilterDialog from './FilterDialog';
+import { toggleFilter, setClassFilter } from '@actions/filters';
 import styles from './styles';
 
-class Settings extends Component {
-    constructor(props) {
-        super(props);
-
-        this.state = {
-            filterDialogVisible: false
-        };
-    }
-
-    static navigationOptions = {
-        drawerLabel: 'Einstellungen'
-    };
-
-
+class Settings extends PureComponent {
     render() {
         const { 
-            filter,
+            filtersActive,
+            filtersEmpty,
             navigation,
-            toggleTimetableFilter,
-            setTimetableFilter,
+            toggleFilter,
             logout
         } = this.props;
-        const { filterDialogVisible } = this.state;
-        const isFilterActive = filter && filter.isActive;
 
         return (
             <View style={styles.container}>
@@ -47,23 +31,18 @@ class Settings extends Component {
                 </Surface>
                 <ScrollView style={styles.content}>
                     <List.Item
-                        title="Filter aktivieren"
-                        description="Vertretungsplan filtern"
+                        title="Filter"
+                        description={filtersActive ? 'An' : 'Aus'}
+                        onPress={() => navigation.navigate('Filters')}
                         left={props => (<List.Icon {...props} icon="filter-list" />)}
                         right={()=> (
                             <Switch
                                 style={styles.switch}
-                                value={isFilterActive}
-                                onValueChange={() => toggleTimetableFilter()}
+                                value={filtersActive}
+                                disabled={filtersEmpty}
+                                onValueChange={() => toggleFilter()}
                             />
                         )}
-                    />
-                    <List.Item
-                        title="Klassen Filter"
-                        style={isFilterActive ? {} : styles.deactivatedItem}
-                        description={filter && filter.data ? filter.data : 'leer'}
-                        left={() => (<View style={styles.leftSpacer} />)}
-                        onPress={isFilterActive ? () => this.setState({ filterDialogVisible: true }) : null}
                     />
                     <Divider />
                     <List.Item
@@ -75,27 +54,19 @@ class Settings extends Component {
                         left={props => (<List.Icon {...props} icon="exit-to-app" />)}
                     />
                 </ScrollView>
-                <FilterDialog
-                    visible={filterDialogVisible}
-                    onDismiss={() => this.setState({ filterDialogVisible: false })}
-                    onCreate={filter =>
-                        this.setState({ filterDialogVisible: false }, () => 
-                            setTimetableFilter(filter)
-                        )
-                    }
-                />
             </View>
         );
     }
 }
 
 const mapStateToProps = (state) => ({
-    filter: state.timetables.filter
+    filtersActive: state.timetables.filters.isActive,
+    filtersEmpty: state.timetables.filters.isEmpty
 });
 
 const mapDispatchToProps = {
-    setTimetableFilter,
-    toggleTimetableFilter,
+    toggleFilter,
+    setClassFilter,
     logout
 };
 

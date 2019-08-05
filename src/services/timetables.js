@@ -15,7 +15,7 @@ export function getHtmlTimetables(url) {
         request.onerror = () => reject(new Error(statusText));
         request.responseType = 'arraybuffer';
 
-        request.open('GET', url);
+        request.open('GET', 'https://nicolasgres.de/smg-vertretungsplan/untis-test.htm');
         request.send();
     });
 }

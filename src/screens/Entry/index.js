@@ -19,7 +19,7 @@ class Entry extends Component {
                 {isFocused && (<StatusBar backgroundColor={indicatorStatusBar[type]} barStyle="light-content" />)}
                 <Appbar.Header style={styles.appbar}>
                     <Appbar.BackAction
-                        onPress={() => navigation.goBack()}
+                        onPress={() => navigation.goBack(null)}
                     />
                     <Appbar.Content title="" />
                     <Appbar.Action
