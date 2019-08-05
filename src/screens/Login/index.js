@@ -16,22 +16,16 @@ class Login extends PureComponent {
             password: ''
         };
 
-        this.login = this.login.bind(this);
+        this.onLogin = this.onLogin.bind(this);
     }
 
-    componentWillReceiveProps(newProps) {
-        const { navigation } = this.props;
-
-        if (newProps.auth.token) {
-            navigation.navigate('Authenticated');
-        }
-    }
-
-    login() {
-        const { login } = this.props;
+    onLogin() {
+        const { login, navigation } = this.props;
         const { username, password } = this.state;
 
-        login(username, password);
+        login(username, password).then(() =>
+            navigation.navigate('Authenticated')
+        );
     }
 
     render() {
@@ -65,6 +59,9 @@ class Login extends PureComponent {
                         onSubmitEditing={() => this.passwordInput.focus()}
                         returnKeyType="next"
                         label="Nutzername"
+                        disableFullscreenUI
+                        selectTextOnFocus
+                        importantForAutofill="yes"
                     />
                     <TextInput
                         ref={passwordInput => this.passwordInput = passwordInput}
@@ -72,14 +69,16 @@ class Login extends PureComponent {
                         mode="outlined"
                         value={password}
                         onChangeText={password => this.setState({ password })}
-                        onSubmitEditing={this.login}
+                        onSubmitEditing={this.onLogin}
                         returnKeyType="done"
                         label="Passwort"
+                        disableFullscreenUI
                         secureTextEntry
+                        importantForAutofill="yes"
                     />
                     <View style={styles.actions}>
                         <Button onPress={() => navigation.navigate('Register')}>Zugang anfordern</Button>
-                        <Button onPress={this.login} mode="contained">Login</Button>
+                        <Button onPress={this.onLogin} mode="contained">Login</Button>
                     </View>
                 </SafeAreaView>
             </ScrollView>
@@ -87,7 +86,7 @@ class Login extends PureComponent {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     auth: state.auth
 });
 

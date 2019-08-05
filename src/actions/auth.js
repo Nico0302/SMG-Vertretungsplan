@@ -11,24 +11,27 @@ export function login(username, password) {
             dispatch({
                 type: LOGIN_REQUEST
             });
-            if (!username)
+            if (!username) {
                 throw new Error('Ungültiger Nutzername!');
-            if (!password)
+            }
+            if (!password) {
                 throw new Error('Ungültiges Passwort!');
+            }
             const token = await getToken(username, password);
             dispatch({
                 type: LOGIN_SUCCESS,
                 token
             });
-        } catch(error) {
+            return token
+        } catch (error) {
             dispatch({
                 type: LOGIN_FAILURE,
                 error
             });
         }
     };
-};
+}
 
 export const logout = () => ({
-    type: 'LOGOUT'
+    type: LOGOUT
 });
