@@ -1,7 +1,7 @@
-platform :ios, '9.0'
+platform :ios, '9.1'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
-target 'RnDiffApp' do
-  # Pods for RnDiffApp
+target 'SMG_Vertretungsplan' do
+  # Pods for SMG_Vertretungsplan
   pod 'React', :path => '../node_modules/react-native/'
   pod 'React-Core', :path => '../node_modules/react-native/React'
   pod 'React-DevSupport', :path => '../node_modules/react-native/React'
@@ -24,15 +24,15 @@ target 'RnDiffApp' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-  target 'RnDiffAppTests' do
+  target 'SMG_VertretungsplanTests' do
     inherit! :search_paths
     # Pods for testing
   end
   use_native_modules!
 end
-target 'RnDiffApp-tvOS' do
-  # Pods for RnDiffApp-tvOS
-  target 'RnDiffApp-tvOSTests' do
+target 'SMG_Vertretungsplan-tvOS' do
+  # Pods for SMG_Vertretungsplan-tvOS
+  target 'SMG_Vertretungsplan-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
   end
