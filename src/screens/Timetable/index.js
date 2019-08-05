@@ -97,6 +97,9 @@ class Timetable extends PureComponent {
                     }
                     stickySectionHeadersEnabled={false}
                     keyExtractor={(item, index) => item.lesson+index.toString()}
+                    getItemLayout={(data, index) => {
+                        return { length: 52, offset: 52 * index, index }
+                    }}
                 />
                 <Snackbar
                     visible={error}

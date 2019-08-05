@@ -5,10 +5,12 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingStart: 4,
         paddingEnd: 16,
-        paddingVertical: 6
+        justifyContent: 'center',
+        height: 52
     },
     lesson: {
         minWidth: 57,
+        height: 40,
         alignItems: 'center',
         justifyContent: 'center',
         marginStart: 4,
