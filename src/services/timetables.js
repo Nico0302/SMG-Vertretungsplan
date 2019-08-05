@@ -2,7 +2,6 @@ import encoding from 'text-encoding';
 
 export function getHtmlTimetables(url) {
     return new Promise((resolve, reject) => {
-        global.Blob = null
         const request = new XMLHttpRequest();
         const decoder = new encoding.TextDecoder('windows-1252', { NONSTANDARD_allowLegacyEncoding: true });
 

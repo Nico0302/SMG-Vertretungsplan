@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, YellowBox } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import moment from 'moment';
@@ -14,6 +14,10 @@ const { store, persistor } = getStore();
 class App extends Component {
   componentDidMount() {
     moment.locale('de');
+    // temporary fix for fetch in React Native 0.60.x
+    global.Blob = null;
+    
+    YellowBox.ignoreWarnings([ 'Warning: componentWillUpdate is deprecated' ]);
   }
 
   render() {

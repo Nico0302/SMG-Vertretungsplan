@@ -48,7 +48,7 @@ class Timetable extends PureComponent {
     }
 
     render() {
-        const { sections = [], error, filter, isLoading, navigation } = this.props;
+        const { sections = [], error, filters, isLoading, navigation } = this.props;
 
         return (
             <View style={styles.container}>
@@ -83,7 +83,7 @@ class Timetable extends PureComponent {
                     renderSectionFooter={({ section }) => section.data.length < 1 ? (
                         <View style={styles.emptySection}>
                             <Subheading>
-                                {'keine Einträge' + (filter.isActive ? ` für die Klasse ${filter.data}` : '')}
+                                {'keine Einträge' + (filters.isActive ? ` für die Klasse ${filters.class}` : '')}
                             </Subheading>
                         </View>
                     ) : null}
@@ -121,7 +121,7 @@ const mapStateToProps = (state) => ({
     isLoading: state.timetables.isLoading,
     error: state.timetables.error,
     sections: state.timetables.sections,
-    filter: state.timetables.filter
+    filters: state.timetables.filters
 });
 
 const mapDispatchToProps = {

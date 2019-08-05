@@ -77,7 +77,7 @@ import com.android.build.OutputFile
 
 project.ext.react = [
     entryFile: "index.js",
-    enableHermes: false,  // clean and rebuild if changing
+    enableHermes: true,  // clean and rebuild if changing
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -191,11 +191,6 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-splash-screen')
-    implementation project(':@react-native-community_async-storage')
-    implementation project(':react-native-vector-icons')
-    implementation project(':react-native-gesture-handler')
-    implementation project(':react-native-svg')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
     if (enableHermes) {
@@ -214,5 +209,12 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 
-apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+
+project.ext.vectoricons = [
+    iconFontNames: [
+        'MaterialIcons.ttf'
+    ]
+]
+
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"

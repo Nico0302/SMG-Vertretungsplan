@@ -16,7 +16,6 @@ export function fetchTimetables() {
             dispatch({
                 type: FETCH_TIMETABLES_REQUEST
             });
-
             const data = await getTimetables(token);
             // only on timetable is used
             const { timetableurl } = data[0];
