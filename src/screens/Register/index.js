@@ -66,7 +66,7 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
                         label="Klasse"
                     />
                     <View style={styles.actions}>
-                        <Button onPress={() => navigation.goBack()}>Anmelden</Button>
+                        <Button onPress={() => navigation.goBack()}>Login</Button>
                         <Button onPress={this.register} mode="contained">Zugang anfordern</Button>
                     </View>
                 </SafeAreaView>

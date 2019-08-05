@@ -10,7 +10,7 @@ import {
 } from '@actions/filters';
 
 function filters(state = {
-    value: '',
+    class: '',
     subjects: [],
     isActive: false,
     isEmpty: true
@@ -24,8 +24,9 @@ function filters(state = {
         case SET_CLASS_FILTER:
             return {
                 ...state,
-                value: action.class,
-                isEmpty: action.class !== ''
+                class: action.class,
+                isEmpty: action.class === '',
+                isActive: action.class !== ''
             };
         case ADD_SUBJECT_FILTER:
             return {
@@ -43,7 +44,8 @@ function filters(state = {
         case LOGOUT:
             return {
                 ...state,
-                data: [],
+                class: '',
+                subjects: [],
                 isEmpty: true,
                 isActive: false
             };

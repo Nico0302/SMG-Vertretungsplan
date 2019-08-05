@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Appbar, Surface, Switch, List, Divider, Colors } from 'react-native-paper';
+import { Appbar, Switch, Surface, List, Text, Divider, FAB, Chip, Colors, withTheme } from 'react-native-paper';
 import { toggleFilter, setClassFilter, addSubjectFilter, removeSubjectFilter } from '@actions/filters';
 import FilterDialog from './FilterDialog';
 import styles from './styles';
@@ -11,7 +11,8 @@ class Filters extends Component {
         super(props);
 
         this.state = {
-            filterDialogVisible: false
+            classFilterDialogVisible: false,
+            subjectFilterDialogVisible: false
         };
     }
 
@@ -19,45 +20,89 @@ class Filters extends Component {
         const {
             filters,
             navigation,
-            toggleFilter
+            toggleFilter,
+            setClassFilter,
+            addSubjectFilter,
+            removeSubjectFilter,
+            theme
         } = this.props;
-        const { filterDialogVisible } = this.state;
+        const { classFilterDialogVisible, subjectFilterDialogVisible } = this.state;
+        const { fonts } = theme;
 
         return (
             <View style={styles.container}>
-                <Appbar.Header style={styles.appbar}>
-                    <Appbar.BackAction
-                        onPress={() => navigation.goBack(null)}
-                    />
-                    <Appbar.Content
-                        title="Filter"
-                    />
-                </Appbar.Header>
+                <Surface style={styles.appbar}>
+                    <Appbar.Header style={styles.appbar}>
+                        <Appbar.BackAction
+                            onPress={() => navigation.goBack(null)}
+                        />
+                        <Appbar.Content
+                            title="Filter"
+                        />
+                    </Appbar.Header>
+                </Surface>
                 <ScrollView style={styles.content}>
                     <View style={styles.masterSwitch}>
-                        <List.Subheader style={styles.masterSwitchText}>Filter anwenden</List.Subheader>
+                        <Text
+                            style={[
+                                styles.masterSwitchText,
+                                { fontFamily: fonts.regular }
+                            ]}
+                        >Filter anwenden</Text>
                         <Switch
                             value={filters.isActive}
                             disabled={filters.isEmpty}
                             onValueChange={() => toggleFilter()}
                             trackColor={Colors.grey400}
-                            thumbColor={Colors.white}
                         />
                     </View>
                     <List.Item
                         title="Klasse"
-                        onPress={() => this.setState({ filterDialogVisible: true })}
-                        left={props => (<List.Icon {...props} icon="class" />)}
+                        description={filters.isEmpty ? 'kein Filter' : filters.class}
+                        onPress={() => this.setState({ classFilterDialogVisible: true })}
+                        left={props => (<List.Icon {...props} icon="group" />)}
                     />
+                    <Divider />
+                    <List.Subheader style={styles.listSubheader}>Fächer & Kurse</List.Subheader>
+                    <View style={styles.listRow}>
+                        <List.Icon style={styles.listIcon} icon="class" />
+                        <View style={styles.subjectsContainer}>
+                            {filters.subjects.length > 0 ? filters.subjects.map(subject => (
+                                <Chip
+                                    key={subject}
+                                    style={styles.subject}
+                                    onClose={() => removeSubjectFilter(subject)}
+                                >{subject}</Chip>
+                            )) : (<Text>keine Filter</Text>)}
+                        </View>
+                    </View>
                 </ScrollView>
+                <FAB
+                    style={styles.fab}
+                    icon="class"
+                    onPress={() => this.setState({ subjectFilterDialogVisible: true })}
+                />
                 <FilterDialog
-                    visible={filterDialogVisible}
-                    onDismiss={() => this.setState({ filterDialogVisible: false })}
-                    onCreate={filter =>
-                        this.setState({ filterDialogVisible: false }, () =>
-                            setTimetableFilter(filter)
+                    visible={classFilterDialogVisible}
+                    onDismiss={() => this.setState({ classFilterDialogVisible: false })}
+                    onCreate={className =>
+                        this.setState({ classFilterDialogVisible: false }, () =>
+                            setClassFilter(className)
                         )
                     }
+                    title="Filter bearbeiten"
+                    placeholder="Klasse"
+                    createText="OK"
+                />
+                <FilterDialog
+                    visible={subjectFilterDialogVisible}
+                    onDismiss={() => this.setState({ subjectFilterDialogVisible: false })}
+                    onCreate={subjectName =>
+                        addSubjectFilter(subjectName)
+                    }
+                    title="Filter hinzufügen"
+                    placeholder="Fach/Kurs-Kürzel"
+                    createText="Neu"
                 />
             </View>
         );
@@ -78,4 +123,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Filters);
+)(withTheme(Filters));

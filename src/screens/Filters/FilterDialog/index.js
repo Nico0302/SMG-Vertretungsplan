@@ -18,12 +18,12 @@ class FilterDialog extends PureComponent {
         const { onCreate } = this.props;
         const { filter } = this.state;
 
-        onCreate(filter === '' ? null : filter.replace(/\s/g, ''));
+        onCreate(filter.replace(/\s/g, ''));
         this.setState({ filter: '' });
     }
 
     render() {
-        const { visible, onDismiss, theme } = this.props;
+        const { visible, title, createText, onDismiss, placeholder, theme } = this.props;
         const { filter } = this.state;
 
         return (
@@ -31,11 +31,11 @@ class FilterDialog extends PureComponent {
                 <Dialog
                     visible={visible}
                     onDismiss={onDismiss}>
-                    <Dialog.Title style={styles.title}>Filter</Dialog.Title>
+                    <Dialog.Title style={styles.title}>{title}</Dialog.Title>
                     <TextInput
+                        autoFocus
                         style={styles.input}
-                        label="Filter"
-                        placeholder="10g"
+                        placeholder={placeholder}
                         value={filter}
                         autoCorrect={false}
                         maxLength={8}
@@ -45,7 +45,7 @@ class FilterDialog extends PureComponent {
                     />
                     <Dialog.Actions>
                         <Button onPress={onDismiss}>Abbruch</Button>
-                        <Button onPress={this.onCreate}>OK</Button>
+                        <Button disabled={filter === ''} onPress={this.onCreate}>{createText}</Button>
                     </Dialog.Actions>
                 </Dialog>
             </Portal>

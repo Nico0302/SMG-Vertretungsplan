@@ -12,14 +12,12 @@ export const setClassFilter = (className) => ({
     class: className
 });
 
-export const addSubjectFilter = (className, subjectName) => ({
+export const addSubjectFilter = (subjectName) => ({
     type: ADD_SUBJECT_FILTER,
-    class: className,
     subject: subjectName
 });
 
-export const removeSubjectFilter = (className, subjectName) => ({
+export const removeSubjectFilter = (subjectName) => ({
     type: REMOVE_SUBJECT_FILTER,
-    class: className,
     subject: subjectName
 });

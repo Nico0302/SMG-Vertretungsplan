@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 import { Colors } from 'react-native-paper';
 import theme from '@config/theme';
 
@@ -15,18 +15,47 @@ const styles = StyleSheet.create({
         flex: 1
     },
     masterSwitch: {
-        backgroundColor: Colors.grey600,
+        backgroundColor: Colors.grey500,
         flexDirection: 'row',
         width: '100%',
         alignItems: 'center',
         justifyContent: 'space-between',
-        paddingStart: 58,
+        paddingStart: 72,
         paddingEnd: 16,
-        paddingVertical: 4
+        height: 56
     },
     masterSwitchText: {
         color: Colors.white,
-        fontSize: 18
+        fontSize: Platform.OS === 'ios' ? 16 : 19
+    },
+    fab: {
+        position: 'absolute',
+        margin: 16,
+        right: 0,
+        bottom: 0
+    },
+    listSubheader: {
+        marginStart: 56,
+        paddingBottom: 0
+    },
+    listRow: {
+        flex: 1,
+        flexDirection: 'row'
+    },
+    listIcon: {
+        width: 56
+    },
+    subjectsContainer: {
+        flex: 1,
+        flexWrap: 'wrap',
+        flexDirection: 'row',
+        paddingEnd: 16,
+        paddingVertical: 12
+    },
+    subject: {
+        flex: 0,
+        marginEnd: 4,
+        marginBottom: 4
     }
 });
 
