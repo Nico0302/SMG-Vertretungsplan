@@ -2775,6 +2775,10 @@ has@^1.0.1, has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hermes-engine@0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/hermes-engine/-/hermes-engine-0.1.0.tgz#b43229a13f36c34dcb4a797afd1a6109043db674"
+
 hermesvm@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/hermesvm/-/hermesvm-0.1.0.tgz#4bfaf4ac682a2fd407b862ab641eb8deb232de83"
@@ -3531,7 +3535,7 @@ jest@^24.8.0:
     import-local "^2.0.0"
     jest-cli "^24.8.0"
 
-jetifier@^1.6.2:
+jetifier@^1.6.2, jetifier@^1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/jetifier/-/jetifier-1.6.3.tgz#61a95b29aefddfe3b6d81ee956f5e99f8b9cba19"
 
@@ -4910,9 +4914,9 @@ react-native-safe-area-view@^0.14.1:
   dependencies:
     debounce "^1.2.0"
 
-react-native-sensitive-info@^5.4.1:
-  version "5.4.2"
-  resolved "https://registry.yarnpkg.com/react-native-sensitive-info/-/react-native-sensitive-info-5.4.2.tgz#d2454991707927f27b5cdedfe21a07f30a5afd22"
+react-native-sensitive-info@^5.5.0:
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-sensitive-info/-/react-native-sensitive-info-5.5.0.tgz#90d32b0ac02f20c2f71eec109024b01adb8114bb"
 
 react-native-splash-screen@^3.2.0:
   version "3.2.0"
@@ -4935,7 +4939,7 @@ react-native-tab-view@^1.2.0, react-native-tab-view@^1.4.1:
   dependencies:
     prop-types "^15.6.1"
 
-react-native-vector-icons@^6.4.2:
+react-native-vector-icons@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"
   dependencies:
@@ -5012,7 +5016,7 @@ react-proxy@^1.1.7:
     lodash "^4.6.1"
     react-deep-force-update "^1.0.0"
 
-react-redux@^7.0.3:
+react-redux@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-7.1.0.tgz#72af7cf490a74acdc516ea9c1dd80e25af9ea0b2"
   dependencies:

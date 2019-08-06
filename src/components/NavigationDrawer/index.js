@@ -11,7 +11,7 @@ class NavigationDrawer extends Component {
     }
 
     render() {
-        const { activeItemKey, onItemPress } = this.props;
+        const { activeItemKey, navigation } = this.props;
 
         return (
             <SafeAreaView style={styles.container}>
@@ -24,13 +24,13 @@ class NavigationDrawer extends Component {
                         label='Vertretungsplan'
                         icon='list'
                         active={activeItemKey === 'TimetableStack'}
-                        onPress={() => onItemPress({ route: { routeName: 'Timetable' }, focused: activeItemKey === 'TimetableStack' })}
+                        onPress={() => navigation.navigate('TimetableStack')}
                     />
                     <Drawer.Item
                         label='Einstellungen'
                         icon='settings'
                         active={activeItemKey === 'SettingsStack'}
-                        onPress={() => onItemPress({ route: { routeName:  'Settings' }, focused: activeItemKey === 'Settings' })}
+                        onPress={() => navigation.navigate('SettingsStack')}
                     />
                     <Drawer.Item
                         label='Feedback'

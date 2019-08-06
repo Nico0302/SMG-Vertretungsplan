@@ -48,8 +48,7 @@ const settingsStack = createStackNavigator(
 const mainStack = createDrawerNavigator(
     {
         TimetableStack: timetableStack,
-        SettingsStack: settingsStack,
-        Entry
+        SettingsStack: settingsStack
     },
     {
         initialRouteName: 'TimetableStack',

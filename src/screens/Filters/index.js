@@ -41,7 +41,7 @@ class Filters extends Component {
                         />
                     </Appbar.Header>
                 </Surface>
-                <ScrollView style={styles.content}>
+                <ScrollView style={styles.content} bounces={false}>
                     <View style={styles.masterSwitch}>
                         <Text
                             style={[

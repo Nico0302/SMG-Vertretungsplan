@@ -23,7 +23,7 @@ class Register extends PureComponent {
 Name: ${name}
 Klasse: ${className}
 Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generiert.`;
-        const subject = 'Zugang Anfordern';
+        const subject = 'Zugang anfordern';
 
         Linking.openURL(Platform.OS === 'ios' ?
             `mailto:dsb@smg-ingelheim.de?cc=&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` :
