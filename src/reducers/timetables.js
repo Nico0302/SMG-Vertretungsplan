@@ -40,6 +40,7 @@ function timetables(state = {
     isEmpty: true,
     filters: filters(),
     cache: null,
+    url: null,
     sections: []
 }, action) {
     switch (action.type) {

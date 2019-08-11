@@ -1,5 +1,6 @@
 import React from 'react';
-import { createAppContainer, createSwitchNavigator, createStackNavigator, createDrawerNavigator } from 'react-navigation';
+import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation-drawer';
 import NavigationDrawer from '@components/NavigationDrawer';
 import Login from '@screens/Login';
 import Register from '@screens/Register';

@@ -1,26 +1,25 @@
-import encoding from 'text-encoding';
+import iconv from 'iconv-lite';
+import { Buffer } from 'buffer';
 
 export function getHtmlTimetables(url) {
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();
-    const decoder = new encoding.TextDecoder('windows-1252', {
-      NONSTANDARD_allowLegacyEncoding: true
-    });
 
     request.onload = () => {
       if (request.status === 200) {
-        resolve(decoder.decode(request.response));
+        resolve(iconv.decode(Buffer.from(request.response), 'windows-1252'));
       } else {
-        reject(new Error(statusText));
+        reject(new Error(request.statusText));
       }
     };
-    request.onerror = () => reject(new Error(statusText));
+    request.onerror = () => reject(new Error(request.statusText));
     request.responseType = 'arraybuffer';
 
     request.open(
       'GET',
       'https://nicolasgres.de/smg-vertretungsplan/untis-test.htm'
     );
+    request.setRequestHeader('Content-type', 'text/html; charset=windows-1252');
     request.send();
   });
 }

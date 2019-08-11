@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, SectionList, RefreshControl } from 'react-native';
+import { View, SectionList, RefreshControl, InteractionManager } from 'react-native';
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {
@@ -19,7 +19,7 @@ class Timetable extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.fetchTimetables = this.fetchTimetables.bind(this);
+    this.updateTimetables = this.updateTimetables.bind(this);
     this.onEntryDetail = this.onEntryDetail.bind(this);
     this.renderSections = this.renderSections.bind(this);
   }
@@ -29,15 +29,19 @@ class Timetable extends PureComponent {
   };
 
   componentDidMount() {
-    this.fetchTimetables();
     SplashScreen.hide();
+    InteractionManager.runAfterInteractions(() => 
+      this.updateTimetables()
+    );
   }
 
-  fetchTimetables() {
+  updateTimetables() {
     const { auth, isLoading, fetchTimetables, navigation } = this.props;
 
     if (auth.token) {
-      if (!isLoading) fetchTimetables();
+      if (!isLoading) {
+        fetchTimetables().catch(error => {});
+      }
     } else {
       navigation.navigate('Unauthenticated');
     }
@@ -86,7 +90,7 @@ class Timetable extends PureComponent {
         refreshControl={
           <RefreshControl
             refreshing={isLoading}
-            onRefresh={this.fetchTimetables}
+            onRefresh={this.updateTimetables}
             colors={[theme.colors.primary]}
           />
         }
@@ -116,7 +120,7 @@ class Timetable extends PureComponent {
           onDismiss={() => {}}
           action={{
             label: 'neu laden',
-            onPress: () => this.fetchTimetables()
+            onPress: () => this.updateTimetables()
           }}
         >
           Offline

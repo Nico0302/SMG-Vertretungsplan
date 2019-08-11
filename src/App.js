@@ -17,7 +17,10 @@ class App extends Component {
     // temporary fix for fetch in React Native 0.60.x
     global.Blob = null;
     
-    YellowBox.ignoreWarnings([ 'Warning: componentWillUpdate is deprecated' ]);
+    YellowBox.ignoreWarnings([
+      'Warning: componentWillUpdate is deprecated',
+      'Warning: componentWillMount is deprecated'
+    ]);
   }
 
   render() {

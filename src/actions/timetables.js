@@ -35,7 +35,7 @@ export function fetchTimetables() {
                     url: timetableurl,
                     receivedAt: moment().toISOString()
                 });
-            }
+            };
         } catch(error) {
             dispatch({
                 type: FETCH_TIMETABLES_FAILURE,
