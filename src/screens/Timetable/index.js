@@ -11,7 +11,8 @@ import {
   Surface
 } from 'react-native-paper';
 import theme from '@config/theme';
-import { fetchTimetables } from '@actions/timetables';
+import { VERSION_NUMBER } from '@config/info';
+import { fetchTimetables, migrateStore } from '@actions/timetables';
 import Entry from './Entry';
 import styles from './styles';
 
@@ -30,9 +31,13 @@ class Timetable extends PureComponent {
 
   componentDidMount() {
     SplashScreen.hide();
-    InteractionManager.runAfterInteractions(() => 
-      this.updateTimetables()
-    );
+    InteractionManager.runAfterInteractions(() => {
+      const { version, migrateStore } = this.props;
+      
+      if (!version || version < VERSION_NUMBER)
+        migrateStore();
+      this.updateTimetables();
+    });
   }
 
   updateTimetables() {
@@ -135,11 +140,13 @@ const mapStateToProps = state => ({
   isLoading: state.timetables.isLoading,
   error: state.timetables.error,
   sections: state.timetables.sections,
-  filters: state.timetables.filters
+  filters: state.timetables.filters,
+  version: state.timetables.version
 });
 
 const mapDispatchToProps = {
-  fetchTimetables
+  fetchTimetables,
+  migrateStore
 };
 
 export default connect(

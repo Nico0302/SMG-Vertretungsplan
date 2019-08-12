@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { VERSION_NUMBER } from '@config/info';
 import {
     LOGOUT
 } from '@actions/auth';
@@ -6,7 +7,8 @@ import {
     TOGGLE_FILTER,
     SET_CLASS_FILTER,
     ADD_SUBJECT_FILTER,
-    REMOVE_SUBJECT_FILTER
+    REMOVE_SUBJECT_FILTER,
+    MIGRATE_VERSION
 } from '@actions/filters';
 import {
     FETCH_TIMETABLES_REQUEST,
@@ -43,7 +45,8 @@ function timetables(state = {
     filters: filters(),
     cache: null,
     url: null,
-    sections: []
+    sections: [],
+    version: VERSION_NUMBER
 }, action) {
     switch (action.type) {
         case FETCH_TIMETABLES_REQUEST:
@@ -96,6 +99,16 @@ function timetables(state = {
                 url: null,
                 receivedAt: null,
                 isEmpty: true
+            };
+        case MIGRATE_VERSION:
+            return {
+                ...state,
+                isEmpty: true,
+                filters: filters(),
+                cache: null,
+                url: null,
+                sections: [],
+                version: VERSION_NUMBER
             };
         default:
             return state;

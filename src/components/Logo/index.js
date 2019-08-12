@@ -29,7 +29,7 @@ class Logo extends PureComponent {
 
         return (
             <TouchableWithoutFeedback
-                delayLongPress={200}
+                delayLongPress={400}
                 onLongPress={this.changeHouse}
             >
                 <Svg
