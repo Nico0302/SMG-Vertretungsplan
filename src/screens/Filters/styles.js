@@ -28,12 +28,6 @@ const styles = StyleSheet.create({
         color: Colors.white,
         fontSize: Platform.OS === 'ios' ? 16 : 19
     },
-    fab: {
-        position: 'absolute',
-        margin: 16,
-        right: 0,
-        bottom: 0
-    },
     listSubheader: {
         marginStart: 56,
         paddingBottom: 0
@@ -56,6 +50,9 @@ const styles = StyleSheet.create({
         flex: 0,
         marginEnd: 4,
         marginBottom: 4
+    },
+    addSubjectButton: {
+        marginTop: 8
     }
 });
 

@@ -38,7 +38,7 @@ class FilterDialog extends PureComponent {
                         placeholder={placeholder}
                         value={filter}
                         autoCorrect={false}
-                        maxLength={8}
+                        maxLength={16}
                         onChangeText={filter => this.setState({ filter })}
                         onSubmitEditing={this.onCreate}
                         underlineColorAndroid={theme.colors.primary}

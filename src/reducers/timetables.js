@@ -27,7 +27,9 @@ function generateSections(timetables, filters) {
                 timetable.data.filter(entry => 
                     entry.classes.find(className =>
                         className.toLowerCase() === filters.class.toLowerCase()
-                    ) && (!entry.subject || (filters.subjects.length < 1 || filters.subjects.includes(entry.subject)))
+                    ) && (!entry.subject || (filters.subjects.length < 1 || filters.subjects.find(subject => 
+                        entry.subject.toLowerCase().replace(/[_\-\s]/g, '') === subject.toLowerCase().replace(/[_\-\s]/g, '')
+                    )))
                 )
                 : timetable.data
         }));

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Appbar, Switch, Surface, List, Text, Divider, FAB, Chip, Colors, withTheme } from 'react-native-paper';
+import { Appbar, Switch, Surface, List, Text, Button, Divider, Chip, Colors, withTheme } from 'react-native-paper';
 import { toggleFilter, setClassFilter, addSubjectFilter, removeSubjectFilter } from '@actions/filters';
 import FilterDialog from './FilterDialog';
 import styles from './styles';
@@ -57,31 +57,31 @@ class Filters extends Component {
                         />
                     </View>
                     <List.Item
-                        title="Klasse"
-                        description={filters.isEmpty ? 'kein Filter' : filters.class}
+                        title="Klasse/MSS-Stufe"
+                        description={filters.isEmpty ? 'leer (tippen zum bearbeiten)' : filters.class}
                         onPress={() => this.setState({ classFilterDialogVisible: true })}
                         left={props => (<List.Icon {...props} icon="group" />)}
                     />
                     <Divider />
-                    <List.Subheader style={styles.listSubheader}>Fächer & Kurse</List.Subheader>
+                    <List.Subheader style={styles.listSubheader}>Fächer & Kurse (optional)</List.Subheader>
                     <View style={styles.listRow}>
                         <List.Icon style={styles.listIcon} icon="class" />
                         <View style={styles.subjectsContainer}>
-                            {filters.subjects.length > 0 ? filters.subjects.map(subject => (
+                            {filters.subjects.length > 0 && filters.subjects.map(subject => (
                                 <Chip
                                     key={subject}
                                     style={styles.subject}
                                     onClose={() => removeSubjectFilter(subject)}
                                 >{subject}</Chip>
-                            )) : (<Text>keine Filter</Text>)}
+                            ))}
+                            <Button
+                                style={filters.subjects.length > 0 ? styles.addSubjectButton : {}}
+                                mode="outlined"
+                                onPress={() => this.setState({ subjectFilterDialogVisible: true })}
+                            >Fach/Kurs hinzufügen</Button>
                         </View>
                     </View>
                 </ScrollView>
-                <FAB
-                    style={styles.fab}
-                    icon="class"
-                    onPress={() => this.setState({ subjectFilterDialogVisible: true })}
-                />
                 <FilterDialog
                     visible={classFilterDialogVisible}
                     onDismiss={() => this.setState({ classFilterDialogVisible: false })}
@@ -91,7 +91,7 @@ class Filters extends Component {
                         )
                     }
                     title="Filter bearbeiten"
-                    placeholder="Klasse"
+                    placeholder="Klasse/MSS-Stufe"
                     createText="OK"
                 />
                 <FilterDialog

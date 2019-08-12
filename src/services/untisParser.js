@@ -71,7 +71,8 @@ const timetableColumns = [
         key: 'lesson'
     },
     {
-        key: 'subject'
+        key: 'subject',
+        value: value => value.replace(/_/g, ' ')
     },
     {
         key: 'room',

@@ -59,6 +59,7 @@ class Login extends PureComponent {
                         onSubmitEditing={() => this.passwordInput.focus()}
                         returnKeyType="next"
                         label="Nutzername"
+                        maxLength={16}
                         disableFullscreenUI
                         selectTextOnFocus
                         importantForAutofill="yes"
@@ -72,6 +73,7 @@ class Login extends PureComponent {
                         onSubmitEditing={this.onLogin}
                         returnKeyType="done"
                         label="Passwort"
+                        maxLength={16}
                         disableFullscreenUI
                         secureTextEntry
                         importantForAutofill="yes"

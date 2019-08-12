@@ -32,7 +32,7 @@ class Settings extends PureComponent {
                 <ScrollView style={styles.content}>
                     <List.Item
                         title="Filter"
-                        description={filtersActive ? 'An' : 'Aus'}
+                        description={filtersActive ? 'An' : filtersEmpty ? 'Leer' : 'Aus'}
                         onPress={() => navigation.navigate('Filters')}
                         left={props => (<List.Icon {...props} icon="filter-list" />)}
                         right={()=> (
