@@ -15,7 +15,7 @@ class App extends Component {
   componentDidMount() {
     moment.locale('de');
     // temporary fix for fetch in React Native 0.60.x
-    global.Blob = null;
+    // global.Blob = null;
     
     YellowBox.ignoreWarnings([
       'Warning: componentWillUpdate is deprecated',
