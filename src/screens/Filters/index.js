@@ -66,14 +66,16 @@ class Filters extends Component {
                     <List.Subheader style={styles.listSubheader}>Fächer & Kurse (optional)</List.Subheader>
                     <View style={styles.listRow}>
                         <List.Icon style={styles.listIcon} icon="class" />
-                        <View style={styles.subjectsContainer}>
-                            {filters.subjects.length > 0 && filters.subjects.map(subject => (
-                                <Chip
-                                    key={subject}
-                                    style={styles.subject}
-                                    onClose={() => removeSubjectFilter(subject)}
-                                >{subject}</Chip>
-                            ))}
+                        <View style={styles.subjectsWrapper}>
+                            <View style={styles.subjectsContainer}>
+                                {filters.subjects.length > 0 && filters.subjects.map(subject => (
+                                    <Chip
+                                        key={subject}
+                                        style={styles.subject}
+                                        onClose={() => removeSubjectFilter(subject)}
+                                    >{subject}</Chip>
+                                ))}
+                            </View>
                             <Button
                                 style={filters.subjects.length > 0 ? styles.addSubjectButton : {}}
                                 mode="outlined"

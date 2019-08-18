@@ -39,12 +39,15 @@ const styles = StyleSheet.create({
     listIcon: {
         width: 56
     },
+    subjectsWrapper: {
+        flex: 1,
+        paddingEnd: 16,
+        paddingVertical: 12
+    },
     subjectsContainer: {
         flex: 1,
         flexWrap: 'wrap',
-        flexDirection: 'row',
-        paddingEnd: 16,
-        paddingVertical: 12
+        flexDirection: 'row'
     },
     subject: {
         flex: 0,

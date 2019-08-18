@@ -18,7 +18,7 @@ class FilterDialog extends PureComponent {
         const { onCreate } = this.props;
         const { filter } = this.state;
 
-        onCreate(filter.replace(/\s/g, ''));
+        onCreate(filter);
         this.setState({ filter: '' });
     }
 

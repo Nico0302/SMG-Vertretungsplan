@@ -3,7 +3,7 @@ const timetableUrl =
   'https://iphone.dsbcontrol.de/iPhoneService.svc/DSB/timetables/';
 
 export async function getToken(username, password) {
-  const response = await fetch(`${loginUrl}/${username}/${password}`, {
+  const response = await fetch(`${loginUrl}${username}/${password}`, {
     method: 'GET'
   });
   const token = await response.json();
