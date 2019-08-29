@@ -97,14 +97,16 @@ function timetables(state = {
                 isEmpty: true
             };
         case MIGRATE_VERSION:
-            return {
-                ...state,
-                isEmpty: true,
-                filters: filters(),
-                cache: null,
-                url: null,
-                sections: []
-            };
+            if (!action.version || action.version < 3)
+                return {
+                    ...state,
+                    isEmpty: true,
+                    filters: filters(),
+                    cache: null,
+                    url: null,
+                    sections: []
+                };
+            return state;
         default:
             return state;
     }

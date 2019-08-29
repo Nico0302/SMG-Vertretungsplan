@@ -59,6 +59,9 @@ class UntisParser {
     }
 }
 
+/**
+ * Colum formatting options
+ */
 const timetableColumns = [
     {
         ignore: true

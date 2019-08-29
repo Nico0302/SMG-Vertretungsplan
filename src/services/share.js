@@ -1,6 +1,12 @@
 import { Share } from 'react-native';
 import moment from 'moment';
 
+/**
+ * Call native text share api to share an timetable entry. 
+ * 
+ * @param {Object} entry
+ * @returns {Promise} Resolves after sharing
+ */
 export function shareEntry({
   date,
   type,
@@ -19,6 +25,6 @@ export function shareEntry({
     }
     Share.share({ message });
   } catch (error) {
-    console.log(error);
+    console.error(error);
   }
 }

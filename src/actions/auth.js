@@ -5,6 +5,13 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGOUT = 'LOGOUT';
 
+/**
+ * Login into the DSB api and require an auth token.
+ * 
+ * @param {String} username 
+ * @param {String} password
+ * @returns {Promise<String>} Promise object represents the auth token
+ */
 export function login(username, password) {
     return async dispatch => {
         try {
@@ -32,6 +39,9 @@ export function login(username, password) {
     };
 }
 
+/**
+ * Logout and clear all personal data.
+ */
 export const logout = () => ({
     type: LOGOUT
 });

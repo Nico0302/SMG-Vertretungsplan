@@ -16,6 +16,8 @@ class Filters extends Component {
         };
     }
 
+    _showClassFilterDialog = () => this.setState({ classFilterDialogVisible: true });
+
     render() {
         const {
             filters,
@@ -51,15 +53,14 @@ class Filters extends Component {
                         >Filter anwenden</Text>
                         <Switch
                             value={filters.isActive}
-                            disabled={filters.isEmpty}
-                            onValueChange={() => toggleFilter()}
+                            onValueChange={() => filters.isEmpty ? this._showClassFilterDialog()  : toggleFilter()}
                             trackColor={Colors.grey400}
                         />
                     </View>
                     <List.Item
                         title="Klasse/MSS-Stufe"
                         description={filters.isEmpty ? 'leer (tippen zum bearbeiten)' : filters.class}
-                        onPress={() => this.setState({ classFilterDialogVisible: true })}
+                        onPress={() => this._showClassFilterDialog()}
                         left={props => (<List.Icon {...props} icon="group" />)}
                     />
                     <Divider />
@@ -94,7 +95,7 @@ class Filters extends Component {
                     }
                     title="Filter bearbeiten"
                     placeholder="Klasse/MSS-Stufe"
-                    createText="OK"
+                    createText="Bestätigen"
                 />
                 <FilterDialog
                     visible={subjectFilterDialogVisible}
@@ -104,7 +105,7 @@ class Filters extends Component {
                     }
                     title="Filter hinzufügen"
                     placeholder="Fach/Kurs-Kürzel"
-                    createText="Neu"
+                    createText="Hinzufügen"
                 />
             </View>
         );

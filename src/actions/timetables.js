@@ -7,6 +7,9 @@ export const FETCH_TIMETABLES_REQUEST = 'FETCH_TIMETABLES_REQUEST';
 export const FETCH_TIMETABLES_FAILURE = 'FETCH_TIMETABLES_FAILURE';
 export const FETCH_TIMETABLES_SUCCESS = 'FETCH_TIMETABLES_SUCCESS';
 
+/**
+ * Fetch the current timetables from the DSB api.
+ */
 export function fetchTimetables() {
     return async (dispatch, getState) => {
         try {

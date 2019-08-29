@@ -13,7 +13,7 @@ class Root extends PureComponent {
         const { version, migrateStore } = this.props;
 
         if (!version || version < VERSION_NUMBER)
-            migrateStore();
+            migrateStore(version);
     }
 
     render() {

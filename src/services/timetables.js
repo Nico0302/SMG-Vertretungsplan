@@ -1,6 +1,14 @@
 import iconv from 'iconv-lite';
 import { Buffer } from 'buffer';
 
+/**
+ * Fetch timetable website by url.
+ * 
+ * Iconv is used to deal with legacy encodings.
+ * 
+ * @param {String} url
+ * @returns {Promise<String>} Promise object with the sites content as string
+ */
 export function getHtmlTimetables(url) {
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest();

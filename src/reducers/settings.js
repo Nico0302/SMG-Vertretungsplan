@@ -11,11 +11,14 @@ function settings(state = {
 }, action) {
     switch (action.type) {
         case MIGRATE_STORE:
-            return {
-                ...state,
-                version: VERSION_NUMBER,
-                theme: 'default'
-            };
+            if (action.version < 4)
+                return {
+                    ...state,
+                    version: VERSION_NUMBER,
+                    theme: 'default'
+                };
+
+            return state;
         case CHANGE_THEME:
             return {
                 ...state,
