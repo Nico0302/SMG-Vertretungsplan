@@ -50,6 +50,11 @@ Launch ``` react-native run-android ``` command in a terminal opened in the proj
 
 - The generated AAB can be found under *android/app/build/outputs/bundle/release/app.aab*.
 
+## Troubleshooting
+
+### Android Hermes release build error
+https://github.com/facebook/react-native/issues/25599
+
 ## Built With
 
 - [React Native](https://facebook.github.io/react-native/) - JavaScript app framework
