@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, ScrollView, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
-import { Button, Text, TextInput } from 'react-native-paper';
+import { Button, Text, TextInput, withTheme } from 'react-native-paper';
 import { login } from '@actions/auth';
 import Logo from '@components/Logo';
 import styles from './styles';
@@ -29,12 +29,12 @@ class Login extends PureComponent {
     }
 
     render() {
-        const { auth, navigation } = this.props;
+        const { auth, navigation, theme } = this.props;
         const { username, password } = this.state;
 
         return (
             <ScrollView
-                style={styles.container}
+                style={[styles.container, { backgroundColor: theme.colors.surface }]}
                 keyboardShouldPersistTaps="always"
                 showsVerticalScrollIndicator={false}
                 bounces={false}
@@ -49,7 +49,7 @@ class Login extends PureComponent {
                         <Text style={styles.errorText}>{auth.error.message}</Text>
                     )}
                     <TextInput
-                        style={styles.textInput}
+                        style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
                         textContentType="username"
                         keyboardType="number-pad"
                         mode="outlined"
@@ -66,7 +66,7 @@ class Login extends PureComponent {
                     />
                     <TextInput
                         ref={passwordInput => this.passwordInput = passwordInput}
-                        style={styles.textInput}
+                        style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
                         mode="outlined"
                         value={password}
                         onChangeText={password => this.setState({ password })}
@@ -99,4 +99,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Login);
+)(withTheme(Login));

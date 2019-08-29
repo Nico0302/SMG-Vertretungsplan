@@ -1,11 +1,9 @@
 import { StyleSheet, Platform } from 'react-native';
 import { Colors } from 'react-native-paper';
-import theme from '@config/theme';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: theme.colors.surface
+        flex: 1
     },
     appbar: {
         elevation: 4,

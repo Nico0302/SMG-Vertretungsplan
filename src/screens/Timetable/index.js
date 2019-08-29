@@ -8,11 +8,10 @@ import {
   Snackbar,
   List,
   Subheading,
-  Surface
+  Surface,
+  withTheme
 } from 'react-native-paper';
-import theme from '@config/theme';
-import { VERSION_NUMBER } from '@config/info';
-import { fetchTimetables, migrateStore } from '@actions/timetables';
+import { fetchTimetables } from '@actions/timetables';
 import Entry from './Entry';
 import styles from './styles';
 
@@ -31,13 +30,9 @@ class Timetable extends PureComponent {
 
   componentDidMount() {
     SplashScreen.hide();
-    InteractionManager.runAfterInteractions(() => {
-      const { version, migrateStore } = this.props;
-      
-      if (!version || version < VERSION_NUMBER)
-        migrateStore();
-      this.updateTimetables();
-    });
+    InteractionManager.runAfterInteractions(() =>
+      this.updateTimetables()
+    );
   }
 
   updateTimetables() {
@@ -64,7 +59,7 @@ class Timetable extends PureComponent {
   }
 
   renderSections() {
-    const { sections, filters, isLoading, error } = this.props;
+    const { sections, filters, isLoading, error, theme } = this.props;
 
     return (
       <SectionList
@@ -109,10 +104,10 @@ class Timetable extends PureComponent {
   }
 
   render() {
-    const { error, navigation } = this.props;
+    const { error, navigation, theme } = this.props;
 
     return (
-      <View style={styles.container}>
+      <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
         <Surface style={styles.appbar}>
           <Appbar.Header>
             <Appbar.Action icon="menu" onPress={navigation.openDrawer} />
@@ -145,11 +140,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  fetchTimetables,
-  migrateStore
+  fetchTimetables
 };
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Timetable);
+)(withTheme(Timetable));

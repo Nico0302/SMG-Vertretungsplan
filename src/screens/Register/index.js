@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, Linking, Platform } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
-import { Button, Paragraph, TextInput } from 'react-native-paper';
+import { Button, Paragraph, TextInput, withTheme } from 'react-native-paper';
 import styles from './styles';
 
 class Register extends PureComponent {
@@ -32,12 +32,12 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
     }
 
     render() {
-        const { navigation } = this.props;
+        const { navigation, theme } = this.props;
         const { name, className } = this.state;
 
         return (
             <ScrollView
-                style={styles.container}
+                style={[styles.container, { backgroundColor: theme.colors.surface }]}
                 keyboardShouldPersistTaps="always"
                 showsVerticalScrollIndicator={false}
                 bounces={false}
@@ -46,7 +46,7 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
                 <SafeAreaView style={styles.content}>
                     <Paragraph style={styles.info}>Du kannst per E-Mail die Zugangsdaten für den SMG Vertretungsplan bei der Schule anfordern.</Paragraph>
                     <TextInput
-                        style={styles.textInput}
+                        style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
                         mode="outlined"
                         value={name}
                         blurOnSubmit={false}
@@ -57,7 +57,7 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
                     />
                     <TextInput
                         ref={classInput => this.classInput = classInput}
-                        style={styles.textInput}
+                        style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
                         mode="outlined"
                         value={className}
                         onChangeText={className => this.setState({ className })}
@@ -75,4 +75,4 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
     }
 }
 
-export default Register;
+export default withTheme(Register);

@@ -1,10 +1,8 @@
 import { StyleSheet } from 'react-native';
-import theme from '@config/theme';
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: theme.colors.surface
+        flex: 1
     },
     appbar: {
         elevation: 4
@@ -14,9 +12,6 @@ const styles = StyleSheet.create({
     },
     deactivatedItem: {
         opacity: 0.6,
-    },
-    activeDescription: {
-        color: theme.colors.primary
     },
     leftSpacer: {
         width: 56

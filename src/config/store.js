@@ -6,6 +6,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import createSensitiveStorage from 'redux-persist-sensitive-storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import authReducer from '@reducers/auth';
+import settingsReducer from '@reducers/settings';
 import timetablesReducer from '@reducers/timetables';
 
 const sensitiveStorage = createSensitiveStorage({
@@ -18,7 +19,13 @@ const timetablesPersistConfig = {
     blacklist: ['isLoading', 'error', 'data', 'cache'],
     storage: AsyncStorage,
     timeout: 0
-}
+};
+
+const settingsPersistConfig = {
+    key: 'settings',
+    storage: AsyncStorage,
+    timeout: 0
+};
 
 const authPersistConfig = {
     key: 'auth',
@@ -30,6 +37,7 @@ const authPersistConfig = {
 
 const rootReducer = combineReducers({
     timetables: persistReducer(timetablesPersistConfig, timetablesReducer),
+    settings: persistReducer(settingsPersistConfig, settingsReducer),
     auth: persistReducer(authPersistConfig, authReducer)
 });
 

@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react';
 import { View } from 'react-native';
-import { TouchableRipple, Text, Title, Colors } from 'react-native-paper';
+import { TouchableRipple, Text, Title, Colors, withTheme } from 'react-native-paper';
 import color from 'color';
-import theme, { indicators } from '@config/theme';
+import { indicators } from '@config/theme';
 import styles from './styles';
 
 class Entry extends PureComponent {
@@ -22,7 +22,7 @@ class Entry extends PureComponent {
     }
 
     render() {
-        const { classes, lesson, room, subject, substitute, type, swap, detail, onPress } = this.props;
+        const { classes, lesson, room, subject, substitute, type, swap, detail, theme, onPress } = this.props;
         const titleColor = color(theme.colors.text)
             .alpha(0.87)
             .rgb()
@@ -87,4 +87,4 @@ class Entry extends PureComponent {
     }
 }
 
-export default Entry;
+export default withTheme(Entry);

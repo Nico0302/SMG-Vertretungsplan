@@ -1,12 +1,43 @@
 import { DefaultTheme, Colors } from 'react-native-paper';
 
-const theme = {
+const themeDefault = {
   ...DefaultTheme,
   colors: {
     ...DefaultTheme.colors,
     primary: '#99203B',
-    accent: '#99203B',
-  },
+    accent: '#9e9e9e',
+    statusBar: '#650016'
+  }
+};
+
+const themeYellow = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#ffc107',
+    accent: '#9e9e9e',
+    statusBar: '#c79100'
+  }
+};
+
+const themeBlue = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#3f51b5',
+    accent: '#9e9e9e',
+    statusBar: '#002984'
+  }
+};
+
+const themeGreen = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#388e3c',
+    accent: '#9e9e9e',
+    statusBar: '#00600f'
+  }
 };
 
 export const indicators = {
@@ -27,6 +58,13 @@ export const indicatorStatusBar = {
   'Raum-Vtr.': '#c79100',
   'Pausenaufsicht': '#808e95',
   'Betreuung': '#007ac1'
-}
+};
 
-export default theme;
+const themes = {
+  default: themeDefault,
+  yellow: themeYellow,
+  blue: themeBlue,
+  green: themeGreen
+};
+
+export default themes;

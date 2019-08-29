@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Appbar, Surface, Switch, Divider, List } from 'react-native-paper';
+import { Appbar, Surface, Switch, Divider, List, withTheme } from 'react-native-paper';
 import { logout } from '@actions/auth';
 import { toggleFilter, setClassFilter } from '@actions/filters';
 import styles from './styles';
@@ -13,11 +13,12 @@ class Settings extends PureComponent {
             filtersEmpty,
             navigation,
             toggleFilter,
-            logout
+            logout,
+            theme
         } = this.props;
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
                 <Surface style={styles.appbar}>
                     <Appbar.Header>
                         <Appbar.Action
@@ -73,4 +74,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Settings);
+)(withTheme(Settings));

@@ -1,13 +1,26 @@
 import React, { Component } from 'react';
-import { View, Linking } from 'react-native';
+import { View, Linking, ToastAndroid, Platform } from 'react-native';
+import { connect } from 'react-redux';
 import { SafeAreaView } from 'react-navigation';
 import { Drawer, Divider } from 'react-native-paper';
+import { setTheme } from '@actions/settings';
 import Logo from '@components/Logo';
 import styles from './styles';
+
+const houses = [ 'default', 'yellow', 'blue', 'green' ];
 
 class NavigationDrawer extends Component {
     shouldComponentUpdate(nextProps) {
         return nextProps.activeItemKey !== this.props.activeItemKey;
+    }
+
+    changeHouse = () => {
+        const theme = houses[(houses.indexOf(this.props.theme)+1)%houses.length];
+
+        this.props.setTheme(theme);
+
+        if (Platform.OS === 'android')
+            ToastAndroid.show('🧙 Changed House', ToastAndroid.SHORT)
     }
 
     render() {
@@ -16,7 +29,7 @@ class NavigationDrawer extends Component {
         return (
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
-                    <Logo size={100} />
+                    <Logo size={100} onLongPress={this.changeHouse} />
                 </View>
                 <Divider />
                 <View style={styles.items}>
@@ -43,4 +56,12 @@ class NavigationDrawer extends Component {
     }
 }
 
-export default NavigationDrawer;
+const mapStateToProps = ({ settings }) => ({
+    theme: settings.theme
+});
+
+const mapDispatchToProps = {
+    setTheme
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationDrawer);

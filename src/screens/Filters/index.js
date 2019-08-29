@@ -27,10 +27,10 @@ class Filters extends Component {
             theme
         } = this.props;
         const { classFilterDialogVisible, subjectFilterDialogVisible } = this.state;
-        const { fonts } = theme;
+        const { fonts, colors } = theme;
 
         return (
-            <View style={styles.container}>
+            <View style={[styles.container, { backgroundColor: colors.surface }]}>
                 <Surface style={styles.appbar}>
                     <Appbar.Header style={styles.appbar}>
                         <Appbar.BackAction

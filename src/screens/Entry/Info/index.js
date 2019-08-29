@@ -1,12 +1,11 @@
 import React, { PureComponent } from 'react';
-import { List } from 'react-native-paper';
+import { List, withTheme } from 'react-native-paper';
 import color from 'color';
-import theme from '@config/theme';
 import styles from './styles';
 
 class Info extends PureComponent {
     render() {
-        const { value, label, icon, ...props } = this.props;
+        const { value, label, theme, icon, ...props } = this.props;
         const descriptionColor = color(theme.colors.text)
             .alpha(0.54)
             .rgb()
@@ -15,8 +14,8 @@ class Info extends PureComponent {
         return (
             <List.Item
                 {...props}
-                titleStyle={[styles.title, { color: descriptionColor }]}
-                descriptionStyle={styles.description}
+                titleStyle={{ color: descriptionColor }}
+                descriptionStyle={[styles.description, { color: theme.colors.text }]}
                 title={label}
                 description={value}
                 left={props => <List.Icon {...props} icon={icon} />}
@@ -25,4 +24,4 @@ class Info extends PureComponent {
     }
 }
 
-export default Info;
+export default withTheme(Info);

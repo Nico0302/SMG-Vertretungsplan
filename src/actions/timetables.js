@@ -7,8 +7,6 @@ export const FETCH_TIMETABLES_REQUEST = 'FETCH_TIMETABLES_REQUEST';
 export const FETCH_TIMETABLES_FAILURE = 'FETCH_TIMETABLES_FAILURE';
 export const FETCH_TIMETABLES_SUCCESS = 'FETCH_TIMETABLES_SUCCESS';
 
-export const MIGRATE_STORE = 'MIGRATE_STORE';
-
 export function fetchTimetables() {
     return async (dispatch, getState) => {
         try {
@@ -45,11 +43,3 @@ export function fetchTimetables() {
         }
     }
 }
-
-/**
- * Migrate the Redux Store to a higher app version number
- * to prevent breaking changes.
- */
-export const migrateStore = () => ({
-    type: MIGRATE_STORE
-});
