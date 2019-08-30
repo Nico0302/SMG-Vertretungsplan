@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
-import { View, StatusBar } from 'react-native';
+import { View, StatusBar, Platform } from 'react-native';
 import { connect } from 'react-redux';
+import color from 'color';
 import { Provider as PaperProvider } from 'react-native-paper';
 import themes from '@config/theme';
 import Navigation from '@config/navigation';
@@ -19,6 +20,7 @@ class Root extends PureComponent {
     render() {
         const { version } = this.props;
         const theme = themes[this.props.theme];
+        const statusBarColor = Platform.OS === 'ios' ? theme.colors.primary : theme.colors.statusBar;
 
         if (!version || version < VERSION_NUMBER)
             return null;
@@ -26,7 +28,10 @@ class Root extends PureComponent {
         return (
             <PaperProvider theme={theme}>
                 <View style={styles.container}>
-                    <StatusBar backgroundColor={theme.colors.statusBar} barStyle="light-content" />
+                    <StatusBar
+                        backgroundColor={statusBarColor}
+                        barStyle={color(statusBarColor).isDark() ? 'light-content' : 'dark-content'}
+                    />
                     <Navigation />
                 </View>
             </PaperProvider>

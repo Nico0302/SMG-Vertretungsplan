@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
+import color from 'color';
 import { Appbar, Switch, Surface, List, Text, Button, Divider, Chip, Colors, withTheme } from 'react-native-paper';
 import { toggleFilter, setClassFilter, addSubjectFilter, removeSubjectFilter } from '@actions/filters';
 import FilterDialog from './FilterDialog';
@@ -30,6 +31,11 @@ class Filters extends Component {
         } = this.props;
         const { classFilterDialogVisible, subjectFilterDialogVisible } = this.state;
         const { fonts, colors } = theme;
+
+        const descriptionColor = color(theme.colors.text)
+            .alpha(0.54)
+            .rgb()
+            .string();
 
         return (
             <View style={[styles.container, { backgroundColor: colors.surface }]}>
@@ -66,7 +72,7 @@ class Filters extends Component {
                     <Divider />
                     <List.Subheader style={styles.listSubheader}>Fächer & Kurse (optional)</List.Subheader>
                     <View style={styles.listRow}>
-                        <List.Icon style={styles.listIcon} icon="class" />
+                        <List.Icon style={styles.listIcon} icon="class" color={descriptionColor} />
                         <View style={styles.subjectsWrapper}>
                             <View style={styles.subjectsContainer}>
                                 {filters.subjects.length > 0 && filters.subjects.map(subject => (

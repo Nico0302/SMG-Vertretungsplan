@@ -5,8 +5,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     appbar: {
-        elevation: 0,
-        backgroundColor: 'transparent'
+        elevation: 0
     },
     backdrop: {
         flexDirection: 'row',

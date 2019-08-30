@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { View, ScrollView, StatusBar } from 'react-native';
+import { View, ScrollView, StatusBar, Platform } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import moment from 'moment';
-import { Appbar, Surface, Headline } from 'react-native-paper';
+import color from 'color';
+import { Appbar, Surface, Headline, Colors, withTheme } from 'react-native-paper';
 import { shareEntry } from '@services/share';
 import { indicators, indicatorStatusBar } from '@config/theme';
 import Info from './Info';
@@ -10,14 +11,21 @@ import styles from './styles';
 
 class Entry extends Component {
     render() {
-        const { navigation, isFocused } = this.props;
+        const { navigation, isFocused, theme } = this.props;
         const entry = navigation.getParam('entry');
         const { classes, lesson, type, date, subject, substitute, room, swap, detail } = entry;
+        const statusBarColor = Platform.OS === 'ios' ? indicators[type] : indicatorStatusBar[type];
+        const titleColor = color(indicators[type]).isDark() ? Colors.white : theme.colors.text;
 
         return (
             <View style={[styles.container, { backgroundColor: indicators[type] }]}>
-                {isFocused && (<StatusBar backgroundColor={indicatorStatusBar[type]} barStyle="light-content" />)}
-                <Appbar.Header style={styles.appbar}>
+                {isFocused && (
+                    <StatusBar
+                        backgroundColor={statusBarColor}
+                        barStyle={color(statusBarColor).isDark() ? 'light-content' : 'dark-content'}
+                    />
+                )}
+                <Appbar.Header style={[styles.appbar, { backgroundColor: indicators[type] }]}>
                     <Appbar.BackAction
                         onPress={() => navigation.goBack(null)}
                     />
@@ -29,9 +37,9 @@ class Entry extends Component {
                 </Appbar.Header>
                 <View style={styles.backdrop}>
                     <View style={styles.lessonContainer}>
-                        <Headline style={styles.lessonText}>{lesson}</Headline>
+                        <Headline style={[styles.lessonText, { color: titleColor }]}>{lesson}</Headline>
                     </View>
-                    <Headline>{type}</Headline>
+                    <Headline style={{ color: titleColor }}>{type}</Headline>
                 </View>
                 <Surface style={styles.surface}>
                     <ScrollView bounces={false}>
@@ -61,4 +69,4 @@ class Entry extends Component {
     }
 }
 
-export default withNavigationFocus(Entry);
+export default withNavigationFocus(withTheme(Entry));
