@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
         width: 56
     },
     switch: {
-        alignSelf: 'center'
+        alignSelf: 'center',
+        marginRight: 8
     }
 });
 

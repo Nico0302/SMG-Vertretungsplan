@@ -35,6 +35,7 @@ export function login(username, password) {
         type: LOGIN_FAILURE,
         error,
       });
+      throw error;
     }
   };
 }

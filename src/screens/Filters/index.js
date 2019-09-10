@@ -60,7 +60,7 @@ class Filters extends Component {
                         <Switch
                             value={filters.isActive}
                             onValueChange={() => filters.isEmpty ? this._showClassFilterDialog()  : toggleFilter()}
-                            trackColor={Colors.grey400}
+                            color={Colors.white}
                         />
                     </View>
                     <List.Item

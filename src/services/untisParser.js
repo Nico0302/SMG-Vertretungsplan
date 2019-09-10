@@ -68,7 +68,7 @@ const timetableColumns = [
     },
     {
         key: 'classes',
-        value: value => value.split(', ')
+        value: value => value.split(', ').map(item => item.replace(/^0+/, ''))
     },
     {
         key: 'lesson'

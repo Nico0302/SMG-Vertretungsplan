@@ -25,7 +25,7 @@ class Login extends PureComponent {
 
         login(username, password).then(() =>
             navigation.navigate('Authenticated')
-        );
+        ).catch(() => {});
     }
 
     render() {
@@ -80,7 +80,7 @@ class Login extends PureComponent {
                     />
                     <View style={styles.actions}>
                         <Button onPress={() => navigation.navigate('Register')}>Zugang anfordern</Button>
-                        <Button onPress={this.onLogin} mode="contained">Login</Button>
+                        <Button onPress={this.onLogin} mode="contained" loading={auth.isLoading}>Login</Button>
                     </View>
                 </SafeAreaView>
             </ScrollView>

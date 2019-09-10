@@ -4,9 +4,14 @@ import { connect } from 'react-redux';
 import { Appbar, Surface, Switch, Divider, List, withTheme } from 'react-native-paper';
 import { logout } from '@actions/auth';
 import { toggleFilter, setClassFilter } from '@actions/filters';
+import LogoutDialog from './LogoutDialog';
 import styles from './styles';
 
 class Settings extends PureComponent {
+    state = {
+        logoutDialogVisible: false
+    };
+
     render() {
         const { 
             filtersActive,
@@ -16,6 +21,7 @@ class Settings extends PureComponent {
             logout,
             theme
         } = this.props;
+        const { logoutDialogVisible } = this.state;
 
         return (
             <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
@@ -48,13 +54,18 @@ class Settings extends PureComponent {
                     <Divider />
                     <List.Item
                         title="Abmelden"
-                        onPress={() => {
-                            logout();
-                            navigation.navigate('Unauthenticated');
-                        }}
+                        onPress={() => this.setState({ logoutDialogVisible: true })}
                         left={props => (<List.Icon {...props} icon="exit-to-app" />)}
                     />
                 </ScrollView>
+                <LogoutDialog
+                    visible={logoutDialogVisible}
+                    onDismiss={() => this.setState({ logoutDialogVisible: false })}
+                    onConfirm={() => {
+                        logout();
+                        navigation.navigate('Unauthenticated');
+                    }}
+                />
             </View>
         );
     }

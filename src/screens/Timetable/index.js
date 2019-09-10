@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, SectionList, RefreshControl, InteractionManager } from 'react-native';
+import { View, SectionList, RefreshControl, InteractionManager, Clipboard } from 'react-native';
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {
@@ -40,7 +40,7 @@ class Timetable extends PureComponent {
 
     if (auth.token) {
       if (!isLoading) {
-        fetchTimetables().catch(error => {});
+        fetchTimetables().catch(() => {});
       }
     } else {
       navigation.navigate('Unauthenticated');
@@ -63,7 +63,6 @@ class Timetable extends PureComponent {
 
     return (
       <SectionList
-        initialNumToRender={11}
         sections={sections}
         contentContainerStyle={error ? styles.snackbarListPadding : {}}
         renderItem={({ item, section }) => (
