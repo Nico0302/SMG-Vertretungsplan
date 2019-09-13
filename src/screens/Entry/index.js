@@ -14,18 +14,21 @@ class Entry extends Component {
         const { navigation, isFocused, theme } = this.props;
         const entry = navigation.getParam('entry');
         const { classes, lesson, type, date, subject, substitute, room, swap, detail } = entry;
-        const statusBarColor = Platform.OS === 'ios' ? indicators[type] : indicatorStatusBar[type];
-        const titleColor = color(indicators[type]).isDark() ? Colors.white : theme.colors.text;
+        const indicatorColor = indicators[type] ? indicators[type] : indicators.default;
+        const statusBarColor = Platform.OS === 'ios' ?
+            indicatorColor :
+            indicatorStatusBar[type] || indicatorStatusBar.default;
+        const titleColor = color(indicatorColor).isDark() ? Colors.white : theme.colors.text;
 
         return (
-            <View style={[styles.container, { backgroundColor: indicators[type] }]}>
+            <View style={[styles.container, { backgroundColor: indicatorColor }]}>
                 {isFocused && (
                     <StatusBar
                         backgroundColor={statusBarColor}
                         barStyle={color(statusBarColor).isDark() ? 'light-content' : 'dark-content'}
                     />
                 )}
-                <Appbar.Header style={[styles.appbar, { backgroundColor: indicators[type] }]}>
+                <Appbar.Header style={[styles.appbar, { backgroundColor: indicatorColor }]}>
                     <Appbar.BackAction
                         onPress={() => navigation.goBack(null)}
                     />
