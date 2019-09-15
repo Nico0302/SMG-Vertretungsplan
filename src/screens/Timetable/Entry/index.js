@@ -31,7 +31,7 @@ class Entry extends PureComponent {
             .alpha(0.54)
             .rgb()
             .string();
-        const indicatorColor = indicators[type] ? indicators[type] : Colors.grey500;
+        const indicatorColor = indicators[type] || indicators.default;
 
         return (
             <TouchableRipple

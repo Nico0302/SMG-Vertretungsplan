@@ -51,6 +51,7 @@ const themeDark = {
 };
 
 export const indicators = {
+  default: Colors.grey500,
   'Entfall': Colors.red600,
   'Vertretung': Colors.cyan600,
   'Statt-Vertretung': Colors.cyan600,
@@ -61,6 +62,7 @@ export const indicators = {
 };
 
 export const indicatorStatusBar = {
+  default: '#707070',
   'Entfall': '#ab000d',
   'Vertretung': '#007c91',
   'Statt-Vertretung': '#007c91',
