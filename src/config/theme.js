@@ -1,4 +1,4 @@
-import { DefaultTheme, Colors } from 'react-native-paper';
+import { DefaultTheme, DarkTheme, Colors } from 'react-native-paper';
 
 const themeDefault = {
   ...DefaultTheme,
@@ -40,6 +40,16 @@ const themeGreen = {
   }
 };
 
+const themeDark = {
+  ...DarkTheme,
+  colors: {
+    ...DarkTheme.colors,
+    primary: '#546e7a',
+    accent: '#64dd17',
+    statusBar: '#29434e'
+  }
+};
+
 export const indicators = {
   'Entfall': Colors.red600,
   'Vertretung': Colors.cyan600,
@@ -64,7 +74,8 @@ const themes = {
   default: themeDefault,
   yellow: themeYellow,
   blue: themeBlue,
-  green: themeGreen
+  green: themeGreen,
+  dark: themeDark
 };
 
 export default themes;

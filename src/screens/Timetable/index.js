@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, SectionList, RefreshControl, InteractionManager, Clipboard } from 'react-native';
+import { View, SectionList, RefreshControl, InteractionManager, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import {
@@ -60,6 +60,7 @@ class Timetable extends PureComponent {
 
   renderSections() {
     const { sections, filters, isLoading, error, theme } = this.props;
+    const { height } = Dimensions.get('window');
 
     return (
       <SectionList
@@ -95,6 +96,7 @@ class Timetable extends PureComponent {
         }
         stickySectionHeadersEnabled={false}
         keyExtractor={(item, index) => item.lesson + index.toString()}
+        initialNumToRender={Math.floor(height / 52)}
         getItemLayout={(data, index) => {
           return { length: 52, offset: 52 * index, index };
         }}
@@ -106,7 +108,8 @@ class Timetable extends PureComponent {
     const { error, navigation, theme } = this.props;
 
     return (
-      <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
+      <View
+        style={[styles.container, { backgroundColor: theme.colors.surface }]}>
         <Surface style={styles.appbar}>
           <Appbar.Header>
             <Appbar.Action icon="menu" onPress={navigation.openDrawer} />
@@ -120,8 +123,7 @@ class Timetable extends PureComponent {
           action={{
             label: 'neu laden',
             onPress: () => this.updateTimetables()
-          }}
-        >
+          }}>
           Offline
         </Snackbar>
       </View>

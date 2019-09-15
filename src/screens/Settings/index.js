@@ -1,9 +1,11 @@
 import React, { PureComponent } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 import { connect } from 'react-redux';
 import { Appbar, Surface, Switch, Divider, List, withTheme } from 'react-native-paper';
+import { VERSION_NAME } from '@config/info';
 import { logout } from '@actions/auth';
 import { toggleFilter, setClassFilter } from '@actions/filters';
+import { setTheme } from '@actions/settings';
 import LogoutDialog from './LogoutDialog';
 import styles from './styles';
 
@@ -19,6 +21,8 @@ class Settings extends PureComponent {
             navigation,
             toggleFilter,
             logout,
+            setTheme,
+            themeName,
             theme
         } = this.props;
         const { logoutDialogVisible } = this.state;
@@ -57,6 +61,16 @@ class Settings extends PureComponent {
                         onPress={() => this.setState({ logoutDialogVisible: true })}
                         left={props => (<List.Icon {...props} icon="exit-to-app" />)}
                     />
+                    <Divider />
+                    <TouchableOpacity
+                        onLongPress={() => setTheme(themeName === 'dark' ? 'default' : 'dark')}
+                    >
+                        <List.Item
+                            title="Version"
+                            description={VERSION_NAME}
+                            left={props => (<List.Icon {...props} icon="info" />)}
+                        />
+                    </TouchableOpacity>
                 </ScrollView>
                 <LogoutDialog
                     visible={logoutDialogVisible}
@@ -73,12 +87,14 @@ class Settings extends PureComponent {
 
 const mapStateToProps = (state) => ({
     filtersActive: state.timetables.filters.isActive,
-    filtersEmpty: state.timetables.filters.isEmpty
+    filtersEmpty: state.timetables.filters.isEmpty,
+    themeName: state.settings.theme
 });
 
 const mapDispatchToProps = {
     toggleFilter,
     setClassFilter,
+    setTheme,
     logout
 };
 
