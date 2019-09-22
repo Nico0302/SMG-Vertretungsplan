@@ -18,7 +18,8 @@ class Entry extends Component {
         const statusBarColor = Platform.OS === 'ios' ?
             indicatorColor :
             indicatorStatusBar[type] || indicatorStatusBar.default;
-        const titleColor = color(indicatorColor).isDark() ? Colors.white : theme.colors.text;
+        const titleColor = color(indicatorColor).isDark() ? Colors.white :
+            theme.dark ? Colors.black : theme.colors.text;
 
         return (
             <View style={[styles.container, { backgroundColor: indicatorColor }]}>
