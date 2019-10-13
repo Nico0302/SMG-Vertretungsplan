@@ -16,7 +16,7 @@ const sensitiveStorage = createSensitiveStorage({
 
 const timetablesPersistConfig = {
     key: 'timetables',
-    blacklist: ['isLoading', 'error', 'data', 'cache'],
+    blacklist: ['isLoading', 'error'],
     storage: AsyncStorage,
     timeout: 0
 };

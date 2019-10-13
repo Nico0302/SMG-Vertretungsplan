@@ -40,7 +40,7 @@ class Settings extends PureComponent {
                         />
                     </Appbar.Header>
                 </Surface>
-                <ScrollView style={styles.content}>
+                <ScrollView style={styles.content} bounces={false}>
                     <List.Item
                         title="Filter"
                         description={filtersActive ? 'An' : filtersEmpty ? 'Leer' : 'Aus'}

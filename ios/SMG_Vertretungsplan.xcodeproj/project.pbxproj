@@ -681,7 +681,7 @@
 			baseConfigurationReference = 4954729A66952778F3703224 /* Pods-SMG_Vertretungsplan.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.5.0;
 				DEAD_CODE_STRIPPING = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -694,12 +694,13 @@
 				);
 				INFOPLIST_FILE = SMG_Vertretungsplan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.gres.SMG-Vertretungsplan";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.gres.smg-vertretungsplan";
 				PRODUCT_NAME = SMG_Vertretungsplan;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -711,7 +712,7 @@
 			baseConfigurationReference = AD737FB5974D093478D82BD0 /* Pods-SMG_Vertretungsplan.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 0.5.0;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)..\node_modules\neact-native-gesture-handlerios/**",
@@ -723,12 +724,13 @@
 				);
 				INFOPLIST_FILE = SMG_Vertretungsplan/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 6;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "io.gres.SMG-Vertretungsplan";
+				PRODUCT_BUNDLE_IDENTIFIER = "io.gres.smg-vertretungsplan";
 				PRODUCT_NAME = SMG_Vertretungsplan;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";

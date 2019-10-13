@@ -1,12 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
     },
     appbar: {
-        zIndex: 10,
-        elevation: 4
+        elevation: Platform.OS === 'ios' ? 0 : 4
     },
     emptySection: {
         alignItems: 'center',

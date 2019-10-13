@@ -42,7 +42,8 @@ function timetables(state = {
     filters: filters(),
     cache: null,
     url: null,
-    sections: []
+    sections: [],
+    receivedAt: null
 }, action) {
     switch (action.type) {
         case FETCH_TIMETABLES_REQUEST:
@@ -94,7 +95,8 @@ function timetables(state = {
                 sections: [],
                 url: null,
                 receivedAt: null,
-                isEmpty: true
+                isEmpty: true,
+                receivedAt: null
             };
         case MIGRATE_VERSION:
             if (!action.version || action.version < 3)

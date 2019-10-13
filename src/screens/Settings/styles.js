@@ -1,11 +1,11 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1
     },
     appbar: {
-        elevation: 4
+        elevation: Platform.OS === 'ios' ? 0 : 4
     },
     content: {
         flex: 1
