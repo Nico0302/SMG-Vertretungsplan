@@ -38,7 +38,7 @@ class Timetable extends PureComponent {
   updateTimetables() {
     const { auth, isLoading, fetchTimetables, navigation } = this.props;
 
-    if (auth.token) {
+    if (auth.username && auth.password) {
       if (!isLoading) {
         fetchTimetables().catch(() => {});
       }

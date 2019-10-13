@@ -4634,6 +4634,11 @@ p-try@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
 
+pako@^1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
+  integrity sha512-0DTvPVU3ed8+HNXOu5Bs+o//Mbdj9VNQMUOe9oKCwh8l0GNwpTDMKCWbRjgtD291AWnkAgkqA/LOnQS8AmS1tw==
+
 parent-module@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/parent-module/-/parent-module-1.0.1.tgz#691d2709e78c79fae3a156622452d00762caaaa2"
@@ -4893,6 +4898,11 @@ react-native-cheerio@^1.0.0-rc.4:
     htmlparser2-without-node-native "^3.9.0"
     lodash "^4.15.0"
     react-native-parse-html "^2.2.6"
+
+react-native-device-info@^4.0.1-beta.5:
+  version "4.0.1-beta.5"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-4.0.1-beta.5.tgz#92366e93f1b084ddbd585a66001792cc0b6e1782"
+  integrity sha512-CWlh2ebV1iblUtu/UVKwrq6u5b2kbIhDFJTlobIs0f7V25piwo25QiZhrTd9DBHQw+sQBlL9qsaCvU5clBpisA==
 
 react-native-gesture-handler@^1.3.0:
   version "1.3.0"

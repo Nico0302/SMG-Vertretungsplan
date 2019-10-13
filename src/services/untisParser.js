@@ -68,33 +68,33 @@ const timetableColumns = [
     },
     {
         key: 'classes',
-        value: value => value.split(', ').map(item => item.replace(/^0+/, ''))
+        value: classes => classes.split(', ').map(className => className.replace(/^0+/, ''))
     },
     {
         key: 'lesson'
     },
     {
         key: 'subject',
-        value: value => value.replace(/_/g, ' ')
+        value: subject => subject.replace(/_/g, ' ')
     },
     {
         key: 'room',
-        value: value => value === '---' ? null : value
+        value: room => room === '---' ? null : room
     },
     {
         key: 'substitute',
-        value: value => value === '---' ? null : value
+        value: substitute => substitute === '---' ? null : substitute
     },
     {
         key: 'type'
     },
     {
         key: 'swap',
-        value: value => value === '' ? null : value
+        value: swap => swap === '' ? null : swap
     },
     {
         key: 'detail',
-        value: value => value === '' ? null : value
+        value: detail => detail === '' ? null : detail
     }
 ];
 

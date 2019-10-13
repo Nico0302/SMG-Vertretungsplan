@@ -1,4 +1,5 @@
-import { getToken } from '@services/dsb';
+import { generateAppId } from '@services/dsb';
+import { fetchTimetables } from '@actions/timetables';
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
@@ -10,26 +11,34 @@ export const LOGOUT = 'LOGOUT';
  *
  * @param {String} username
  * @param {String} password
- * @returns {Promise<String>} Promise object represents the auth token
+ * @returns {Promise<String>}
  */
 export function login(username, password) {
-  return async dispatch => {
+  return async (dispatch, getState) => {
     try {
+      const state = getState();
+      const appId = state.auth.appId || generateAppId();
+      
       dispatch({
         type: LOGIN_REQUEST,
+        appId
       });
+
       if (!username) {
         throw new Error('Ungültiger Nutzername!');
       }
       if (!password) {
         throw new Error('Ungültiges Passwort!');
       }
-      const token = await getToken(username, password);
+
+      const response = await dispatch(fetchTimetables({ username, password, appId, lastUpdate: null }));
+
       dispatch({
         type: LOGIN_SUCCESS,
-        token,
+        username,
+        password
       });
-      return token;
+      return response;
     } catch (error) {
       dispatch({
         type: LOGIN_FAILURE,
