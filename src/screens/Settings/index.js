@@ -68,7 +68,7 @@ class Settings extends PureComponent {
                         <List.Item
                             title="Version"
                             description={VERSION_NAME}
-                            left={props => (<List.Icon {...props} icon="info" />)}
+                            left={props => (<List.Icon {...props} icon="info-outline" />)}
                         />
                     </TouchableOpacity>
                 </ScrollView>
