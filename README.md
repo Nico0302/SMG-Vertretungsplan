@@ -62,7 +62,7 @@ Launch ``` react-native run-android ``` command in a terminal opened in the proj
 ## Troubleshooting
 
 ### Android Hermes release build error
-https://github.com/facebook/react-native/issues/25599
+https://github.com/facebook/react-native/issues/25599#issuecomment-524537342
 
 ## Built With
 

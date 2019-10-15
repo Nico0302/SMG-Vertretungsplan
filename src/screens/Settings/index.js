@@ -5,6 +5,7 @@ import { Appbar, Surface, Switch, Divider, List, withTheme } from 'react-native-
 import { VERSION_NAME } from '@config/info';
 import { logout } from '@actions/auth';
 import { toggleFilter, setClassFilter } from '@actions/filters';
+import { toggleHidePast } from '@actions/timetables';
 import { setTheme } from '@actions/settings';
 import LogoutDialog from './LogoutDialog';
 import styles from './styles';
@@ -18,8 +19,10 @@ class Settings extends PureComponent {
         const { 
             filtersActive,
             filtersEmpty,
+            hidePast,
             navigation,
             toggleFilter,
+            toggleHidePast,
             logout,
             setTheme,
             themeName,
@@ -57,6 +60,20 @@ class Settings extends PureComponent {
                     />
                     <Divider />
                     <List.Item
+                        title="Vergangene Pläne ausblenden"
+                        description={hidePast ? 'Vergangene Pläne werden ausgeblendet' : 'Vergangene Pläne werden angezeigt'}
+                        onPress={() => toggleHidePast()}
+                        left={props => (<List.Icon {...props} icon="event-note" />)}
+                        right={()=> (
+                            <Switch
+                                style={styles.switch}
+                                value={hidePast}
+                                onValueChange={() => toggleHidePast()}
+                            />
+                        )}
+                    />
+                    <Divider />
+                    <List.Item
                         title="Abmelden"
                         onPress={() => this.setState({ logoutDialogVisible: true })}
                         left={props => (<List.Icon {...props} icon="exit-to-app" />)}
@@ -88,11 +105,13 @@ class Settings extends PureComponent {
 const mapStateToProps = (state) => ({
     filtersActive: state.timetables.filters.isActive,
     filtersEmpty: state.timetables.filters.isEmpty,
+    hidePast: state.timetables.hidePast,
     themeName: state.settings.theme
 });
 
 const mapDispatchToProps = {
     toggleFilter,
+    toggleHidePast,
     setClassFilter,
     setTheme,
     logout

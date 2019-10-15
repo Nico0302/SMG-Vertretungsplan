@@ -10,13 +10,18 @@ import {
 import {
     FETCH_TIMETABLES_REQUEST,
     FETCH_TIMETABLES_FAILURE,
-    FETCH_TIMETABLES_SUCCESS
+    FETCH_TIMETABLES_SUCCESS,
+    TOGGLE_HIDE_PAST
 } from '@actions/timetables';
 import filters from '@reducers/filters';
 
-function generateSections(timetables, filters) {
+function generateSections(timetables, filters, hidePast) {
+    console.log(timetables[0].date);
+    console.log(moment().diff(timetables[0].date, 'days'));
     if (timetables) {
-        return timetables.map(timetable => ({
+        return timetables.filter(timetable =>
+                !hidePast || (moment().diff(timetable.date, 'days') <= 0)
+            ).map(timetable => ({
             ...timetable,
             // format date as title
             title: moment(timetable.date).format('dddd, DD.MM.YYYY'),
@@ -39,6 +44,7 @@ function generateSections(timetables, filters) {
 function timetables(state = {
     isLoading: false,
     isEmpty: true,
+    hidePast: false,
     filters: filters(),
     cache: null,
     url: null,
@@ -59,7 +65,7 @@ function timetables(state = {
                     isLoading: false,
                     isEmpty: action.timetables.length < 1,
                     cache: action.timetables,
-                    sections: generateSections(action.timetables, state.filters),
+                    sections: generateSections(action.timetables, state.filters, state.hidePast),
                     url: action.url,
                     receivedAt: action.receivedAt
                 };
@@ -67,7 +73,7 @@ function timetables(state = {
             return {
                 ...state,
                 isLoading: false,
-                sections: generateSections(state.cache, state.filters),
+                sections: generateSections(state.cache, state.filters, state.hidePast),
                 receivedAt: action.receivedAt
             };
         case FETCH_TIMETABLES_FAILURE:
@@ -84,8 +90,14 @@ function timetables(state = {
 
             return {
                 ...state,
-                sections: generateSections(state.cache, nextFilterState),
+                sections: generateSections(state.cache, nextFilterState, state.hidePast),
                 filters: nextFilterState
+            };
+        case TOGGLE_HIDE_PAST:
+            return {
+                ...state,
+                sections: generateSections(state.cache, state.filters, !state.hidePast),
+                hidePast: !state.hidePast
             };
         case LOGOUT:
             return {
@@ -96,7 +108,7 @@ function timetables(state = {
                 url: null,
                 receivedAt: null,
                 isEmpty: true,
-                receivedAt: null
+                hidePast: false
             };
         case MIGRATE_VERSION:
             if (!action.version || action.version < 3)

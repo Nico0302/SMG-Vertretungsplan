@@ -12,12 +12,10 @@ const { store, persistor } = getStore();
 class App extends PureComponent {
   componentDidMount() {
     moment.locale('de');
-    // temporary fix for fetch in React Native 0.60.x
-    // global.Blob = null;
 
     YellowBox.ignoreWarnings([
       'Warning: componentWillUpdate is deprecated',
-      'Warning: componentWillMount is deprecated'
+      'Warning: componentWillMount',
     ]);
   }
 

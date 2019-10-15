@@ -7,6 +7,8 @@ export const FETCH_TIMETABLES_REQUEST = 'FETCH_TIMETABLES_REQUEST';
 export const FETCH_TIMETABLES_FAILURE = 'FETCH_TIMETABLES_FAILURE';
 export const FETCH_TIMETABLES_SUCCESS = 'FETCH_TIMETABLES_SUCCESS';
 
+export const TOGGLE_HIDE_PAST = 'TOGGLE_HIDE_PAST';
+
 /**
  * Fetch the current timetables from the DSB api.
  * 
@@ -70,3 +72,10 @@ export function fetchTimetables({ username, password, appId, receivedAt }={}) {
         }
     }
 }
+
+/**
+ * Toggle hide past option.
+ */
+export const toggleHidePast = () => ({
+    type: TOGGLE_HIDE_PAST
+});

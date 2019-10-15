@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, SectionList, RefreshControl, InteractionManager, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import {
   Appbar,
   Paragraph,
@@ -94,6 +95,18 @@ class Timetable extends PureComponent {
             colors={[theme.colors.primary]}
           />
         }
+        ListEmptyComponent={(
+          <View style={styles.emptyList}>
+            <Icon
+              name="event-busy"
+              size={80}
+              color={theme.colors.disabled}
+            />
+            <Subheading>
+              Keine aktuellen Vertretungspläne
+            </Subheading>
+          </View>
+        )}
         stickySectionHeadersEnabled={false}
         keyExtractor={(item, index) => item.lesson + index.toString()}
         initialNumToRender={Math.floor(height / 52)}

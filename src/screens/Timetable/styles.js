@@ -11,6 +11,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         padding: 4
     },
+    emptyList: {
+        flex: 1,
+        alignItems: 'center',
+        paddingTop: 80
+    },
     snackbarListPadding: {
         paddingBottom: 68
     },

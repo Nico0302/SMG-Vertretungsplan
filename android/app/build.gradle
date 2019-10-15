@@ -78,7 +78,6 @@ import com.android.build.OutputFile
 project.ext.react = [
     entryFile: "index.js",
     enableHermes: true,  // clean and rebuild if changing
-    hermesCommand: "../../node_modules/hermes-engine/%OS-BIN%/hermes",
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -129,8 +128,8 @@ android {
         applicationId "io.gres.smg_vertretungsplan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 7
-        versionName "0.5.1"
+        versionCode 8
+        versionName "0.5.2"
     }
     splits {
         abi {
@@ -180,11 +179,18 @@ android {
 
         }
     }
+    configurations.all {
+        resolutionStrategy {
+            force "com.facebook.soloader:soloader:0.8.0"
+        }
+    }
 }
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
         debugImplementation files(hermesPath + "hermes-debug.aar")
