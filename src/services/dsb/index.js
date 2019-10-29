@@ -1,6 +1,6 @@
 import { getDeviceId, getSystemVersion } from 'react-native-device-info';
 import moment from 'moment';
-import { VERSION_NAME, BUNDLE_ID } from '@config/info';
+import { BUNDLE_ID } from '@config/info';
 import decode from './decoding';
 import encode from './encoding';
 
@@ -33,38 +33,26 @@ export function generateAppId() {
  * @returns {Object}
  */
 export async function fetchTimetableData({ username, password, appId, lastUpdate }) {
-	console.log({
-		AddId: appId,
-		UserId: username,
-		UserPw: password,
-		AppVersion: VERSION_NAME,
-		Device: getDeviceId(),
-		OsVersion: getSystemVersion(),
-		Language: 'de',
-		PushId: '',
-		Date: moment().format('YYYY-MM-DDTHH:mm:ssSSSSS'),
-		LastUpdate: lastUpdate ? moment(lastUpdate).format('YYYY-MM-DDTHH:mm:ssSSSSS') : null,
-		BundleId: BUNDLE_ID
-	});
 	const response = await fetch('https://app.dsbcontrol.de/JsonHandler.ashx/GetData', {
 		method: 'POST',
 		headers: {
-			'Content-type': 'application/json'
+			'Content-Type': 'application/json; charset=UTF-8',
+			'Connection': 'Keep-Alive',
+			'Accept-Encoding': 'gzip'
 		},
 		body: JSON.stringify({
 			req: {
 				Data: encode({
-					AddId: appId,
-					UserId: username,
-					UserPw: password,
-					AppVersion: VERSION_NAME,
+					AppId: appId,
+					AppVersion: '2.5.9',
+					BundleId: BUNDLE_ID,
+					Date: moment().format('YYYY-MM-DD[T]HH:mm:ssSSSS00'),
 					Device: getDeviceId(),
-					OsVersion: getSystemVersion(),
 					Language: 'de',
-					PushId: '',
-					Date: moment().format('YYYY-MM-DDTHH:mm:ssSSSSS'),
-					LastUpdate: lastUpdate ? moment(lastUpdate).format('YYYY-MM-DDTHH:mm:ssSSSSS') : null,
-					BundleId: BUNDLE_ID
+					LastUpdate: moment(lastUpdate).format('YYYY-MM-DD[T]HH:mm:ssSSSS00'),
+					OsVersion: getSystemVersion(),
+					UserId: username,
+					UserPw: password
 				}),
 				DataType: 1
 			}

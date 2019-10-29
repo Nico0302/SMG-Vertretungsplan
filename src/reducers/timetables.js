@@ -16,8 +16,6 @@ import {
 import filters from '@reducers/filters';
 
 function generateSections(timetables, filters, hidePast) {
-    console.log(timetables[0].date);
-    console.log(moment().diff(timetables[0].date, 'days'));
     if (timetables) {
         return timetables.filter(timetable =>
                 !hidePast || (moment().diff(timetable.date, 'days') <= 0)
@@ -49,7 +47,7 @@ function timetables(state = {
     cache: null,
     url: null,
     sections: [],
-    receivedAt: null
+    receivedAt: moment().toISOString()
 }, action) {
     switch (action.type) {
         case FETCH_TIMETABLES_REQUEST:
@@ -80,7 +78,8 @@ function timetables(state = {
             return {
                 ...state,
                 isLoading: false,
-                error: action.error
+                error: action.error,
+                receivedAt: action.receivedAt
             };
         case TOGGLE_FILTER:
         case SET_CLASS_FILTER:
@@ -106,7 +105,6 @@ function timetables(state = {
                 cache: null,
                 sections: [],
                 url: null,
-                receivedAt: null,
                 isEmpty: true,
                 hidePast: false
             };

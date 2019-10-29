@@ -31,7 +31,7 @@ export function login(username, password) {
         throw new Error('Ungültiges Passwort!');
       }
 
-      const response = await dispatch(fetchTimetables({ username, password, appId, lastUpdate: null }));
+      const response = await dispatch(fetchTimetables({ username, password, appId }));
 
       dispatch({
         type: LOGIN_SUCCESS,
