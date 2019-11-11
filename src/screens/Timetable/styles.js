@@ -16,6 +16,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 80
     },
+    disclaimer: {
+        paddingVertical: 8,
+        paddingHorizontal: 16
+    },
     snackbarListPadding: {
         paddingBottom: 68
     },

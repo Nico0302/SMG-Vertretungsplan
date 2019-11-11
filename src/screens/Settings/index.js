@@ -64,7 +64,7 @@ class Settings extends PureComponent {
                         description={hidePast ? 'Vergangene Pläne werden ausgeblendet' : 'Vergangene Pläne werden angezeigt'}
                         onPress={() => toggleHidePast()}
                         left={props => (<List.Icon {...props} icon="calendar-clock" />)}
-                        right={()=> (
+                        right={() => (
                             <Switch
                                 style={styles.switch}
                                 value={hidePast}

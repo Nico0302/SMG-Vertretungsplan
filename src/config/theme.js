@@ -46,7 +46,7 @@ const themeDark = {
     ...DarkTheme.colors,
     primary: '#99203B',
     accent: '#64dd17',
-    statusBar: '#29434e'
+    statusBar: '#000'
   }
 };
 

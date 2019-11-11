@@ -9,6 +9,7 @@ import {
   Snackbar,
   List,
   Subheading,
+  Caption,
   Surface,
   withTheme
 } from 'react-native-paper';
@@ -41,7 +42,7 @@ class Timetable extends PureComponent {
 
     if (auth.username && auth.password) {
       if (!isLoading) {
-        fetchTimetables().catch(() => {});
+        fetchTimetables().catch(() => { });
       }
     } else {
       navigation.navigate('Unauthenticated');
@@ -80,13 +81,20 @@ class Timetable extends PureComponent {
           </View>
         )}
         renderSectionFooter={({ section }) =>
-          section.data.length < 1 ? (
-            <View style={styles.emptySection}>
-              <Subheading>
-                {'keine Einträge' + (filters.isActive ? ` für die Klasse ${filters.class}` : '')}
-              </Subheading>
-            </View>
-          ) : null
+          <View>
+            {section.data.length < 1 && (
+              <View style={styles.emptySection}>
+                <Subheading>
+                  {'keine Einträge' + (filters.isActive ? ` für die Klasse ${filters.class}` : '')}
+                </Subheading>
+              </View>
+            )}
+            {section.index + 1 >= sections.length && (
+              <Caption style={styles.disclaimer}>
+                Das SMG und die Betreiber des DSBs übernehmen keine Haftung für Vollständigkeit und Richtigkeit. 
+              </Caption>
+            )}
+          </View>
         }
         refreshControl={
           <RefreshControl
@@ -132,7 +140,7 @@ class Timetable extends PureComponent {
         {this.renderSections()}
         <Snackbar
           visible={error}
-          onDismiss={() => {}}
+          onDismiss={() => { }}
           action={{
             label: 'neu laden',
             onPress: () => this.updateTimetables()

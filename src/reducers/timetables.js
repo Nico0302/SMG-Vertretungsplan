@@ -19,10 +19,11 @@ function generateSections(timetables, filters, hidePast) {
     if (timetables) {
         return timetables.filter(timetable =>
                 !hidePast || (moment().diff(timetable.date, 'days') <= 0)
-            ).map(timetable => ({
+            ).map((timetable, index) => ({
             ...timetable,
             // format date as title
             title: moment(timetable.date).format('dddd, DD.MM.YYYY'),
+            index,
             // check if filter exists and is active
             data: filters.isActive && !filters.isEmpty ?
                 // apply filter

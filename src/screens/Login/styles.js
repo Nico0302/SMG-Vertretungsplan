@@ -17,7 +17,8 @@ const styles = StyleSheet.create({
     },
     errorText: {
         color: Colors.red500,
-        marginVertical: 8
+        marginVertical: 8,
+        textAlign: 'center'
     },
     logo: {
         width: '100%',

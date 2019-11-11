@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { SafeAreaView } from 'react-navigation';
 import { Button, Text, TextInput, withTheme } from 'react-native-paper';
 import { login } from '@actions/auth';
@@ -28,6 +29,23 @@ class Login extends PureComponent {
         ).catch(() => {});
     }
 
+    _getErrorMessage = () => {
+        const { message } = this.props.auth.error;
+        let humanizedMessage = message;
+
+        if (message === 'To many requests.') {
+            const diff = -Math.round(moment().diff(moment(this.props.receivedAt).add(10, 's'))/1000);
+            humanizedMessage = 'Zu viele Anfragen!';
+            if (diff > 0) {
+                humanizedMessage += `\nVersuche es in ${diff} Sekunde${diff > 1 ? 'n' : ''} erneut.`;
+            } else {
+                humanizedMessage += '\nVersuche es erneut.';
+            }
+        }
+
+        return humanizedMessage;
+    };
+
     render() {
         const { auth, navigation, theme } = this.props;
         const { username, password } = this.state;
@@ -45,8 +63,10 @@ class Login extends PureComponent {
                     <View style={styles.logo}>
                         <Logo size={160} />
                     </View>
-                    {auth.error && auth.error.message &&  (
-                        <Text style={styles.errorText}>{auth.error.message}</Text>
+                    {auth.error && auth.error.message && (
+                        <Text style={styles.errorText}>
+                            {this._getErrorMessage()}
+                        </Text>
                     )}
                     <TextInput
                         style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
@@ -89,7 +109,8 @@ class Login extends PureComponent {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    receivedAt: state.timetables.receivedAt
 });
 
 const mapDispatchToProps = {

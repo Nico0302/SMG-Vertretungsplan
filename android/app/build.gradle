@@ -128,8 +128,8 @@ android {
         applicationId "io.gres.smg_vertretungsplan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 8
-        versionName "0.5.2"
+        versionCode 10
+        versionName "0.6.1"
     }
     splits {
         abi {
@@ -211,7 +211,7 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 
 project.ext.vectoricons = [
     iconFontNames: [
-        'MaterialIcons.ttf'
+        'MaterialCommunityIcons.ttf'
     ]
 ]
 
