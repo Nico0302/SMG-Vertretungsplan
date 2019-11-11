@@ -54,7 +54,7 @@ class Filters extends Component {
                         <Text
                             style={[
                                 styles.masterSwitchText,
-                                { fontFamily: fonts.regular }
+                                fonts.regular
                             ]}
                         >Filter anwenden</Text>
                         <Switch
@@ -67,12 +67,12 @@ class Filters extends Component {
                         title="Klasse/MSS-Stufe"
                         description={filters.isEmpty ? 'leer (tippen zum bearbeiten)' : filters.class}
                         onPress={() => this._showClassFilterDialog()}
-                        left={props => (<List.Icon {...props} icon="group" />)}
+                        left={props => (<List.Icon {...props} icon="account-multiple" />)}
                     />
                     <Divider />
                     <List.Subheader style={styles.listSubheader}>Fächer & Kurse (optional)</List.Subheader>
                     <View style={styles.listRow}>
-                        <List.Icon style={styles.listIcon} icon="class" color={descriptionColor} />
+                        <List.Icon style={styles.listIcon} icon="book-variant" color={descriptionColor} />
                         <View style={styles.subjectsWrapper}>
                             <View style={styles.subjectsContainer}>
                                 {filters.subjects.length > 0 && filters.subjects.map(subject => (

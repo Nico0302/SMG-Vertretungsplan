@@ -35,7 +35,7 @@ class Entry extends Component {
                     />
                     <Appbar.Content title="" />
                     <Appbar.Action
-                        icon="share"
+                        icon="share-variant"
                         onPress={() => shareEntry(entry)}
                     />
                 </Appbar.Header>
@@ -47,24 +47,24 @@ class Entry extends Component {
                 </View>
                 <Surface style={styles.surface}>
                     <ScrollView bounces={false}>
-                        <Info value={moment(date).format('dddd, DD.MM.YYYY')} label="Datum" icon="event"/>
+                        <Info value={moment(date).format('dddd, DD.MM.YYYY')} label="Datum" icon="calendar"/>
                         {classes && classes[0] !== '' && (
-                            <Info value={classes.join(', ')} label={classes.length > 1 ? 'Klassen' : 'Klasse'} icon="group"/>
+                            <Info value={classes.join(', ')} label={classes.length > 1 ? 'Klassen' : 'Klasse'} icon="account-multiple"/>
                         )}
                         {subject && (
-                            <Info value={subject} label="Fach" icon="class"/>
+                            <Info value={subject} label="Fach" icon="book-variant"/>
                         )}
                         {substitute && (
-                            <Info value={substitute} label="Lehrer/in" icon="person"/>
+                            <Info value={substitute} label="Lehrer/in" icon="account"/>
                         )}
                         {room && (
-                            <Info value={room} label="Raum" icon="room"/>
+                            <Info value={room} label="Raum" icon="map-marker"/>
                         )}
                         {swap && (
                             <Info value={`von ${swap}. Stunde`} label="Verlegung" icon="reply"/>
                         )}
                         {detail && (
-                            <Info value={detail} label="Anmerkung" icon="info"/>
+                            <Info value={detail} label="Anmerkung" icon="information"/>
                         )}
                     </ScrollView>
                 </Surface>

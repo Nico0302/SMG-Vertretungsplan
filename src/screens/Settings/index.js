@@ -48,7 +48,7 @@ class Settings extends PureComponent {
                         title="Filter"
                         description={filtersActive ? 'An' : filtersEmpty ? 'Leer' : 'Aus'}
                         onPress={() => navigation.navigate('Filters')}
-                        left={props => (<List.Icon {...props} icon="filter-list" />)}
+                        left={props => (<List.Icon {...props} icon="filter-variant" />)}
                         right={()=> (
                             <Switch
                                 style={styles.switch}
@@ -63,7 +63,7 @@ class Settings extends PureComponent {
                         title="Vergangene Pläne ausblenden"
                         description={hidePast ? 'Vergangene Pläne werden ausgeblendet' : 'Vergangene Pläne werden angezeigt'}
                         onPress={() => toggleHidePast()}
-                        left={props => (<List.Icon {...props} icon="event-note" />)}
+                        left={props => (<List.Icon {...props} icon="calendar-clock" />)}
                         right={()=> (
                             <Switch
                                 style={styles.switch}
@@ -85,7 +85,7 @@ class Settings extends PureComponent {
                         <List.Item
                             title="Version"
                             description={VERSION_NAME}
-                            left={props => (<List.Icon {...props} icon="info-outline" />)}
+                            left={props => (<List.Icon {...props} icon="information-outline" />)}
                         />
                     </TouchableOpacity>
                 </ScrollView>

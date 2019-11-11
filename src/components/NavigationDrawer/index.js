@@ -31,7 +31,7 @@ class NavigationDrawer extends Component {
                 <View style={styles.items}>
                     <Drawer.Item
                         label='Vertretungsplan'
-                        icon='list'
+                        icon='format-list-bulleted'
                         active={activeItemKey === 'TimetableStack'}
                         onPress={() => navigation.navigate('TimetableStack')}
                     />
@@ -43,7 +43,7 @@ class NavigationDrawer extends Component {
                     />
                     <Drawer.Item
                         label='Feedback'
-                        icon='feedback'
+                        icon='message-alert'
                         onPress={() => Linking.openURL('https://github.com/Nico0302/SMG-Vertretungsplan/issues')}
                     />
                 </View>

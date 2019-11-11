@@ -19,10 +19,23 @@ export function shareEntry({
   detail
 }) {
   try {
-    let message = `${moment(date).format('dd, D.M')} ${lesson} ${subject} ${type} ${classes.join(',')}`;
+    let message = `📅 ${moment(date).format('ddd D.M')}
+${classes.join(',')} 📕 ${subject} 
+🕒 ${lesson}. Stunde 
+${type} `;
     if (swap) {
-       message += ` ${swap}. Stunde`;
+       message += `️➡️ ${swap}. Stunde `;
     }
+    if (substitute) {
+      message += `\n👤 ${substitute} `;
+    }
+    if (room) {
+      message += `\n🚪 ${room} `;
+    }
+    if (detail) {
+      message += `\nℹ️ (${detail}) `;
+    }
+    message += '\nSMG-Vertretungsplan App';
     Share.share({ message });
   } catch (error) {
     console.error(error);

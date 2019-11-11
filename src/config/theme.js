@@ -44,7 +44,7 @@ const themeDark = {
   ...DarkTheme,
   colors: {
     ...DarkTheme.colors,
-    primary: '#546e7a',
+    primary: '#99203B',
     accent: '#64dd17',
     statusBar: '#29434e'
   }
