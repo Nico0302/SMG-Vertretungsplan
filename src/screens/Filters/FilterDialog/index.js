@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
-import { TextInput } from 'react-native';
-import { Button, Dialog, Portal, withTheme } from 'react-native-paper';
+import { Button, Dialog, TextInput, Portal, withTheme } from 'react-native-paper';
 import styles from './styles';
 
 class FilterDialog extends PureComponent {
@@ -34,8 +33,9 @@ class FilterDialog extends PureComponent {
                     <Dialog.Title style={styles.title}>{title}</Dialog.Title>
                     <TextInput
                         autoFocus
-                        style={styles.input}
-                        placeholder={placeholder}
+                        mode="outlined"
+                        style={[styles.input, { backgroundColor: theme.colors.surface }]}
+                        label={placeholder}
                         value={filter}
                         autoCorrect={false}
                         maxLength={16}

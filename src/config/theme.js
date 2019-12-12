@@ -5,7 +5,7 @@ const themeDefault = {
   colors: {
     ...DefaultTheme.colors,
     primary: '#99203B',
-    accent: '#9e9e9e',
+    accent: '#99203B',
     statusBar: '#650016'
   }
 };
@@ -45,7 +45,7 @@ const themeDark = {
   colors: {
     ...DarkTheme.colors,
     primary: '#99203B',
-    accent: '#64dd17',
+    accent: '#99203B',
     statusBar: '#000'
   }
 };

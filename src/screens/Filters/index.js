@@ -36,6 +36,10 @@ class Filters extends Component {
             .alpha(0.54)
             .rgb()
             .string();
+        const switchContainerColor = color(theme.colors.text)
+            .alpha(0.34)
+            .rgb()
+            .string();
 
         return (
             <View style={[styles.container, { backgroundColor: colors.surface }]}>
@@ -50,7 +54,7 @@ class Filters extends Component {
                     </Appbar.Header>
                 </Surface>
                 <ScrollView style={styles.content} bounces={false}>
-                    <View style={styles.masterSwitch}>
+                    <View style={[styles.masterSwitch, { backgroundColor: switchContainerColor }]}>
                         <Text
                             style={[
                                 styles.masterSwitchText,

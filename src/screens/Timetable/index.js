@@ -11,6 +11,7 @@ import {
   Subheading,
   Caption,
   Surface,
+  overlay,
   withTheme
 } from 'react-native-paper';
 import { fetchTimetables } from '@actions/timetables';
@@ -64,6 +65,8 @@ class Timetable extends PureComponent {
     const { sections, filters, isLoading, error, theme } = this.props;
     const { height } = Dimensions.get('window');
 
+    const progressBackgroundColor = overlay(12, theme.colors.surface);
+
     return (
       <SectionList
         sections={sections}
@@ -100,6 +103,7 @@ class Timetable extends PureComponent {
           <RefreshControl
             refreshing={isLoading}
             onRefresh={this.updateTimetables}
+            progressBackgroundColor={progressBackgroundColor}
             colors={[theme.colors.primary]}
           />
         }

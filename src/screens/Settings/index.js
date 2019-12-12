@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, ScrollView, TouchableOpacity } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Appbar, Surface, Switch, Divider, List, withTheme } from 'react-native-paper';
 import { VERSION_NAME } from '@config/info';
@@ -58,12 +58,11 @@ class Settings extends PureComponent {
                             />
                         )}
                     />
-                    <Divider />
                     <List.Item
                         title="Vergangene Pläne ausblenden"
                         description={hidePast ? 'Vergangene Pläne werden ausgeblendet' : 'Vergangene Pläne werden angezeigt'}
                         onPress={() => toggleHidePast()}
-                        left={props => (<List.Icon {...props} icon="calendar-clock" />)}
+                        left={props => (<List.Icon {...props} icon="calendar-remove-outline" />)}
                         right={() => (
                             <Switch
                                 style={styles.switch}
@@ -72,22 +71,29 @@ class Settings extends PureComponent {
                             />
                         )}
                     />
-                    <Divider />
+                    <List.Item
+                        title="Dark Theme"
+                        description={themeName === 'dark' ? 'An' : 'Aus'}
+                        onPress={() => navigation.navigate('Filters')}
+                        left={props => (<List.Icon {...props} icon="brightness-4" />)}
+                        right={()=> (
+                            <Switch
+                                style={styles.switch}
+                                value={themeName === 'dark'}
+                                onValueChange={() => setTheme(themeName === 'dark' ? 'default' : 'dark')}
+                            />
+                        )}
+                    />
                     <List.Item
                         title="Abmelden"
                         onPress={() => this.setState({ logoutDialogVisible: true })}
                         left={props => (<List.Icon {...props} icon="exit-to-app" />)}
                     />
-                    <Divider />
-                    <TouchableOpacity
-                        onLongPress={() => setTheme(themeName === 'dark' ? 'default' : 'dark')}
-                    >
-                        <List.Item
-                            title="Version"
-                            description={VERSION_NAME}
-                            left={props => (<List.Icon {...props} icon="information-outline" />)}
-                        />
-                    </TouchableOpacity>
+                    <List.Item
+                        title="Version"
+                        description={VERSION_NAME}
+                        left={props => (<List.Icon {...props} icon="information-outline" />)}
+                    />
                 </ScrollView>
                 <LogoutDialog
                     visible={logoutDialogVisible}

@@ -13,7 +13,6 @@ const styles = StyleSheet.create({
         flex: 1
     },
     masterSwitch: {
-        backgroundColor: Colors.grey500,
         flexDirection: 'row',
         width: '100%',
         alignItems: 'center',
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row'
     },
     listIcon: {
-        width: 56
+        marginRight: 24
     },
     subjectsWrapper: {
         flex: 1,
