@@ -68,7 +68,7 @@ class Entry extends Component {
             : theme.dark
             ? Colors.black
             : theme.colors.text;
-        
+
         const displayTime = this._getTime(lesson);
 
         return (
@@ -139,11 +139,22 @@ class Entry extends Component {
                                 }
                                 label="Lehrer/in"
                                 icon="account"
-                                onPress={teachers.hasOwnProperty(substitute) ? () => navigation.navigate('Teacher', { teacher: substitute }) : null}
+                                onPress={
+                                    teachers.hasOwnProperty(substitute)
+                                        ? () =>
+                                              navigation.navigate('Teacher', {
+                                                  teacher: substitute
+                                              })
+                                        : null
+                                }
                             />
                         )}
                         {room && (
-                            <InfoItem value={room} label="Raum" icon="map-marker" />
+                            <InfoItem
+                                value={room}
+                                label="Raum"
+                                icon="map-marker"
+                            />
                         )}
                         {swap && (
                             <InfoItem

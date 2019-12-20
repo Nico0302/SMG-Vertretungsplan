@@ -2,8 +2,23 @@ import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import color from 'color';
-import { Appbar, Switch, List, Text, Button, Divider, Chip, Colors, withTheme } from 'react-native-paper';
-import { toggleFilter, setClassFilter, addSubjectFilter, removeSubjectFilter } from '@actions/filters';
+import {
+    Appbar,
+    Switch,
+    List,
+    Text,
+    Button,
+    Divider,
+    Chip,
+    Colors,
+    withTheme
+} from 'react-native-paper';
+import {
+    toggleFilter,
+    setClassFilter,
+    addSubjectFilter,
+    removeSubjectFilter
+} from '@actions/filters';
 import FilterDialog from './FilterDialog';
 import styles from './styles';
 
@@ -17,7 +32,8 @@ class Filters extends Component {
         };
     }
 
-    _showClassFilterDialog = () => this.setState({ classFilterDialogVisible: true });
+    _showClassFilterDialog = () =>
+        this.setState({ classFilterDialogVisible: true });
 
     render() {
         const {
@@ -29,7 +45,10 @@ class Filters extends Component {
             removeSubjectFilter,
             theme
         } = this.props;
-        const { classFilterDialogVisible, subjectFilterDialogVisible } = this.state;
+        const {
+            classFilterDialogVisible,
+            subjectFilterDialogVisible
+        } = this.state;
         const { fonts, colors } = theme;
 
         const descriptionColor = color(theme.colors.text)
@@ -42,60 +61,91 @@ class Filters extends Component {
             .string();
 
         return (
-            <View style={[styles.container, { backgroundColor: colors.surface }]}>
+            <View
+                style={[styles.container, { backgroundColor: colors.surface }]}>
                 <Appbar.Header style={styles.appbar}>
                     <Appbar.BackAction
                         onPress={() => navigation.goBack(null)}
                     />
-                    <Appbar.Content
-                        title="Filter"
-                    />
+                    <Appbar.Content title="Filter" />
                 </Appbar.Header>
                 <ScrollView style={styles.content} bounces={false}>
-                    <View style={[styles.masterSwitch, { backgroundColor: switchContainerColor }]}>
-                        <Text
-                            style={[
-                                styles.masterSwitchText,
-                                fonts.regular
-                            ]}
-                        >Filter anwenden</Text>
+                    <View
+                        style={[
+                            styles.masterSwitch,
+                            { backgroundColor: switchContainerColor }
+                        ]}>
+                        <Text style={[styles.masterSwitchText, fonts.regular]}>
+                            Filter anwenden
+                        </Text>
                         <Switch
                             value={filters.isActive}
-                            onValueChange={() => filters.isEmpty ? this._showClassFilterDialog()  : toggleFilter()}
+                            onValueChange={() =>
+                                filters.isEmpty
+                                    ? this._showClassFilterDialog()
+                                    : toggleFilter()
+                            }
                             color={Colors.white}
                         />
                     </View>
                     <List.Item
                         title="Klasse/MSS-Stufe"
-                        description={filters.isEmpty ? 'leer (tippen zum bearbeiten)' : filters.class}
+                        description={
+                            filters.isEmpty
+                                ? 'leer (tippen zum bearbeiten)'
+                                : filters.class
+                        }
                         onPress={() => this._showClassFilterDialog()}
-                        left={props => (<List.Icon {...props} icon="account-multiple" />)}
+                        left={props => (
+                            <List.Icon {...props} icon="account-multiple" />
+                        )}
                     />
                     <Divider />
-                    <List.Subheader style={styles.listSubheader}>Fächer & Kurse (optional)</List.Subheader>
+                    <List.Subheader style={styles.listSubheader}>
+                        Fächer & Kurse (optional)
+                    </List.Subheader>
                     <View style={styles.listRow}>
-                        <List.Icon style={styles.listIcon} icon="book-variant" color={descriptionColor} />
+                        <List.Icon
+                            style={styles.listIcon}
+                            icon="book-variant"
+                            color={descriptionColor}
+                        />
                         <View style={styles.subjectsWrapper}>
                             <View style={styles.subjectsContainer}>
-                                {filters.subjects.length > 0 && filters.subjects.map(subject => (
-                                    <Chip
-                                        key={subject}
-                                        style={styles.subject}
-                                        onClose={() => removeSubjectFilter(subject)}
-                                    >{subject}</Chip>
-                                ))}
+                                {filters.subjects.length > 0 &&
+                                    filters.subjects.map(subject => (
+                                        <Chip
+                                            key={subject}
+                                            style={styles.subject}
+                                            onClose={() =>
+                                                removeSubjectFilter(subject)
+                                            }>
+                                            {subject}
+                                        </Chip>
+                                    ))}
                             </View>
                             <Button
-                                style={filters.subjects.length > 0 ? styles.addSubjectButton : {}}
+                                style={
+                                    filters.subjects.length > 0
+                                        ? styles.addSubjectButton
+                                        : {}
+                                }
                                 mode="outlined"
-                                onPress={() => this.setState({ subjectFilterDialogVisible: true })}
-                            >Fach/Kurs hinzufügen</Button>
+                                onPress={() =>
+                                    this.setState({
+                                        subjectFilterDialogVisible: true
+                                    })
+                                }>
+                                Fach/Kurs hinzufügen
+                            </Button>
                         </View>
                     </View>
                 </ScrollView>
                 <FilterDialog
                     visible={classFilterDialogVisible}
-                    onDismiss={() => this.setState({ classFilterDialogVisible: false })}
+                    onDismiss={() =>
+                        this.setState({ classFilterDialogVisible: false })
+                    }
                     onCreate={className =>
                         this.setState({ classFilterDialogVisible: false }, () =>
                             setClassFilter(className)
@@ -107,10 +157,10 @@ class Filters extends Component {
                 />
                 <FilterDialog
                     visible={subjectFilterDialogVisible}
-                    onDismiss={() => this.setState({ subjectFilterDialogVisible: false })}
-                    onCreate={subjectName =>
-                        addSubjectFilter(subjectName)
+                    onDismiss={() =>
+                        this.setState({ subjectFilterDialogVisible: false })
                     }
+                    onCreate={subjectName => addSubjectFilter(subjectName)}
                     title="Filter hinzufügen"
                     placeholder="Fach/Kurs-Kürzel"
                     createText="Hinzufügen"
@@ -120,7 +170,7 @@ class Filters extends Component {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     filters: state.timetables.filters
 });
 
@@ -131,7 +181,4 @@ const mapDispatchToProps = {
     removeSubjectFilter
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withTheme(Filters));
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(Filters));

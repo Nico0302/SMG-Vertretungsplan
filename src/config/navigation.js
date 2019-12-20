@@ -58,18 +58,18 @@ const teacherStack = createStackNavigator(
         initialRouteName: 'TeacherList',
         defaultNavigationOptions
     }
-)
+);
 
 const drawerStack = createDrawerNavigator(
     {
         TimetableStack: timetableStack,
         SettingsStack: settingsStack,
-        TeacherStack: teacherStack,
+        TeacherStack: teacherStack
     },
     {
         initialRouteName: 'TimetableStack',
         defaultNavigationOptions,
-        contentComponent: props => (<NavigationDrawer {...props}/>)
+        contentComponent: props => <NavigationDrawer {...props} />
     }
 );
 
@@ -77,16 +77,17 @@ const mainStack = createStackNavigator(
     {
         DrawerStack: drawerStack,
         Teacher
-    }, {
+    },
+    {
         initialRouteName: 'DrawerStack',
         defaultNavigationOptions
     }
-)
+);
 
 const rootStack = createSwitchNavigator(
     {
         Authenticated: mainStack,
-        Unauthenticated: authStack,
+        Unauthenticated: authStack
     },
     {
         initialRouteName: 'Authenticated'

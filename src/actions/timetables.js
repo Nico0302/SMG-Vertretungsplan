@@ -11,7 +11,7 @@ export const TOGGLE_HIDE_PAST = 'TOGGLE_HIDE_PAST';
 
 /**
  * Fetch the current timetables from the DSB api.
- * 
+ *
  * @param {Object} [param]
  * @param {String} parma.username
  * @param {String} param.password
@@ -23,12 +23,9 @@ export function fetchTimetables({ username, password, appId } = {}) {
             const state = getState();
             const receivedAt = state.timetables.receivedAt;
 
-            if (username === undefined)
-                username = state.auth.username;
-            if (password === undefined)
-                password = state.auth.password;
-            if (appId === undefined)
-                appId = state.auth.appId;
+            if (username === undefined) username = state.auth.username;
+            if (password === undefined) password = state.auth.password;
+            if (appId === undefined) appId = state.auth.appId;
 
             if (moment().diff(moment(receivedAt)) < 10000)
                 throw new Error('To many requests.');
@@ -59,7 +56,7 @@ export function fetchTimetables({ username, password, appId } = {}) {
                     url: Detail,
                     receivedAt: moment().toISOString()
                 });
-            };
+            }
             return true;
         } catch (error) {
             if (error.message !== 'To many requests.') {
@@ -71,7 +68,7 @@ export function fetchTimetables({ username, password, appId } = {}) {
             }
             throw error;
         }
-    }
+    };
 }
 
 /**

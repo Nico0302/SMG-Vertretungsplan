@@ -43,21 +43,15 @@ const rootReducer = combineReducers({
 
 const loggerMiddleware = createLogger();
 
-const middlewares = [
-    thunk
-];
+const middlewares = [thunk];
 
 if (__DEV__) {
     middlewares.push(loggerMiddleware);
 }
 
 export default () => {
-    const store = createStore(
-        rootReducer,
-        {},
-        applyMiddleware(...middlewares)
-    );
+    const store = createStore(rootReducer, {}, applyMiddleware(...middlewares));
     const persistor = persistStore(store);
 
-    return { store, persistor }
+    return { store, persistor };
 };

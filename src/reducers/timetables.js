@@ -17,39 +17,61 @@ import filters from '@reducers/filters';
 
 function generateSections(timetables, filters, hidePast) {
     if (timetables) {
-        return timetables.filter(timetable =>
-                !hidePast || (moment().diff(timetable.date, 'days') <= 0)
-            ).map((timetable, index) => ({
-            ...timetable,
-            // format date as title
-            title: moment(timetable.date).format('dddd, DD.MM.YYYY'),
-            index,
-            // check if filter exists and is active
-            data: filters.isActive && !filters.isEmpty ?
-                // apply filter
-                timetable.data.filter(entry => 
-                    entry.classes.find(className =>
-                        className.toLowerCase() === filters.class.toLowerCase()
-                    ) && (!entry.subject || (filters.subjects.length < 1 || filters.subjects.find(subject => 
-                        entry.subject.toLowerCase().replace(/[_\-\s]/g, '') === subject.toLowerCase().replace(/[_\-\s]/g, '')
-                    )))
-                )
-                : timetable.data
-        }));
+        return timetables
+            .filter(
+                timetable =>
+                    !hidePast || moment().diff(timetable.date, 'days') <= 0
+            )
+            .map((timetable, index) => ({
+                ...timetable,
+                // format date as title
+                title: moment(timetable.date).format('dddd, DD.MM.YYYY'),
+                index,
+                // check if filter exists and is active
+                data:
+                    filters.isActive && !filters.isEmpty
+                        ? // apply filter
+                          timetable.data.filter(
+                              entry =>
+                                  entry.classes.find(
+                                      className =>
+                                          className.toLowerCase() ===
+                                          filters.class.toLowerCase()
+                                  ) &&
+                                  (!entry.subject ||
+                                      filters.subjects.length < 1 ||
+                                          filters.subjects.find(
+                                              subject =>
+                                                  entry.subject
+                                                      .toLowerCase()
+                                                      .replace(
+                                                          /[_\-\s]/g,
+                                                          ''
+                                                      ) ===
+                                                  subject
+                                                      .toLowerCase()
+                                                      .replace(/[_\-\s]/g, '')
+                                          ))
+                          )
+                        : timetable.data
+            }));
     }
     return [];
 }
 
-function timetables(state = {
-    isLoading: false,
-    isEmpty: true,
-    hidePast: false,
-    filters: filters(),
-    cache: null,
-    url: null,
-    sections: [],
-    receivedAt: moment().toISOString()
-}, action) {
+function timetables(
+    state = {
+        isLoading: false,
+        isEmpty: true,
+        hidePast: false,
+        filters: filters(),
+        cache: null,
+        url: null,
+        sections: [],
+        receivedAt: moment().toISOString()
+    },
+    action
+) {
     switch (action.type) {
         case FETCH_TIMETABLES_REQUEST:
             return {
@@ -64,7 +86,11 @@ function timetables(state = {
                     isLoading: false,
                     isEmpty: action.timetables.length < 1,
                     cache: action.timetables,
-                    sections: generateSections(action.timetables, state.filters, state.hidePast),
+                    sections: generateSections(
+                        action.timetables,
+                        state.filters,
+                        state.hidePast
+                    ),
                     url: action.url,
                     receivedAt: action.receivedAt
                 };
@@ -72,7 +98,11 @@ function timetables(state = {
             return {
                 ...state,
                 isLoading: false,
-                sections: generateSections(state.cache, state.filters, state.hidePast),
+                sections: generateSections(
+                    state.cache,
+                    state.filters,
+                    state.hidePast
+                ),
                 receivedAt: action.receivedAt
             };
         case FETCH_TIMETABLES_FAILURE:
@@ -90,13 +120,21 @@ function timetables(state = {
 
             return {
                 ...state,
-                sections: generateSections(state.cache, nextFilterState, state.hidePast),
+                sections: generateSections(
+                    state.cache,
+                    nextFilterState,
+                    state.hidePast
+                ),
                 filters: nextFilterState
             };
         case TOGGLE_HIDE_PAST:
             return {
                 ...state,
-                sections: generateSections(state.cache, state.filters, !state.hidePast),
+                sections: generateSections(
+                    state.cache,
+                    state.filters,
+                    !state.hidePast
+                ),
                 hidePast: !state.hidePast
             };
         case LOGOUT:

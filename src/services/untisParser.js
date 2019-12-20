@@ -18,7 +18,9 @@ class UntisParser {
     }
 
     prepareTimetable(timetableIndex, dateElement) {
-        const dateString = this._$(dateElement).text().split(' ')[0];
+        const dateString = this._$(dateElement)
+            .text()
+            .split(' ')[0];
         const date = moment(dateString, 'D.M.YYYY').toISOString();
 
         this.timetables[timetableIndex] = { date, data: [] };
@@ -26,34 +28,42 @@ class UntisParser {
         // check for timetable info
         const infoElement = this._$(dateElement).next();
         if (infoElement.hasClass('info'))
-            this.timetables[timetableIndex].info = infoElement.text().replace(/^\s+|\s+$/g, '');
+            this.timetables[timetableIndex].info = infoElement
+                .text()
+                .replace(/^\s+|\s+$/g, '');
     }
 
     parseTimetable(timetableIndex, timetable) {
-        this._$(timetable).find('tr').each((index, row) => {
-            try {
-                this.parseTimetableRow(timetableIndex, index, row);
-            } catch(error) {
-                if (error.message !== 'Missing mandatory value!')
-                    throw error;
-            }
-        });
+        this._$(timetable)
+            .find('tr')
+            .each((index, row) => {
+                try {
+                    this.parseTimetableRow(timetableIndex, index, row);
+                } catch (error) {
+                    if (error.message !== 'Missing mandatory value!')
+                        throw error;
+                }
+            });
     }
 
     parseTimetableRow(timetableIndex, rowIndex, row) {
         let entry = {};
 
-        this._$(row).find('td').each((index, cell) => {
-            const plainValue = this._$(cell).text().trim();
-            const columProperties = timetableColumns[index];
+        this._$(row)
+            .find('td')
+            .each((index, cell) => {
+                const plainValue = this._$(cell)
+                    .text()
+                    .trim();
+                const columProperties = timetableColumns[index];
 
-            if (!columProperties.ignore) {
-                const value = columProperties.value ?
-                        columProperties.value(plainValue) : plainValue;
-                if (value)
-                    entry[columProperties.key] = value;
-            }
-        });
+                if (!columProperties.ignore) {
+                    const value = columProperties.value
+                        ? columProperties.value(plainValue)
+                        : plainValue;
+                    if (value) entry[columProperties.key] = value;
+                }
+            });
         if (Object.keys(entry).length > 0)
             this.timetables[timetableIndex].data.push(entry);
     }
@@ -68,7 +78,8 @@ const timetableColumns = [
     },
     {
         key: 'classes',
-        value: classes => classes.split(', ').map(className => className.replace(/^0+/, ''))
+        value: classes =>
+            classes.split(', ').map(className => className.replace(/^0+/, ''))
     },
     {
         key: 'lesson'
@@ -79,22 +90,23 @@ const timetableColumns = [
     },
     {
         key: 'room',
-        value: room => room === '---' ? null : room
+        value: room => (room === '---' ? null : room)
     },
     {
         key: 'substitute',
-        value: substitute => substitute === '---' || substitute === '???' ? null : substitute
+        value: substitute =>
+            substitute === '---' || substitute === '???' ? null : substitute
     },
     {
         key: 'type'
     },
     {
         key: 'swap',
-        value: swap => swap === '' ? null : swap
+        value: swap => (swap === '' ? null : swap)
     },
     {
         key: 'detail',
-        value: detail => detail === '' ? null : detail
+        value: detail => (detail === '' ? null : detail)
     }
 ];
 

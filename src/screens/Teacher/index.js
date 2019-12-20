@@ -18,14 +18,11 @@ class Teacher extends Component {
     render() {
         const { navigation, isFocused, theme } = this.props;
         const id = navigation.getParam('teacher');
-        const {
-            name,
-            email,
-            subjects,
-            special
-        } = teachers[id];
+        const { name, email, subjects, special } = teachers[id];
 
-        const backgroundColor = theme.dark ? theme.colors.background :  theme.colors.primary;
+        const backgroundColor = theme.dark
+            ? theme.colors.background
+            : theme.colors.primary;
         const statusBarColor = theme.colors.statusBarColor;
         const titleColor = color(backgroundColor).isDark()
             ? Colors.white
@@ -34,8 +31,7 @@ class Teacher extends Component {
             : theme.colors.text;
 
         return (
-            <View
-                style={[styles.container, { backgroundColor }]}>
+            <View style={[styles.container, { backgroundColor }]}>
                 {isFocused && (
                     <StatusBar
                         backgroundColor={statusBarColor}
@@ -46,14 +42,8 @@ class Teacher extends Component {
                         }
                     />
                 )}
-                <Appbar.Header
-                    style={[
-                        styles.appbar,
-                        { backgroundColor }
-                    ]}>
-                    <Appbar.BackAction
-                        onPress={() => navigation.goBack()}
-                    />
+                <Appbar.Header style={[styles.appbar, { backgroundColor }]}>
+                    <Appbar.BackAction onPress={() => navigation.goBack()} />
                     <Appbar.Content title="" />
                 </Appbar.Header>
                 <View style={styles.backdrop}>
@@ -69,7 +59,9 @@ class Teacher extends Component {
                         <InfoItem
                             value={name}
                             label="Name"
-                            onPress={() => Clipboard.setString(name.split(', ')[0])}
+                            onPress={() =>
+                                Clipboard.setString(name.split(', ')[0])
+                            }
                             icon="account"
                         />
                         {subjects && (

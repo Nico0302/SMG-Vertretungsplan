@@ -4,7 +4,7 @@ import {
     Dialog,
     Paragraph,
     Portal,
-    withTheme,
+    withTheme
 } from 'react-native-paper';
 
 class LogoutDialog extends PureComponent {
@@ -16,7 +16,10 @@ class LogoutDialog extends PureComponent {
                 <Dialog visible={visible} onDismiss={onDismiss}>
                     <Dialog.Title>Abmelden?</Dialog.Title>
                     <Dialog.Content>
-                        <Paragraph>Alle Einstellungen und Anmeldedaten werden zurückgesetzt.</Paragraph>
+                        <Paragraph>
+                            Alle Einstellungen und Anmeldedaten werden
+                            zurückgesetzt.
+                        </Paragraph>
                     </Dialog.Content>
                     <Dialog.Actions>
                         <Button onPress={onDismiss}>Abbruch</Button>

@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
         flex: 1
     },
     deactivatedItem: {
-        opacity: 0.6,
+        opacity: 0.6
     },
     leftSpacer: {
         width: 56

@@ -1,7 +1,4 @@
-
-import {
-    LOGOUT
-} from '@actions/auth';
+import { LOGOUT } from '@actions/auth';
 import {
     TOGGLE_FILTER,
     SET_CLASS_FILTER,
@@ -9,12 +6,15 @@ import {
     REMOVE_SUBJECT_FILTER
 } from '@actions/filters';
 
-function filters(state = {
-    class: '',
-    subjects: [],
-    isActive: false,
-    isEmpty: true
-}, action = {}) {
+function filters(
+    state = {
+        class: '',
+        subjects: [],
+        isActive: false,
+        isEmpty: true
+    },
+    action = {}
+) {
     switch (action.type) {
         case TOGGLE_FILTER:
             return {
@@ -31,15 +31,14 @@ function filters(state = {
         case ADD_SUBJECT_FILTER:
             return {
                 ...state,
-                subjects: [
-                    ...state.subjects,
-                    action.subject
-                ]
+                subjects: [...state.subjects, action.subject]
             };
         case REMOVE_SUBJECT_FILTER:
             return {
                 ...state,
-                subjects: state.subjects.filter(subject => subject !== action.subject)
+                subjects: state.subjects.filter(
+                    subject => subject !== action.subject
+                )
             };
         case LOGOUT:
             return {

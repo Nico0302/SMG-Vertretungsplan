@@ -5,12 +5,15 @@ import {
     LOGOUT
 } from '@actions/auth';
 
-function auth(state = {
-    username: null,
-    password: null,
-    appId: null,
-    isLoading: false
-}, action) {
+function auth(
+    state = {
+        username: null,
+        password: null,
+        appId: null,
+        isLoading: false
+    },
+    action
+) {
     switch (action.type) {
         case LOGIN_REQUEST:
             return {

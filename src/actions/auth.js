@@ -14,44 +14,46 @@ export const LOGOUT = 'LOGOUT';
  * @returns {Promise<String>}
  */
 export function login(username, password) {
-  return async (dispatch, getState) => {
-    try {
-      const state = getState();
-      const appId = state.auth.appId || generateAppId();
-      
-      dispatch({
-        type: LOGIN_REQUEST,
-        appId
-      });
+    return async (dispatch, getState) => {
+        try {
+            const state = getState();
+            const appId = state.auth.appId || generateAppId();
 
-      if (!username) {
-        throw new Error('Ungültiger Nutzername!');
-      }
-      if (!password) {
-        throw new Error('Ungültiges Passwort!');
-      }
+            dispatch({
+                type: LOGIN_REQUEST,
+                appId
+            });
 
-      const response = await dispatch(fetchTimetables({ username, password, appId }));
+            if (!username) {
+                throw new Error('Ungültiger Nutzername!');
+            }
+            if (!password) {
+                throw new Error('Ungültiges Passwort!');
+            }
 
-      dispatch({
-        type: LOGIN_SUCCESS,
-        username,
-        password
-      });
-      return response;
-    } catch (error) {
-      dispatch({
-        type: LOGIN_FAILURE,
-        error,
-      });
-      throw error;
-    }
-  };
+            const response = await dispatch(
+                fetchTimetables({ username, password, appId })
+            );
+
+            dispatch({
+                type: LOGIN_SUCCESS,
+                username,
+                password
+            });
+            return response;
+        } catch (error) {
+            dispatch({
+                type: LOGIN_FAILURE,
+                error
+            });
+            throw error;
+        }
+    };
 }
 
 /**
  * Logout and clear all personal data.
  */
 export const logout = () => ({
-  type: LOGOUT,
+    type: LOGOUT
 });

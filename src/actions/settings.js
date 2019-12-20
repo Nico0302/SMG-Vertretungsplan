@@ -3,10 +3,10 @@ export const MIGRATE_STORE = 'MIGRATE_STORE';
 
 /**
  * Update the current theme name.
- * 
+ *
  * The name must be one of the key exported from config/theme.js.
- * 
- * @param {String} theme 
+ *
+ * @param {String} theme
  */
 export const setTheme = theme => ({
     type: CHANGE_THEME,
@@ -16,7 +16,7 @@ export const setTheme = theme => ({
 /**
  * Migrate the Redux Store to a higher app version number
  * to prevent breaking changes.
- * 
+ *
  * @param {String} version
  */
 export const migrateStore = version => ({

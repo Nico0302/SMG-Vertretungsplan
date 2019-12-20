@@ -1,14 +1,14 @@
 import { VERSION_NUMBER } from '@config/info';
 import { LOGOUT } from '@actions/auth';
-import {
-    MIGRATE_STORE,
-    CHANGE_THEME
-} from '@actions/settings';
+import { MIGRATE_STORE, CHANGE_THEME } from '@actions/settings';
 
-function settings(state = {
-    version: VERSION_NUMBER,
-    theme: 'default'
-}, action) {
+function settings(
+    state = {
+        version: VERSION_NUMBER,
+        theme: 'default'
+    },
+    action
+) {
     switch (action.type) {
         case MIGRATE_STORE:
             if (action.version < 4) {

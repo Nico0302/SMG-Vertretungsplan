@@ -12,8 +12,8 @@ export const toggleFilter = () => ({
 
 /**
  * Update timetable class filter.
- * 
- * @param {String} className 
+ *
+ * @param {String} className
  */
 export const setClassFilter = className => ({
     type: SET_CLASS_FILTER,
@@ -22,8 +22,8 @@ export const setClassFilter = className => ({
 
 /**
  * Add a subject to the timetable filter.
- * 
- * @param {String} subjectName 
+ *
+ * @param {String} subjectName
  */
 export const addSubjectFilter = subjectName => ({
     type: ADD_SUBJECT_FILTER,
@@ -32,8 +32,8 @@ export const addSubjectFilter = subjectName => ({
 
 /**
  * Remove a subject from the timetable filter.
- * 
- * @param {String} subjectName 
+ *
+ * @param {String} subjectName
  */
 export const removeSubjectFilter = subjectName => ({
     type: REMOVE_SUBJECT_FILTER,

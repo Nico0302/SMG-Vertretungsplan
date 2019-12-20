@@ -10,24 +10,24 @@ import Root from '@screens/Root';
 const { store, persistor } = getStore();
 
 class App extends PureComponent {
-  componentDidMount() {
-    moment.locale('de');
+    componentDidMount() {
+        moment.locale('de');
 
-    YellowBox.ignoreWarnings([
-      'Warning: componentWillUpdate is deprecated',
-      'Warning: componentWillMount',
-    ]);
-  }
+        YellowBox.ignoreWarnings([
+            'Warning: componentWillUpdate is deprecated',
+            'Warning: componentWillMount'
+        ]);
+    }
 
-  render() {
-    return (
-      <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor} >
-          <Root />
-        </PersistGate>
-      </Provider>
-    );
-  }
+    render() {
+        return (
+            <Provider store={store}>
+                <PersistGate loading={null} persistor={persistor}>
+                    <Root />
+                </PersistGate>
+            </Provider>
+        );
+    }
 }
 
 export default App;

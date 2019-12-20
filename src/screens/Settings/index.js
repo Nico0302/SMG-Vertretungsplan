@@ -21,7 +21,7 @@ class Settings extends PureComponent {
         );
 
     render() {
-        const { 
+        const {
             filtersActive,
             filtersEmpty,
             hidePast,
@@ -35,23 +35,29 @@ class Settings extends PureComponent {
         const { logoutDialogVisible } = this.state;
 
         return (
-            <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
+            <View
+                style={[
+                    styles.container,
+                    { backgroundColor: theme.colors.surface }
+                ]}>
                 <Appbar.Header>
                     <Appbar.Action
                         icon="menu"
                         onPress={navigation.openDrawer}
                     />
-                    <Appbar.Content
-                        title="Einstellungen"
-                    />
+                    <Appbar.Content title="Einstellungen" />
                 </Appbar.Header>
                 <ScrollView style={styles.content} bounces={false}>
                     <List.Item
                         title="Filter"
-                        description={filtersActive ? 'An' : filtersEmpty ? 'Leer' : 'Aus'}
+                        description={
+                            filtersActive ? 'An' : filtersEmpty ? 'Leer' : 'Aus'
+                        }
                         onPress={() => navigation.navigate('Filters')}
-                        left={props => (<List.Icon {...props} icon="filter-variant" />)}
-                        right={()=> (
+                        left={props => (
+                            <List.Icon {...props} icon="filter-variant" />
+                        )}
+                        right={() => (
                             <Switch
                                 style={styles.switch}
                                 value={filtersActive}
@@ -62,9 +68,18 @@ class Settings extends PureComponent {
                     />
                     <List.Item
                         title="Vergangene Pläne ausblenden"
-                        description={hidePast ? 'Vergangene Pläne werden ausgeblendet' : 'Vergangene Pläne werden angezeigt'}
+                        description={
+                            hidePast
+                                ? 'Vergangene Pläne werden ausgeblendet'
+                                : 'Vergangene Pläne werden angezeigt'
+                        }
                         onPress={() => toggleHidePast()}
-                        left={props => (<List.Icon {...props} icon="calendar-remove-outline" />)}
+                        left={props => (
+                            <List.Icon
+                                {...props}
+                                icon="calendar-remove-outline"
+                            />
+                        )}
                         right={() => (
                             <Switch
                                 style={styles.switch}
@@ -77,8 +92,10 @@ class Settings extends PureComponent {
                         title="Dark Theme"
                         description={themeName === 'dark' ? 'An' : 'Aus'}
                         onPress={this.onToggleDarkTheme}
-                        left={props => (<List.Icon {...props} icon="brightness-4" />)}
-                        right={()=> (
+                        left={props => (
+                            <List.Icon {...props} icon="brightness-4" />
+                        )}
+                        right={() => (
                             <Switch
                                 style={styles.switch}
                                 value={themeName === 'dark'}
@@ -88,18 +105,26 @@ class Settings extends PureComponent {
                     />
                     <List.Item
                         title="Abmelden"
-                        onPress={() => this.setState({ logoutDialogVisible: true })}
-                        left={props => (<List.Icon {...props} icon="exit-to-app" />)}
+                        onPress={() =>
+                            this.setState({ logoutDialogVisible: true })
+                        }
+                        left={props => (
+                            <List.Icon {...props} icon="exit-to-app" />
+                        )}
                     />
                     <List.Item
                         title="Version"
                         description={VERSION_NAME}
-                        left={props => (<List.Icon {...props} icon="information-outline" />)}
+                        left={props => (
+                            <List.Icon {...props} icon="information-outline" />
+                        )}
                     />
                 </ScrollView>
                 <LogoutDialog
                     visible={logoutDialogVisible}
-                    onDismiss={() => this.setState({ logoutDialogVisible: false })}
+                    onDismiss={() =>
+                        this.setState({ logoutDialogVisible: false })
+                    }
                     onConfirm={() => {
                         logout();
                         navigation.navigate('Unauthenticated');
@@ -110,7 +135,7 @@ class Settings extends PureComponent {
     }
 }
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
     filtersActive: state.timetables.filters.isActive,
     filtersEmpty: state.timetables.filters.isEmpty,
     hidePast: state.timetables.hidePast,

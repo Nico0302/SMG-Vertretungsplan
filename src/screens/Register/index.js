@@ -19,8 +19,7 @@ class Register extends PureComponent {
 
     register() {
         const { name, className } = this.state;
-        const body = 
-        `Bitte stellen Sie die Zugangsdaten für den Online-Vertretungsplan bereit.
+        const body = `Bitte stellen Sie die Zugangsdaten für den Online-Vertretungsplan bereit.
 Name: ${name}
 Klasse: ${className}
 Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generiert.`;
@@ -35,16 +34,24 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
 
         return (
             <ScrollView
-                style={[styles.container, { backgroundColor: theme.colors.surface }]}
+                style={[
+                    styles.container,
+                    { backgroundColor: theme.colors.surface }
+                ]}
                 keyboardShouldPersistTaps="always"
                 showsVerticalScrollIndicator={false}
                 bounces={false}
-                ref={scrollView => this.scrollView = scrollView}
-            >
+                ref={scrollView => (this.scrollView = scrollView)}>
                 <SafeAreaView style={styles.content}>
-                    <Paragraph style={styles.info}>Du kannst per E-Mail die Zugangsdaten für den SMG Vertretungsplan bei der Schule anfordern.</Paragraph>
+                    <Paragraph style={styles.info}>
+                        Du kannst per E-Mail die Zugangsdaten für den SMG
+                        Vertretungsplan bei der Schule anfordern.
+                    </Paragraph>
                     <TextInput
-                        style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
+                        style={[
+                            styles.textInput,
+                            { backgroundColor: theme.colors.surface }
+                        ]}
                         mode="outlined"
                         value={name}
                         blurOnSubmit={false}
@@ -54,8 +61,11 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
                         label="Vor- & Nachname"
                     />
                     <TextInput
-                        ref={classInput => this.classInput = classInput}
-                        style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
+                        ref={classInput => (this.classInput = classInput)}
+                        style={[
+                            styles.textInput,
+                            { backgroundColor: theme.colors.surface }
+                        ]}
                         mode="outlined"
                         value={className}
                         onChangeText={className => this.setState({ className })}
@@ -64,8 +74,12 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
                         label="Klasse"
                     />
                     <View style={styles.actions}>
-                        <Button onPress={() => navigation.goBack()}>Login</Button>
-                        <Button onPress={this.register} mode="contained">Zugang anfordern</Button>
+                        <Button onPress={() => navigation.goBack()}>
+                            Login
+                        </Button>
+                        <Button onPress={this.register} mode="contained">
+                            Zugang anfordern
+                        </Button>
                     </View>
                 </SafeAreaView>
             </ScrollView>

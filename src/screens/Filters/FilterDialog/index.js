@@ -1,5 +1,11 @@
 import React, { PureComponent } from 'react';
-import { Button, Dialog, TextInput, Portal, withTheme } from 'react-native-paper';
+import {
+    Button,
+    Dialog,
+    TextInput,
+    Portal,
+    withTheme
+} from 'react-native-paper';
 import styles from './styles';
 
 class FilterDialog extends PureComponent {
@@ -22,19 +28,27 @@ class FilterDialog extends PureComponent {
     }
 
     render() {
-        const { visible, title, createText, onDismiss, placeholder, theme } = this.props;
+        const {
+            visible,
+            title,
+            createText,
+            onDismiss,
+            placeholder,
+            theme
+        } = this.props;
         const { filter } = this.state;
 
         return (
             <Portal>
-                <Dialog
-                    visible={visible}
-                    onDismiss={onDismiss}>
+                <Dialog visible={visible} onDismiss={onDismiss}>
                     <Dialog.Title style={styles.title}>{title}</Dialog.Title>
                     <TextInput
                         autoFocus
                         mode="outlined"
-                        style={[styles.input, { backgroundColor: theme.colors.surface }]}
+                        style={[
+                            styles.input,
+                            { backgroundColor: theme.colors.surface }
+                        ]}
                         label={placeholder}
                         value={filter}
                         autoCorrect={false}
@@ -45,7 +59,11 @@ class FilterDialog extends PureComponent {
                     />
                     <Dialog.Actions>
                         <Button onPress={onDismiss}>Abbruch</Button>
-                        <Button disabled={filter === ''} onPress={this.onCreate}>{createText}</Button>
+                        <Button
+                            disabled={filter === ''}
+                            onPress={this.onCreate}>
+                            {createText}
+                        </Button>
                     </Dialog.Actions>
                 </Dialog>
             </Portal>

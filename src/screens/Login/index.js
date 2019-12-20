@@ -24,9 +24,9 @@ class Login extends PureComponent {
         const { login, navigation } = this.props;
         const { username, password } = this.state;
 
-        login(username, password).then(() =>
-            navigation.navigate('Authenticated')
-        ).catch(() => {});
+        login(username, password)
+            .then(() => navigation.navigate('Authenticated'))
+            .catch(() => {});
     }
 
     _getErrorMessage = () => {
@@ -34,10 +34,14 @@ class Login extends PureComponent {
         let humanizedMessage = message;
 
         if (message === 'To many requests.') {
-            const diff = -Math.round(moment().diff(moment(this.props.receivedAt).add(10, 's'))/1000);
+            const diff = -Math.round(
+                moment().diff(moment(this.props.receivedAt).add(10, 's')) / 1000
+            );
             humanizedMessage = 'Zu viele Anfragen!';
             if (diff > 0) {
-                humanizedMessage += `\nVersuche es in ${diff} Sekunde${diff > 1 ? 'n' : ''} erneut.`;
+                humanizedMessage += `\nVersuche es in ${diff} Sekunde${
+                    diff > 1 ? 'n' : ''
+                } erneut.`;
             } else {
                 humanizedMessage += '\nVersuche es erneut.';
             }
@@ -52,14 +56,19 @@ class Login extends PureComponent {
 
         return (
             <ScrollView
-                style={[styles.container, { backgroundColor: theme.colors.surface }]}
+                style={[
+                    styles.container,
+                    { backgroundColor: theme.colors.surface }
+                ]}
                 keyboardShouldPersistTaps="always"
                 showsVerticalScrollIndicator={false}
                 bounces={false}
-                ref={scrollView => this.scrollView = scrollView}
-            >
+                ref={scrollView => (this.scrollView = scrollView)}>
                 <SafeAreaView style={styles.content}>
-                    <StatusBar backgroundColor="#cccccc" barStyle="dark-content" />
+                    <StatusBar
+                        backgroundColor="#cccccc"
+                        barStyle="dark-content"
+                    />
                     <View style={styles.logo}>
                         <Logo size={160} />
                     </View>
@@ -69,7 +78,10 @@ class Login extends PureComponent {
                         </Text>
                     )}
                     <TextInput
-                        style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
+                        style={[
+                            styles.textInput,
+                            { backgroundColor: theme.colors.surface }
+                        ]}
                         textContentType="username"
                         keyboardType="number-pad"
                         mode="outlined"
@@ -85,8 +97,13 @@ class Login extends PureComponent {
                         importantForAutofill="yes"
                     />
                     <TextInput
-                        ref={passwordInput => this.passwordInput = passwordInput}
-                        style={[styles.textInput, { backgroundColor: theme.colors.surface }]}
+                        ref={passwordInput =>
+                            (this.passwordInput = passwordInput)
+                        }
+                        style={[
+                            styles.textInput,
+                            { backgroundColor: theme.colors.surface }
+                        ]}
                         mode="outlined"
                         value={password}
                         onChangeText={password => this.setState({ password })}
@@ -100,8 +117,15 @@ class Login extends PureComponent {
                         textContentType="password"
                     />
                     <View style={styles.actions}>
-                        <Button onPress={() => navigation.navigate('Register')}>Zugang anfordern</Button>
-                        <Button onPress={this.onLogin} mode="contained" loading={auth.isLoading}>Login</Button>
+                        <Button onPress={() => navigation.navigate('Register')}>
+                            Zugang anfordern
+                        </Button>
+                        <Button
+                            onPress={this.onLogin}
+                            mode="contained"
+                            loading={auth.isLoading}>
+                            Login
+                        </Button>
                     </View>
                 </SafeAreaView>
             </ScrollView>
@@ -118,7 +142,4 @@ const mapDispatchToProps = {
     login
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(withTheme(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(withTheme(Login));

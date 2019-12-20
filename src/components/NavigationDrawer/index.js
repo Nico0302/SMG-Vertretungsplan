@@ -7,49 +7,54 @@ import { setTheme } from '@actions/settings';
 import Logo from '@components/Logo';
 import styles from './styles';
 
-const houses = [ 'default', 'yellow', 'blue', 'green' ];
+const houses = ['default', 'yellow', 'blue', 'green'];
 
 class NavigationDrawer extends Component {
     changeHouse = () => {
-        const theme = houses[(houses.indexOf(this.props.themeName)+1)%houses.length];
+        const theme =
+            houses[(houses.indexOf(this.props.themeName) + 1) % houses.length];
 
         if (Platform.OS === 'android')
-            ToastAndroid.show('🧙 Changed House', ToastAndroid.SHORT)
+            ToastAndroid.show('🧙 Changed House', ToastAndroid.SHORT);
 
         this.props.setTheme(theme);
-    }
+    };
 
     render() {
         const { activeItemKey, navigation, theme } = this.props;
 
         return (
-            <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.surface }]}>
+            <SafeAreaView
+                style={[
+                    styles.container,
+                    { backgroundColor: theme.colors.surface }
+                ]}>
                 <View style={styles.header}>
                     <Logo size={100} onLongPress={this.changeHouse} />
                 </View>
                 <Divider />
                 <View style={styles.items}>
                     <Drawer.Item
-                        label='Vertretungsplan'
-                        icon='format-list-bulleted'
+                        label="Vertretungsplan"
+                        icon="format-list-bulleted"
                         active={activeItemKey === 'TimetableStack'}
                         onPress={() => navigation.navigate('TimetableStack')}
                     />
                     <Drawer.Item
-                        label='Kollegium'
-                        icon='account-multiple'
+                        label="Kollegium"
+                        icon="account-multiple"
                         active={activeItemKey === 'TeacherStack'}
                         onPress={() => navigation.navigate('TeacherStack')}
                     />
                     <Drawer.Item
-                        label='Einstellungen'
-                        icon='settings'
+                        label="Einstellungen"
+                        icon="settings"
                         active={activeItemKey === 'SettingsStack'}
                         onPress={() => navigation.navigate('SettingsStack')}
                     />
                 </View>
             </SafeAreaView>
-        )
+        );
     }
 }
 
@@ -61,4 +66,7 @@ const mapDispatchToProps = {
     setTheme
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(withTheme(NavigationDrawer));
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withTheme(NavigationDrawer));

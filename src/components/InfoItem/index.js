@@ -15,12 +15,15 @@ class InfoItem extends PureComponent {
             <List.Item
                 {...props}
                 titleStyle={{ color: descriptionColor }}
-                descriptionStyle={[styles.description, { color: theme.colors.text }]}
+                descriptionStyle={[
+                    styles.description,
+                    { color: theme.colors.text }
+                ]}
                 title={label}
                 description={value}
                 left={props => <List.Icon {...props} icon={icon} />}
             />
-        )
+        );
     }
 }
 

@@ -13,24 +13,29 @@ class Root extends PureComponent {
     componentDidMount() {
         const { version, migrateStore } = this.props;
 
-        if (!version || version < VERSION_NUMBER)
-            migrateStore(version);
+        if (!version || version < VERSION_NUMBER) migrateStore(version);
     }
 
     render() {
         const { version } = this.props;
         const theme = themes[this.props.theme];
-        const statusBarColor = Platform.OS === 'ios' ? theme.colors.primary : theme.colors.statusBar;
+        const statusBarColor =
+            Platform.OS === 'ios'
+                ? theme.colors.primary
+                : theme.colors.statusBar;
 
-        if (!version || version < VERSION_NUMBER)
-            return null;
+        if (!version || version < VERSION_NUMBER) return null;
 
         return (
             <PaperProvider theme={theme}>
                 <View style={styles.container}>
                     <StatusBar
                         backgroundColor={statusBarColor}
-                        barStyle={theme.dark || color(statusBarColor).isDark() ? 'light-content' : 'dark-content'}
+                        barStyle={
+                            theme.dark || color(statusBarColor).isDark()
+                                ? 'light-content'
+                                : 'dark-content'
+                        }
                     />
                     <Navigation />
                 </View>
@@ -48,7 +53,4 @@ const mapDispatchToProps = {
     migrateStore
 };
 
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Root);
+export default connect(mapStateToProps, mapDispatchToProps)(Root);

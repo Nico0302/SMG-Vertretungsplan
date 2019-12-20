@@ -5,7 +5,7 @@ const styles = StyleSheet.create({
         marginBottom: 4
     },
     input: {
-        marginHorizontal: 20,
+        marginHorizontal: 20
     }
 });
 
