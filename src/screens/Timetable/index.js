@@ -24,6 +24,7 @@ class Timetable extends PureComponent {
 
     this.updateTimetables = this.updateTimetables.bind(this);
     this.onEntryDetail = this.onEntryDetail.bind(this);
+    this.renderItem = this.renderItem.bind(this);
     this.renderSections = this.renderSections.bind(this);
   }
 
@@ -61,6 +62,15 @@ class Timetable extends PureComponent {
     });
   }
 
+  renderItem({ item, section }) {
+    return (
+      <Entry
+        {...item}
+        onPress={() => this.onEntryDetail({ item, section })}
+      />
+    );
+  }
+
   renderSections() {
     const { sections, filters, isLoading, error, theme } = this.props;
     const { height } = Dimensions.get('window');
@@ -71,12 +81,7 @@ class Timetable extends PureComponent {
       <SectionList
         sections={sections}
         contentContainerStyle={error ? styles.snackbarListPadding : {}}
-        renderItem={({ item, section }) => (
-          <Entry
-            {...item}
-            onPress={() => this.onEntryDetail({ item, section })}
-          />
-        )}
+        renderItem={this.renderItem}
         renderSectionHeader={({ section: { title, info } }) => (
           <View>
             <List.Subheader>{title}</List.Subheader>
@@ -120,6 +125,7 @@ class Timetable extends PureComponent {
           </View>
         )}
         stickySectionHeadersEnabled={false}
+        removeClippedSubviews
         keyExtractor={(item, index) => item.lesson + index.toString()}
         initialNumToRender={Math.floor(height / 52)}
         getItemLayout={(data, index) => {

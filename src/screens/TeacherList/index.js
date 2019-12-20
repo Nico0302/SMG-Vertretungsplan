@@ -53,6 +53,17 @@ class TeacherList extends PureComponent {
         }
     }
 
+    renderItem = ({ item }) => (
+        <Teacher
+            {...item}
+            onPress={() =>
+                this.props.navigation.navigate('Teacher', {
+                    teacher: item.id
+                })
+            }
+        />
+    );
+
     render() {
         const { navigation, theme } = this.props;
         const { search } = this.state;
@@ -108,20 +119,12 @@ class TeacherList extends PureComponent {
                 </Appbar.Header>
                 <FlatList
                     data={this.state.teachers}
-                    renderItem={({ item }) => (
-                        <Teacher
-                            {...item}
-                            onPress={() =>
-                                navigation.navigate('Teacher', {
-                                    teacher: item.id
-                                })
-                            }
-                        />
-                    )}
+                    renderItem={this.renderItem}
                     keyExtractor={item => item.id}
                     getItemLayout={(data, index) => {
                         return { length: 72, offset: 72 * index, index };
                     }}
+                    removeClippedSubviews
                     keyboardShouldPersistTaps="always"
                 />
             </View>

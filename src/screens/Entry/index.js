@@ -133,13 +133,13 @@ class Entry extends Component {
                         {substitute && (
                             <InfoItem
                                 value={
-                                    teachers[substitute]
+                                    teachers.hasOwnProperty(substitute)
                                         ? teachers[substitute].name
                                         : substitute
                                 }
                                 label="Lehrer/in"
                                 icon="account"
-                                onPress={teachers[substitute].name ? () => navigation.navigate('Teacher', { teacher: substitute }) : null}
+                                onPress={teachers.hasOwnProperty(substitute) ? () => navigation.navigate('Teacher', { teacher: substitute }) : null}
                             />
                         )}
                         {room && (
