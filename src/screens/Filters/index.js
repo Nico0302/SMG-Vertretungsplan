@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import color from 'color';
-import { Appbar, Switch, Surface, List, Text, Button, Divider, Chip, Colors, withTheme } from 'react-native-paper';
+import { Appbar, Switch, List, Text, Button, Divider, Chip, Colors, withTheme } from 'react-native-paper';
 import { toggleFilter, setClassFilter, addSubjectFilter, removeSubjectFilter } from '@actions/filters';
 import FilterDialog from './FilterDialog';
 import styles from './styles';
@@ -43,16 +43,14 @@ class Filters extends Component {
 
         return (
             <View style={[styles.container, { backgroundColor: colors.surface }]}>
-                <Surface style={styles.appbar}>
-                    <Appbar.Header style={styles.appbar}>
-                        <Appbar.BackAction
-                            onPress={() => navigation.goBack(null)}
-                        />
-                        <Appbar.Content
-                            title="Filter"
-                        />
-                    </Appbar.Header>
-                </Surface>
+                <Appbar.Header style={styles.appbar}>
+                    <Appbar.BackAction
+                        onPress={() => navigation.goBack(null)}
+                    />
+                    <Appbar.Content
+                        title="Filter"
+                    />
+                </Appbar.Header>
                 <ScrollView style={styles.content} bounces={false}>
                     <View style={[styles.masterSwitch, { backgroundColor: switchContainerColor }]}>
                         <Text

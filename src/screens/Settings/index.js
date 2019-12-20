@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
-import { Appbar, Surface, Switch, Divider, List, withTheme } from 'react-native-paper';
+import { Appbar, Switch, List, withTheme } from 'react-native-paper';
 import { VERSION_NAME } from '@config/info';
 import { logout } from '@actions/auth';
 import { toggleFilter, setClassFilter } from '@actions/filters';
@@ -15,6 +15,11 @@ class Settings extends PureComponent {
         logoutDialogVisible: false
     };
 
+    onToggleDarkTheme = () =>
+        this.props.setTheme(
+            this.props.themeName === 'dark' ? 'default' : 'dark'
+        );
+
     render() {
         const { 
             filtersActive,
@@ -24,7 +29,6 @@ class Settings extends PureComponent {
             toggleFilter,
             toggleHidePast,
             logout,
-            setTheme,
             themeName,
             theme
         } = this.props;
@@ -32,17 +36,15 @@ class Settings extends PureComponent {
 
         return (
             <View style={[styles.container, { backgroundColor: theme.colors.surface }]}>
-                <Surface style={styles.appbar}>
-                    <Appbar.Header>
-                        <Appbar.Action
-                            icon="menu"
-                            onPress={navigation.openDrawer}
-                        />
-                        <Appbar.Content
-                            title="Einstellungen"
-                        />
-                    </Appbar.Header>
-                </Surface>
+                <Appbar.Header>
+                    <Appbar.Action
+                        icon="menu"
+                        onPress={navigation.openDrawer}
+                    />
+                    <Appbar.Content
+                        title="Einstellungen"
+                    />
+                </Appbar.Header>
                 <ScrollView style={styles.content} bounces={false}>
                     <List.Item
                         title="Filter"
@@ -74,13 +76,13 @@ class Settings extends PureComponent {
                     <List.Item
                         title="Dark Theme"
                         description={themeName === 'dark' ? 'An' : 'Aus'}
-                        onPress={() => navigation.navigate('Filters')}
+                        onPress={this.onToggleDarkTheme}
                         left={props => (<List.Icon {...props} icon="brightness-4" />)}
                         right={()=> (
                             <Switch
                                 style={styles.switch}
                                 value={themeName === 'dark'}
-                                onValueChange={() => setTheme(themeName === 'dark' ? 'default' : 'dark')}
+                                onValueChange={this.onToggleDarkTheme}
                             />
                         )}
                     />

@@ -97,6 +97,7 @@ class Login extends PureComponent {
                         disableFullscreenUI
                         secureTextEntry
                         importantForAutofill="yes"
+                        textContentType="password"
                     />
                     <View style={styles.actions}>
                         <Button onPress={() => navigation.navigate('Register')}>Zugang anfordern</Button>

@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
-import { View, ScrollView, Linking, Platform } from 'react-native';
+import { View, ScrollView } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { Button, Paragraph, TextInput, withTheme } from 'react-native-paper';
+import { openMail } from '@services/share';
 import styles from './styles';
 
 class Register extends PureComponent {
@@ -25,10 +26,7 @@ Klasse: ${className}
 Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generiert.`;
         const subject = 'Zugang anfordern';
 
-        Linking.openURL(Platform.OS === 'ios' ?
-            `mailto:dsb@smg-ingelheim.de?cc=&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}` :
-            `mailto:dsb@smg-ingelheim.de?subject=${subject}&body=${body}`
-        );
+        openMail('dsb@smg-ingelheim.de', subject, body);
     }
 
     render() {

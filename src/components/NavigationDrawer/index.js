@@ -36,15 +36,16 @@ class NavigationDrawer extends Component {
                         onPress={() => navigation.navigate('TimetableStack')}
                     />
                     <Drawer.Item
+                        label='Kollegium'
+                        icon='account-multiple'
+                        active={activeItemKey === 'TeacherStack'}
+                        onPress={() => navigation.navigate('TeacherStack')}
+                    />
+                    <Drawer.Item
                         label='Einstellungen'
                         icon='settings'
                         active={activeItemKey === 'SettingsStack'}
                         onPress={() => navigation.navigate('SettingsStack')}
-                    />
-                    <Drawer.Item
-                        label='Feedback'
-                        icon='message-alert'
-                        onPress={() => Linking.openURL('https://github.com/Nico0302/SMG-Vertretungsplan/issues')}
                     />
                 </View>
             </SafeAreaView>

@@ -40,7 +40,7 @@ class Entry extends PureComponent {
             >
                 <View style={styles.row}>
                     <View style={[styles.lesson, { borderColor: indicatorColor }]}>
-                        <Title style={{ color: titleColor }} >{lesson}</Title>
+                        <Title style={{ color: titleColor }} >{lesson.length > 6 ? lesson.replace(/\s/g, '') : lesson}</Title>
                     </View>
                     <View style={styles.content} pointerEvents="none">
                         <View style={styles.spaceRow} pointerEvents="none">

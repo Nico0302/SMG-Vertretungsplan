@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
-import { View, SectionList, RefreshControl, InteractionManager, Dimensions } from 'react-native';
+import { View, SectionList, RefreshControl, InteractionManager, StatusBar, Dimensions } from 'react-native';
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import color from 'color';
 import {
   Appbar,
   Paragraph,
@@ -10,7 +11,6 @@ import {
   List,
   Subheading,
   Caption,
-  Surface,
   overlay,
   withTheme
 } from 'react-native-paper';
@@ -94,7 +94,7 @@ class Timetable extends PureComponent {
             )}
             {section.index + 1 >= sections.length && (
               <Caption style={styles.disclaimer}>
-                Das SMG und die Betreiber des DSBs übernehmen keine Haftung für Vollständigkeit und Richtigkeit. 
+                Das SMG und die Betreiber des DSBs übernehmen keine Haftung für Vollständigkeit und Richtigkeit.
               </Caption>
             )}
           </View>
@@ -135,12 +135,10 @@ class Timetable extends PureComponent {
     return (
       <View
         style={[styles.container, { backgroundColor: theme.colors.surface }]}>
-        <Surface style={styles.appbar}>
-          <Appbar.Header>
-            <Appbar.Action icon="menu" onPress={navigation.openDrawer} />
-            <Appbar.Content title="Vertretungsplan" />
-          </Appbar.Header>
-        </Surface>
+        <Appbar.Header>
+          <Appbar.Action icon="menu" onPress={navigation.openDrawer} />
+          <Appbar.Content title="Vertretungsplan" />
+        </Appbar.Header>
         {this.renderSections()}
         <Snackbar
           visible={error}

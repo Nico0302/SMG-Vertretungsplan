@@ -1,4 +1,4 @@
-import { Share } from 'react-native';
+import { Share, Linking, Platform } from 'react-native';
 import moment from 'moment';
 
 /**
@@ -24,7 +24,7 @@ ${classes.join(',')} 📕 ${subject}
 🕒 ${lesson}. Stunde 
 ${type} `;
     if (swap) {
-       message += `️➡️ ${swap}. Stunde `;
+      message += `️➡️ ${swap}. Stunde `;
     }
     if (substitute) {
       message += `\n👤 ${substitute} `;
@@ -40,4 +40,30 @@ ${type} `;
   } catch (error) {
     console.error(error);
   }
+}
+
+/**
+ * Open default email app.
+ * 
+ * @param {String} address 
+ * @param {String} [subject]
+ * @param {String} [body]
+ */
+export function openMail(address, subject, body) {
+  let url = 'mailto:' + address;
+
+  if (subject || body)
+    url += Platform.OS === 'ios' ? '?cc=' : '?';
+
+  if (subject) {
+    url += `subject=${encodeURIComponent(subject)}`;
+  }
+
+  if (body) {
+    url += `&body=${encodeURIComponent(body)}`;
+  }
+
+  console.log(url)
+
+  Linking.openURL(url);
 }

@@ -30,7 +30,7 @@ class Root extends PureComponent {
                 <View style={styles.container}>
                     <StatusBar
                         backgroundColor={statusBarColor}
-                        barStyle={color(statusBarColor).isDark() ? 'light-content' : 'dark-content'}
+                        barStyle={theme.dark || color(statusBarColor).isDark() ? 'light-content' : 'dark-content'}
                     />
                     <Navigation />
                 </View>

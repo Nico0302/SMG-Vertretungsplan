@@ -63,3 +63,9 @@ release.keystore
 
 # CocoaPods
 /ios/Pods/
+
+# Query files
+src/config/teachers.json
+
+# VS Code
+.vscode/.react

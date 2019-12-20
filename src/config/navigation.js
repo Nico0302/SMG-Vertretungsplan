@@ -10,6 +10,8 @@ import Timetable from '@screens/Timetable';
 import Settings from '@screens/Settings';
 import Filters from '@screens/Filters';
 import Entry from '@screens/Entry';
+import TeacherList from '@screens/TeacherList';
+import Teacher from '@screens/Teacher';
 
 const defaultNavigationOptions = {
     header: null
@@ -46,12 +48,23 @@ const settingsStack = createStackNavigator(
         initialRouteName: 'Settings',
         defaultNavigationOptions
     }
+);
+
+const teacherStack = createStackNavigator(
+    {
+        TeacherList
+    },
+    {
+        initialRouteName: 'TeacherList',
+        defaultNavigationOptions
+    }
 )
 
-const mainStack = createDrawerNavigator(
+const drawerStack = createDrawerNavigator(
     {
         TimetableStack: timetableStack,
-        SettingsStack: settingsStack
+        SettingsStack: settingsStack,
+        TeacherStack: teacherStack,
     },
     {
         initialRouteName: 'TimetableStack',
@@ -59,6 +72,16 @@ const mainStack = createDrawerNavigator(
         contentComponent: props => (<NavigationDrawer {...props}/>)
     }
 );
+
+const mainStack = createStackNavigator(
+    {
+        DrawerStack: drawerStack,
+        Teacher
+    }, {
+        initialRouteName: 'DrawerStack',
+        defaultNavigationOptions
+    }
+)
 
 const rootStack = createSwitchNavigator(
     {

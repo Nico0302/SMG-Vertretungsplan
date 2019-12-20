@@ -3,7 +3,7 @@ import { List, withTheme } from 'react-native-paper';
 import color from 'color';
 import styles from './styles';
 
-class Info extends PureComponent {
+class InfoItem extends PureComponent {
     render() {
         const { value, label, theme, icon, ...props } = this.props;
         const descriptionColor = color(theme.colors.text)
@@ -24,4 +24,4 @@ class Info extends PureComponent {
     }
 }
 
-export default withTheme(Info);
+export default withTheme(InfoItem);

@@ -83,7 +83,7 @@ const timetableColumns = [
     },
     {
         key: 'substitute',
-        value: substitute => substitute === '---' ? null : substitute
+        value: substitute => substitute === '---' || substitute === '???' ? null : substitute
     },
     {
         key: 'type'
