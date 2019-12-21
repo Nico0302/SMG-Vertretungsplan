@@ -1,6 +1,7 @@
 import moment from 'moment';
+import cheerio from 'react-native-cheerio';
+import UntisParser from 'smg-untis-parser';
 import { fetchTimetableData } from '@services/dsb';
-import UntisParser from '@services/untisParser';
 import { fetchHtml } from '@services/fetch';
 
 export const FETCH_TIMETABLES_REQUEST = 'FETCH_TIMETABLES_REQUEST';
@@ -48,7 +49,7 @@ export function fetchTimetables({ username, password, appId } = {}) {
                 });
             } else {
                 const htmlTimetable = await fetchHtml(Detail);
-                const parser = new UntisParser(htmlTimetable);
+                const parser = new UntisParser(cheerio, htmlTimetable);
 
                 dispatch({
                     type: FETCH_TIMETABLES_SUCCESS,
