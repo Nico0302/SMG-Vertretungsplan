@@ -1,18 +1,7 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList, TextInput } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import color from 'color';
-import {
-    Appbar,
-    Paragraph,
-    Snackbar,
-    List,
-    Subheading,
-    Caption,
-    overlay,
-    Colors,
-    withTheme
-} from 'react-native-paper';
+import { Appbar, Colors, withTheme } from 'react-native-paper';
 import teacherData from '@config/teachers.json';
 import Teacher from './Teacher';
 import styles from './styles';

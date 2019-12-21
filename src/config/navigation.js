@@ -12,6 +12,7 @@ import Filters from '@screens/Filters';
 import Entry from '@screens/Entry';
 import TeacherList from '@screens/TeacherList';
 import Teacher from '@screens/Teacher';
+import Times from '@screens/Times';
 
 const defaultNavigationOptions = {
     header: null
@@ -64,7 +65,8 @@ const drawerStack = createDrawerNavigator(
     {
         TimetableStack: timetableStack,
         SettingsStack: settingsStack,
-        TeacherStack: teacherStack
+        TeacherStack: teacherStack,
+        Times
     },
     {
         initialRouteName: 'TimetableStack',

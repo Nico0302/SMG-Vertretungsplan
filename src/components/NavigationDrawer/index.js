@@ -47,6 +47,12 @@ class NavigationDrawer extends Component {
                         onPress={() => navigation.navigate('TeacherStack')}
                     />
                     <Drawer.Item
+                        label="Zeiten"
+                        icon="clock-outline"
+                        active={activeItemKey === 'Times'}
+                        onPress={() => navigation.navigate('Times')}
+                    />
+                    <Drawer.Item
                         label="Einstellungen"
                         icon="settings"
                         active={activeItemKey === 'SettingsStack'}

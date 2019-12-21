@@ -40,18 +40,15 @@ function generateSections(timetables, filters, hidePast) {
                                   ) &&
                                   (!entry.subject ||
                                       filters.subjects.length < 1 ||
-                                          filters.subjects.find(
-                                              subject =>
-                                                  entry.subject
-                                                      .toLowerCase()
-                                                      .replace(
-                                                          /[_\-\s]/g,
-                                                          ''
-                                                      ) ===
-                                                  subject
-                                                      .toLowerCase()
-                                                      .replace(/[_\-\s]/g, '')
-                                          ))
+                                      filters.subjects.find(
+                                          subject =>
+                                              entry.subject
+                                                  .toLowerCase()
+                                                  .replace(/[_\-\s]/g, '') ===
+                                              subject
+                                                  .toLowerCase()
+                                                  .replace(/[_\-\s]/g, '')
+                                      ))
                           )
                         : timetable.data
             }));

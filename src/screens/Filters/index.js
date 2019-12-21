@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ScrollView } from 'react-native';
+import { View, TouchableOpacity, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import color from 'color';
 import {
@@ -78,15 +78,22 @@ class Filters extends Component {
                         <Text style={[styles.masterSwitchText, fonts.regular]}>
                             Filter anwenden
                         </Text>
-                        <Switch
-                            value={filters.isActive}
-                            onValueChange={() =>
-                                filters.isEmpty
-                                    ? this._showClassFilterDialog()
-                                    : toggleFilter()
-                            }
-                            color={Colors.white}
-                        />
+                        {filters.isEmpty ? (
+                            <TouchableOpacity
+                                onPress={this._showClassFilterDialog}>
+                                <Switch
+                                    value={false}
+                                    disabled
+                                    color={Colors.white}
+                                />
+                            </TouchableOpacity>
+                        ) : (
+                            <Switch
+                                value={filters.isActive}
+                                onValueChange={toggleFilter}
+                                color={Colors.white}
+                            />
+                        )}
                     </View>
                     <List.Item
                         title="Klasse/MSS-Stufe"
