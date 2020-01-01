@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import SplashScreen from 'react-native-splash-screen';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import color from 'color';
 import {
     Appbar,
@@ -42,6 +42,15 @@ class Timetable extends PureComponent {
     componentDidMount() {
         SplashScreen.hide();
         InteractionManager.runAfterInteractions(() => this.updateTimetables());
+
+        const { dark, colors } = this.props.theme;
+        this._navListener = this.props.navigation.addListener('didFocus', () => {
+            StatusBar.setBarStyle(dark || color(colors.primary).isDark() ? 'light-content' : 'dark-content');
+        });
+    }
+
+    componentWillUnmount() {
+        this._navListener.remove();
     }
 
     updateTimetables() {
@@ -49,7 +58,7 @@ class Timetable extends PureComponent {
 
         if (auth.username && auth.password) {
             if (!isLoading) {
-                fetchTimetables().catch(() => {});
+                fetchTimetables().catch(() => { });
             }
         } else {
             navigation.navigate('Unauthenticated');
@@ -99,8 +108,13 @@ class Timetable extends PureComponent {
                     <View>
                         {section.data.length < 1 && (
                             <View style={styles.emptySection}>
+                                <Icon
+                                    name="calendar-search"
+                                    size={80}
+                                    color={theme.colors.disabled}
+                                />
                                 <Subheading>
-                                    {'keine Einträge' +
+                                    {'Keine Einträge' +
                                         (filters.isActive
                                             ? ` für die Klasse ${filters.class}`
                                             : '')}
@@ -127,7 +141,7 @@ class Timetable extends PureComponent {
                 ListEmptyComponent={
                     <View style={styles.emptyList}>
                         <Icon
-                            name="event-busy"
+                            name="calendar-remove"
                             size={80}
                             color={theme.colors.disabled}
                         />
@@ -166,12 +180,12 @@ class Timetable extends PureComponent {
                 {this.renderSections()}
                 <Snackbar
                     visible={error}
-                    onDismiss={() => {}}
+                    onDismiss={() => { }}
                     action={{
                         label: 'neu laden',
                         onPress: () => this.updateTimetables()
                     }}>
-                    Offline
+                    {error ? error.message : 'Unbekannter Fehler'}
                 </Snackbar>
             </View>
         );
