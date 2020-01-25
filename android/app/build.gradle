@@ -128,8 +128,8 @@ android {
         applicationId "io.gres.smg_vertretungsplan"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
-        versionName "0.6.0"
+        versionCode 11
+        versionName "0.6.2"
     }
     splits {
         abi {

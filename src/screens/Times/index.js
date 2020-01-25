@@ -25,7 +25,7 @@ class Times extends PureComponent {
 
     renderItem = ({ item: { lesson, start, end }, index }) => {
         const { theme } = this.props;
-        const active = moment().isBetween(
+        const active = this._now.isBetween(
             moment(start, 'hh:mm'),
             moment(end, 'hh:mm')
         );
@@ -82,6 +82,8 @@ class Times extends PureComponent {
 
     render() {
         const { navigation, theme } = this.props;
+
+        this._now = moment();
 
         return (
             <View
