@@ -7,8 +7,6 @@ import encode from './encoding';
 /**
  * Generates a RFC4122 version 4 compliant UUID.
  *
- * http://stackoverflow.com/a/8809472
- *
  * @returns {String}
  */
 export function generateAppId() {

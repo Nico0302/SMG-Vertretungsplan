@@ -44,7 +44,6 @@ class Teacher extends Component {
                 )}
                 <Appbar.Header style={[styles.appbar, { backgroundColor }]}>
                     <Appbar.BackAction onPress={() => navigation.goBack()} />
-                    <Appbar.Content title="" />
                 </Appbar.Header>
                 <View style={styles.backdrop}>
                     <View style={styles.lessonContainer}>

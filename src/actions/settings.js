@@ -1,5 +1,7 @@
 export const CHANGE_THEME = 'CHANGE_THEME';
 export const MIGRATE_STORE = 'MIGRATE_STORE';
+export const ENABLE_NOTIFICATIONS = 'ENABLE_NOTIFICATIONS';
+export const DISABLE_NOTIFICATIONS = 'DISABLE_NOTIFICATIONS';
 
 /**
  * Update the current theme name.
@@ -23,3 +25,10 @@ export const migrateStore = version => ({
     type: MIGRATE_STORE,
     version
 });
+
+export function enableNotifications() {
+    return async (dispatch, getState) => {
+        await firebase.messaging().registerForRemoteNotifications();
+        const fcmToken = await firebase.messaging().getToken();
+    }
+}

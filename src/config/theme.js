@@ -52,24 +52,24 @@ const themeDark = {
 
 export const indicators = {
     default: Colors.grey500,
-    Entfall: Colors.red600,
-    Vertretung: Colors.cyan600,
+    'Entfall': Colors.red600,
+    'Vertretung': Colors.cyan600,
     'Statt-Vertretung': Colors.cyan600,
-    Verlegung: Colors.deepPurple300,
+    'Verlegung': Colors.deepPurple300,
     'Raum-Vtr.': Colors.amber500,
-    Pausenaufsicht: Colors.blueGrey200,
-    Betreuung: Colors.lightBlue500
+    'Pausenaufsicht': Colors.blueGrey200,
+    'Betreuung': Colors.lightBlue500
 };
 
 export const indicatorStatusBar = {
     default: '#707070',
-    Entfall: '#ab000d',
-    Vertretung: '#007c91',
+    'Entfall': '#ab000d',
+    'Vertretung': '#007c91',
     'Statt-Vertretung': '#007c91',
-    Verlegung: '#65499c',
+    'Verlegung': '#65499c',
     'Raum-Vtr.': '#c79100',
-    Pausenaufsicht: '#808e95',
-    Betreuung: '#007ac1'
+    'Pausenaufsicht': '#808e95',
+    'Betreuung': '#007ac1'
 };
 
 const themes = {

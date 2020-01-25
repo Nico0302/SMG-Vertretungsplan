@@ -67,5 +67,9 @@ release.keystore
 # Query files
 src/config/teachers.json
 
+# Firebase
+android/app/google-services.json
+ios/GoogleService-Info.plist
+
 # VS Code
 .vscode/.react

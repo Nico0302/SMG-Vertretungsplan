@@ -7,7 +7,7 @@ import { Buffer } from 'buffer';
  * Iconv is used to deal with legacy encodings.
  *
  * @param {String} url
- * @returns {Promise<String>} Promise object with the sites content as string
+ * @returns {Promise<String>} Promise object with the sites content as a string
  */
 export function fetchHtml(url) {
     return new Promise((resolve, reject) => {
