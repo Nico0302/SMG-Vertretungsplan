@@ -103,9 +103,7 @@ class Times extends PureComponent {
                     renderItem={this.renderItem}
                     ListHeaderComponent={
                         <DataTable.Header>
-                            <DataTable.Title style={styles.lesson}>
-                                Stunde
-                            </DataTable.Title>
+                            <DataTable.Title style={styles.lesson} />
                             <DataTable.Title>Anfang</DataTable.Title>
                             <DataTable.Title>Ende</DataTable.Title>
                         </DataTable.Header>

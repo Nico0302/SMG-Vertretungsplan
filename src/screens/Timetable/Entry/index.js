@@ -4,7 +4,6 @@ import {
     TouchableRipple,
     Text,
     Title,
-    Colors,
     withTheme
 } from 'react-native-paper';
 import color from 'color';
@@ -72,7 +71,7 @@ class Entry extends PureComponent {
                                         <Text
                                             style={[
                                                 styles.title,
-                                                { color: descriptionColor }
+                                                { color: titleColor }
                                             ]}>
                                             {subject + ' '}
                                         </Text>
@@ -81,7 +80,7 @@ class Entry extends PureComponent {
                                 <Text
                                     style={[
                                         styles.title,
-                                        { color: titleColor }
+                                        { color: subject ? descriptionColor : titleColor }
                                     ]}>
                                     {type}
                                 </Text>

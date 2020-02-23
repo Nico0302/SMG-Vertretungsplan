@@ -1,11 +1,12 @@
 import { VERSION_NUMBER } from '@config/info';
 import { LOGOUT } from '@actions/auth';
-import { MIGRATE_STORE, CHANGE_THEME } from '@actions/settings';
+import { MIGRATE_STORE, CHANGE_THEME, SET_DARK_MODE } from '@actions/settings';
 
 function settings(
     state = {
         version: VERSION_NUMBER,
-        theme: 'default'
+        theme: 'default',
+        darkMode: false
     },
     action
 ) {
@@ -15,9 +16,21 @@ function settings(
                 return {
                     ...state,
                     version: VERSION_NUMBER,
-                    theme: 'default'
+                    theme: 'default',
+                    darkMode: false
                 };
             }
+            if (action.version < 12) {
+                const darkMode = state.theme === 'dark';
+                
+                return {
+                    ...state,
+                    version: VERSION_NUMBER,
+                    theme: darkMode ? 'default' : state.theme,
+                    darkMode
+                };
+            }
+
 
             return {
                 ...state,
@@ -27,6 +40,11 @@ function settings(
             return {
                 ...state,
                 theme: action.theme
+            };
+        case SET_DARK_MODE:
+            return {
+                ...state,
+                darkMode: action.active
             };
         case LOGOUT:
             return {

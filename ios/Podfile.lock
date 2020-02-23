@@ -225,7 +225,7 @@ PODS:
     - React
   - RNCAsyncStorage (1.6.2):
     - React
-  - RNDeviceInfo (5.3.0):
+  - RNDeviceInfo (5.5.3):
     - React
   - RNGestureHandler (1.5.0):
     - React
@@ -385,7 +385,7 @@ SPEC CHECKSUMS:
   ReactCommon: a6a294e7028ed67b926d29551aa9394fd989c24c
   ReactNativeDarkMode: 0178ffca3b10f6a7c9f49d6f9810232b328fa949
   RNCAsyncStorage: 60a80e72d95bf02a01cace55d3697d9724f0d77f
-  RNDeviceInfo: f245326b5b61b80db7e9cbc9de6c75688572a4e0
+  RNDeviceInfo: 310c1f43d418d950a193c7650de2f9559c906048
   RNGestureHandler: a4ddde1ffc6e590c8127b8b7eabfdade45475c74
   RNReanimated: b2ab0b693dddd2339bd2f300e770f6302d2e960c
   RNScreens: bfa9143ca291bcf3804c932f77b9617ff324704f

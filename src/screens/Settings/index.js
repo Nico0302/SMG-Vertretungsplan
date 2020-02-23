@@ -2,11 +2,11 @@ import React, { PureComponent } from 'react';
 import { View, ScrollView } from 'react-native';
 import { connect } from 'react-redux';
 import { Appbar, Switch, List, withTheme } from 'react-native-paper';
-import { VERSION_NAME } from '@config/info';
+import { VERSION_NAME, SYSTEM_DARK_MODE_READY } from '@config/info';
 import { logout } from '@actions/auth';
 import { toggleFilter, setClassFilter } from '@actions/filters';
 import { toggleHidePast } from '@actions/timetables';
-import { setTheme } from '@actions/settings';
+import { setDarkMode } from '@actions/settings';
 import LogoutDialog from './LogoutDialog';
 import styles from './styles';
 
@@ -16,9 +16,7 @@ class Settings extends PureComponent {
     };
 
     onToggleDarkTheme = () =>
-        this.props.setTheme(
-            this.props.themeName === 'dark' ? 'default' : 'dark'
-        );
+        this.props.setDarkMode(!this.props.darkMode);
 
     render() {
         const {
@@ -29,7 +27,7 @@ class Settings extends PureComponent {
             toggleFilter,
             toggleHidePast,
             logout,
-            themeName,
+            darkMode,
             theme
         } = this.props;
         const { logoutDialogVisible } = this.state;
@@ -70,8 +68,8 @@ class Settings extends PureComponent {
                         title="Vergangene Pläne ausblenden"
                         description={
                             hidePast
-                                ? 'Vergangene Pläne werden ausgeblendet'
-                                : 'Vergangene Pläne werden angezeigt'
+                                ? 'Alte Pläne werden ausgeblendet'
+                                : 'Alte Pläne werden angezeigt'
                         }
                         onPress={() => toggleHidePast()}
                         left={props => (
@@ -88,21 +86,23 @@ class Settings extends PureComponent {
                             />
                         )}
                     />
-                    <List.Item
-                        title="Dark Theme"
-                        description={themeName === 'dark' ? 'An' : 'Aus'}
-                        onPress={this.onToggleDarkTheme}
-                        left={props => (
-                            <List.Icon {...props} icon="brightness-4" />
-                        )}
-                        right={() => (
-                            <Switch
-                                style={styles.switch}
-                                value={themeName === 'dark'}
-                                onValueChange={this.onToggleDarkTheme}
-                            />
-                        )}
-                    />
+                    {!SYSTEM_DARK_MODE_READY && (
+                        <List.Item
+                            title="Dark Theme"
+                            description={darkMode ? 'An' : 'Aus'}
+                            onPress={this.onToggleDarkTheme}
+                            left={props => (
+                                <List.Icon {...props} icon="brightness-4" />
+                            )}
+                            right={() => (
+                                <Switch
+                                    style={styles.switch}
+                                    value={darkMode}
+                                    onValueChange={this.onToggleDarkTheme}
+                                />
+                            )}
+                        />
+                    )}
                     <List.Item
                         title="Abmelden"
                         onPress={() =>
@@ -139,14 +139,14 @@ const mapStateToProps = state => ({
     filtersActive: state.timetables.filters.isActive,
     filtersEmpty: state.timetables.filters.isEmpty,
     hidePast: state.timetables.hidePast,
-    themeName: state.settings.theme
+    darkMode: state.settings.darkMode
 });
 
 const mapDispatchToProps = {
     toggleFilter,
     toggleHidePast,
     setClassFilter,
-    setTheme,
+    setDarkMode,
     logout
 };
 

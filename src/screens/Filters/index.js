@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity, ScrollView } from 'react-native';
+import { View, TouchableOpacity, ScrollView, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import color from 'color';
 import {
@@ -56,9 +56,11 @@ class Filters extends Component {
             .rgb()
             .string();
         const switchContainerColor = color(theme.colors.text)
-            .alpha(0.34)
+            .alpha(theme.dark ? 0.2 : 0.34)
             .rgb()
             .string();
+        const switchColor = Platform.OS === 'ios' ?
+            undefined : Colors.white;
 
         return (
             <View
@@ -84,14 +86,14 @@ class Filters extends Component {
                                 <Switch
                                     value={false}
                                     disabled
-                                    color={Colors.white}
+                                    color={switchColor}
                                 />
                             </TouchableOpacity>
                         ) : (
                             <Switch
                                 value={filters.isActive}
                                 onValueChange={toggleFilter}
-                                color={Colors.white}
+                                color={switchColor}
                             />
                         )}
                     </View>

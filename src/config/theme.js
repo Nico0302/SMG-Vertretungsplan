@@ -1,9 +1,7 @@
-import { DefaultTheme, DarkTheme, Colors } from 'react-native-paper';
+import { Colors } from 'react-native-paper';
 
 const themeDefault = {
-    ...DefaultTheme,
     colors: {
-        ...DefaultTheme.colors,
         primary: '#99203B',
         accent: '#99203B',
         statusBar: '#650016'
@@ -11,42 +9,26 @@ const themeDefault = {
 };
 
 const themeYellow = {
-    ...DefaultTheme,
     colors: {
-        ...DefaultTheme.colors,
         primary: '#ffc107',
-        accent: '#9e9e9e',
+        accent: '#ffc107',
         statusBar: '#c79100'
     }
 };
 
 const themeBlue = {
-    ...DefaultTheme,
     colors: {
-        ...DefaultTheme.colors,
         primary: '#3f51b5',
-        accent: '#9e9e9e',
+        accent: '#3f51b5',
         statusBar: '#002984'
     }
 };
 
 const themeGreen = {
-    ...DefaultTheme,
     colors: {
-        ...DefaultTheme.colors,
         primary: '#388e3c',
-        accent: '#9e9e9e',
+        accent: '#388e3c',
         statusBar: '#00600f'
-    }
-};
-
-const themeDark = {
-    ...DarkTheme,
-    colors: {
-        ...DarkTheme.colors,
-        primary: '#99203B',
-        accent: '#99203B',
-        statusBar: '#000'
     }
 };
 
@@ -76,8 +58,7 @@ const themes = {
     default: themeDefault,
     yellow: themeYellow,
     blue: themeBlue,
-    green: themeGreen,
-    dark: themeDark
+    green: themeGreen
 };
 
 export default themes;

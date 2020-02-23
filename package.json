@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "patch-package"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.6.2",
@@ -20,9 +21,9 @@
     "react-native": "0.61.4",
     "react-native-cheerio": "^1.0.0-rc.4",
     "react-native-dark-mode": "^0.2.2",
-    "react-native-device-info": "^5.3.0",
+    "react-native-device-info": "^5.5.3",
     "react-native-gesture-handler": "^1.5.0",
-    "react-native-paper": "^3.2.1",
+    "react-native-paper": "3.4.0",
     "react-native-reanimated": "^1.4.0",
     "react-native-screens": "^2.0.0-alpha.8",
     "react-native-sensitive-info": "^5.5.0",
@@ -50,6 +51,7 @@
     "eslint": "^6.5.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.56.0",
+    "patch-package": "^6.2.0",
     "react-test-renderer": "16.9.0"
   },
   "jest": {

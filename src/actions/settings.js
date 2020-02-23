@@ -1,4 +1,5 @@
 export const CHANGE_THEME = 'CHANGE_THEME';
+export const SET_DARK_MODE = 'SET_DARK_MODE';
 export const MIGRATE_STORE = 'MIGRATE_STORE';
 
 /**
@@ -12,6 +13,16 @@ export const setTheme = theme => ({
     type: CHANGE_THEME,
     theme
 });
+
+/**
+ * Activates or disabled dark mode.
+ * 
+ * @param {Boolean} active 
+ */
+export const setDarkMode = active => ({
+    type: SET_DARK_MODE,
+    active
+})
 
 /**
  * Migrate the Redux Store to a higher app version number
