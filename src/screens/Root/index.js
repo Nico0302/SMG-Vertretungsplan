@@ -3,17 +3,28 @@ import { View, StatusBar, Platform } from 'react-native';
 import { connect } from 'react-redux';
 import color from 'color';
 import { Provider as PaperProvider } from 'react-native-paper';
+import { eventEmitter, initialMode  } from 'react-native-dark-mode'
 import themes from '@config/theme';
 import Navigation from '@config/navigation';
 import { VERSION_NUMBER } from '@config/info';
-import { migrateStore } from '@actions/settings';
+import { migrateStore, setTheme } from '@actions/settings';
 import styles from './styles';
 
 class Root extends PureComponent {
     componentDidMount() {
-        const { version, migrateStore } = this.props;
+        const { version, theme, migrateStore, setTheme } = this.props;
 
         if (!version || version < VERSION_NUMBER) migrateStore(version);
+
+        if (initialMode === 'dark' && theme !== 'dark') {
+            setTheme('dark');
+        } else if (theme === 'dark') {
+            setTheme('default');
+        }
+
+        eventEmitter.on('currentModeChanged', newMode =>
+            setTheme(newMode === 'dark' ? 'dark' : 'default')
+        );
     }
 
     render() {
@@ -50,7 +61,8 @@ const mapStateToProps = ({ settings }) => ({
 });
 
 const mapDispatchToProps = {
-    migrateStore
+    migrateStore,
+    setTheme
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);
