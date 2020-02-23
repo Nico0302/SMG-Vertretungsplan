@@ -52,7 +52,7 @@ ${type} `;
 export function openMail(address, subject, body) {
     let url = 'mailto:' + address;
 
-    if (subject || body) url += Platform.OS === 'ios' ? '?cc=' : '?';
+    if (subject || body) url += Platform.OS === 'ios' ? '?cc=&' : '?';
 
     if (subject) {
         url += `subject=${encodeURIComponent(subject)}`;
