@@ -12,16 +12,12 @@ import styles from './styles';
 
 class Root extends PureComponent {
     componentDidMount() {
-        const { version, darkMode, migrateStore, setDarkMode } = this.props;
+        const { version, migrateStore, setDarkMode } = this.props;
 
         if (!version || version < VERSION_NUMBER) migrateStore(version);
 
         if (SYSTEM_DARK_MODE_READY) {
-            if (initialMode === 'dark' && !darkMode) {
-                setDarkMode(true)
-            } else if (darkMode) {
-                setDarkMode(false);
-            }
+            setDarkMode(initialMode === 'dark');
     
             eventEmitter.on('currentModeChanged', newMode =>
                 setDarkMode(newMode === 'dark')

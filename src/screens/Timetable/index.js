@@ -5,6 +5,7 @@ import {
     RefreshControl,
     InteractionManager,
     StatusBar,
+    Platform,
     Dimensions
 } from 'react-native';
 import { connect } from 'react-redux';
@@ -43,9 +44,16 @@ class Timetable extends PureComponent {
         SplashScreen.hide();
         InteractionManager.runAfterInteractions(() => this.updateTimetables());
 
-        const { dark, colors } = this.props.theme;
+        const statusBarColor =
+            Platform.OS === 'ios'
+                ? this.props.theme.colors.primary
+                : this.props.theme.colors.statusBar;
         this._navListener = this.props.navigation.addListener('didFocus', () => {
-            StatusBar.setBarStyle(dark || color(colors.primary).isDark() ? 'light-content' : 'dark-content');
+            StatusBar.setBarStyle(
+                this.props.darkMode || 
+                color(statusBarColor).isDark() ? 
+                    'light-content' : 
+                    'dark-content');
         });
     }
 
@@ -151,7 +159,7 @@ class Timetable extends PureComponent {
                     </View>
                 }
                 stickySectionHeadersEnabled={false}
-                removeClippedSubviews
+                removeClippedSubviews={Platform.OS === 'android'}
                 keyExtractor={(item, index) => item.lesson + index.toString()}
                 initialNumToRender={Math.floor(height / 52)}
                 getItemLayout={(data, index) => {
@@ -198,7 +206,7 @@ const mapStateToProps = state => ({
     error: state.timetables.error,
     sections: state.timetables.sections,
     filters: state.timetables.filters,
-    version: state.timetables.version
+    darkMode: state.settings.darkMode
 });
 
 const mapDispatchToProps = {

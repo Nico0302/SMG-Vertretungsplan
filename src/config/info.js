@@ -1,13 +1,8 @@
 import { Platform } from 'react-native';
-import { 
-    getBuildNumber,
-    getVersion,
-    getSystemVersion,
-    getApiLevel
-} from 'react-native-device-info';
+import { getSystemVersion, getApiLevel } from 'react-native-device-info';
 
-export const VERSION_NUMBER = parseInt(getBuildNumber()) || 12;
-export const VERSION_NAME = getVersion();
+export const VERSION_NUMBER = 12;
+export const VERSION_NAME = '0.6.3';
 export const BUNDLE_ID =
     Platform.OS === 'ios'
         ? 'io.gres.smg-vertretungsplan'

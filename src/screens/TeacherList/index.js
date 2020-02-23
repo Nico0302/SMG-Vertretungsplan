@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, FlatList, TextInput } from 'react-native';
+import { View, FlatList, TextInput, Platform } from 'react-native';
 import color from 'color';
 import { Appbar, Colors, withTheme } from 'react-native-paper';
 import teacherData from '@config/teachers.json';
@@ -108,12 +108,13 @@ class TeacherList extends PureComponent {
                 </Appbar.Header>
                 <FlatList
                     data={this.state.teachers}
+                    contentContainerStyle={styles.listContent}
                     renderItem={this.renderItem}
                     keyExtractor={item => item.id}
                     getItemLayout={(data, index) => {
                         return { length: 72, offset: 72 * index, index };
                     }}
-                    removeClippedSubviews
+                    removeClippedSubviews={Platform.OS === 'android'}
                     keyboardShouldPersistTaps="always"
                 />
             </View>
