@@ -25,6 +25,9 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         padding: 8,
         paddingBottom: 16
+    },
+    button: {
+        marginHorizontal: 4
     }
 });
 

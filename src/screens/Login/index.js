@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react';
-import { View, ScrollView, StatusBar } from 'react-native';
+import { View, ScrollView, KeyboardAvoidingView, StatusBar } from 'react-native';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { SafeAreaView } from 'react-navigation';
@@ -26,7 +26,7 @@ class Login extends PureComponent {
 
         login(username, password)
             .then(() => navigation.navigate('Authenticated'))
-            .catch(() => {});
+            .catch(() => { });
     }
 
     _getErrorMessage = () => {
@@ -41,7 +41,7 @@ class Login extends PureComponent {
             if (diff > 0) {
                 humanizedMessage += `\nVersuche es in ${diff} Sekunde${
                     diff > 1 ? 'n' : ''
-                } erneut.`;
+                    } erneut.`;
             } else {
                 humanizedMessage += '\nVersuche es erneut.';
             }
@@ -64,69 +64,70 @@ class Login extends PureComponent {
                 showsVerticalScrollIndicator={false}
                 bounces={false}
                 ref={scrollView => (this.scrollView = scrollView)}>
-                <SafeAreaView style={styles.content}>
-                    <StatusBar
-                        backgroundColor="#cccccc"
-                        barStyle="dark-content"
-                    />
-                    <View style={styles.logo}>
-                        <Logo size={160} />
-                    </View>
-                    {auth.error && auth.error.message && (
-                        <Text style={styles.errorText}>
-                            {this._getErrorMessage()}
-                        </Text>
-                    )}
-                    <TextInput
-                        style={[
-                            styles.textInput,
-                            { backgroundColor: theme.colors.surface }
-                        ]}
-                        textContentType="username"
-                        keyboardType="number-pad"
-                        mode="outlined"
-                        value={username}
-                        blurOnSubmit={false}
-                        onChangeText={username => this.setState({ username })}
-                        onSubmitEditing={() => this.passwordInput.focus()}
-                        returnKeyType="next"
-                        label="Nutzername"
-                        maxLength={16}
-                        disableFullscreenUI
-                        selectTextOnFocus
-                        importantForAutofill="yes"
-                    />
-                    <TextInput
-                        ref={passwordInput =>
-                            (this.passwordInput = passwordInput)
-                        }
-                        style={[
-                            styles.textInput,
-                            { backgroundColor: theme.colors.surface }
-                        ]}
-                        mode="outlined"
-                        value={password}
-                        onChangeText={password => this.setState({ password })}
-                        onSubmitEditing={this.onLogin}
-                        returnKeyType="done"
-                        label="Passwort"
-                        maxLength={16}
-                        disableFullscreenUI
-                        secureTextEntry
-                        importantForAutofill="yes"
-                        textContentType="password"
-                    />
-                    <View style={styles.actions}>
-                        <Button onPress={() => navigation.navigate('Register')}>
-                            Zugang anfordern
+                <SafeAreaView style={styles.container}>
+                    <KeyboardAvoidingView style={styles.content} behavior="padding">
+                        <StatusBar
+                            backgroundColor="#cccccc"
+                            barStyle="dark-content"
+                        />
+                        <View style={styles.logo}>
+                            <Logo size={160} />
+                        </View>
+                        {auth.error && auth.error.message && (
+                            <Text style={styles.errorText}>
+                                {this._getErrorMessage()}
+                            </Text>
+                        )}
+                        <TextInput
+                            style={[
+                                styles.textInput,
+                                { backgroundColor: theme.colors.surface }
+                            ]}
+                            textContentType="username"
+                            keyboardType="number-pad"
+                            mode="outlined"
+                            value={username}
+                            blurOnSubmit={false}
+                            onChangeText={username => this.setState({ username })}
+                            onSubmitEditing={() => this.passwordInput.focus()}
+                            returnKeyType="next"
+                            label="Nutzername"
+                            maxLength={16}
+                            disableFullscreenUI
+                            selectTextOnFocus
+                        />
+                        <TextInput
+                            ref={passwordInput =>
+                                (this.passwordInput = passwordInput)
+                            }
+                            style={[
+                                styles.textInput,
+                                { backgroundColor: theme.colors.surface }
+                            ]}
+                            mode="outlined"
+                            value={password}
+                            onChangeText={password => this.setState({ password })}
+                            onSubmitEditing={this.onLogin}
+                            returnKeyType="done"
+                            label="Passwort"
+                            maxLength={16}
+                            disableFullscreenUI
+                            secureTextEntry
+                            textContentType="password"
+                        />
+                        <View style={styles.actions}>
+                            <Button style={styles.button} onPress={() => navigation.navigate('Register')}>
+                                Zugang anfordern
                         </Button>
-                        <Button
-                            onPress={this.onLogin}
-                            mode="contained"
-                            loading={auth.isLoading}>
-                            Login
+                            <Button
+                                style={styles.button}
+                                mode="contained"
+                                onPress={this.onLogin}
+                                loading={auth.isLoading}>
+                                Login
                         </Button>
-                    </View>
+                        </View>
+                    </KeyboardAvoidingView>
                 </SafeAreaView>
             </ScrollView>
         );
