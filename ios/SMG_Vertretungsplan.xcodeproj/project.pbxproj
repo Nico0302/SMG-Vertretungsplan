@@ -704,7 +704,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "io.gres.smg-vertretungsplan";
 				PRODUCT_NAME = SMG_Vertretungsplan;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -735,7 +735,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "io.gres.smg-vertretungsplan";
 				PRODUCT_NAME = SMG_Vertretungsplan;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

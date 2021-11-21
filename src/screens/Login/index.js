@@ -68,7 +68,7 @@ class Login extends PureComponent {
                     <KeyboardAvoidingView style={styles.content} behavior="padding">
                         <StatusBar
                             backgroundColor="#cccccc"
-                            barStyle="dark-content"
+                            barStyle={theme.dark ? 'light-content' : 'dark-content'}
                         />
                         <View style={styles.logo}>
                             <Logo size={160} />

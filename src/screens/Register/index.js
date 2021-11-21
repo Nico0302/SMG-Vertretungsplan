@@ -49,7 +49,7 @@ Diese Nachricht wurde durch die SMG Vertretungsplan App (Alpha Version) generier
                         <Paragraph style={styles.info}>
                             Du kannst per E-Mail die Zugangsdaten für den SMG
                             Vertretungsplan bei der Schule anfordern.
-                    </Paragraph>
+                        </Paragraph>
                         <TextInput
                             style={[
                                 styles.textInput,
